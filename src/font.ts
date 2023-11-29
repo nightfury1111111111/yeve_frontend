@@ -1,7 +1,7 @@
 import { createGlobalStyle } from 'styled-components';
 
-import BeVietNamPro from '../public/font/BeVietNamPro-Regular.ttf';
-import Inter from '../public/font/Inter.ttf';
+import BeVietNamPro from '@public/font/BeVietnamPro-Regular.ttf';
+import Inter from '@public/font/Inter.ttf';
 const GlobalStyle = createGlobalStyle`
     @font-face {
         font-family: 'BeVietNamPro';
@@ -17,4 +17,4 @@ const GlobalStyle = createGlobalStyle`
     }
 `;
 
-export default GlobalStyle
+export default GlobalStyle;
