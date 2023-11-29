@@ -1,12 +1,24 @@
-import { ThemeContext } from "@src/context/useThemeContext";
-import { useContext } from "react";
-
+import logo from '@src/assets/images/png/logo.png';
+import {
+  Button,
+  ButtonPrimary,
+  FlexContainer,
+  HeaderContainer,
+} from './Header.styled';
+import SolanaIcon from '@src/assets/images/svg/solana';
+import StarIcon from '@src/assets/images/svg/star';
 export default function Header() {
-  const { toggleTheme } = useContext(ThemeContext);
-
   return (
-    <div>
-      <button onClick={toggleTheme}>Switch mode</button>
-    </div>
+    <HeaderContainer>
+      <img src={logo} alt="logo" />
+      <FlexContainer>
+        <Button>
+          <SolanaIcon />
+          SOLANA
+        </Button>
+        <StarIcon />
+        <ButtonPrimary padding="12px 48px">Launch app</ButtonPrimary>
+      </FlexContainer>
+    </HeaderContainer>
   );
 }
