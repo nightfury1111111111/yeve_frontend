@@ -5,7 +5,6 @@ export const LandingContainer = styled.div`
   background: #060606;
   width: 100%;
   min-height: 100vh;
-  font-family: 'BeVietNamPro';
 `;
 
 export const LandingInsideContainer = styled.div`

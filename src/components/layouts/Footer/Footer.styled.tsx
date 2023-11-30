@@ -9,7 +9,6 @@ export const FooterContainer = styled.div`
 `;
 
 export const ReservedText = styled.div`
-  font-family: 'BeVietNamPro';
   font-size: 12px;
   font-style: normal;
   font-weight: 400;
@@ -17,7 +16,6 @@ export const ReservedText = styled.div`
   color: #ababab;
 `;
 export const FooterMenu = styled.div`
-  font-family: 'BeVietNamPro';
   font-size: 12px;
   font-style: normal;
   font-weight: 400;

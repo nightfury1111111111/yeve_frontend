@@ -6,7 +6,6 @@ export const HeaderContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   background: #060606;
-  font-family: 'BeVietNamPro';
 `;
 
 export const Button = styled.button<{ padding?: string }>`
@@ -21,7 +20,6 @@ export const Button = styled.button<{ padding?: string }>`
   display: flex;
   gap: 8px;
   align-items: center;
-  font-family: 'BeVietNamPro';
 `;
 
 export const FlexContainer = styled.div`

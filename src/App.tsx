@@ -3,7 +3,6 @@ import { useContext } from 'react';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import { userRoutes } from './routes';
-import GlobalFonts from '@src/font';
 
 const router = createBrowserRouter(userRoutes);
 
@@ -12,7 +11,6 @@ function App() {
 
   return (
     <ThemeProvider theme={themeConfig}>
-      <GlobalFonts />
       <RouterProvider router={router} />
     </ThemeProvider>
   );
