@@ -1,32 +1,31 @@
-import coneImg from '@src/assets/images/png/cone.png';
-import ArrowPointHorizontalIcon from '@src/assets/images/svg/arround-point-horizontal';
-import ArrowPointIcon from '@src/assets/images/svg/arrow-point';
-import BigStarIcon from '@src/assets/images/svg/big-star';
-import StarIcon from '@src/assets/images/svg/star';
-import StarRoundIcon from '@src/assets/images/svg/star-round';
-import Footer from '@src/components/layouts/Footer';
-import { } from '@src/components/layouts/Layout.styles';
 import LandingPageHeader from '@src/components/layouts/LendingPageHeader';
-import { Button } from '@src/components/layouts/LendingPageHeader/Header.styled';
 import {
-  LandingBottom,
-  LandingBottomLeft,
-  LandingBottomRight,
   LandingContainer,
   LandingInsideContainer,
   LandingLeft,
-  LandingLeftCommunityText,
   LandingLeftDesc,
   LandingLeftTitle,
   LandingMain,
-  LandingRight,
-  LandingRightDesc,
-  LandingRightTitle,
+  LandingLeftCommunityText,
   LogoGroup,
   LogoItem1,
   LogoItem2,
   LogoItem3,
+  LandingRight,
+  LandingRightTitle,
+  LandingRightDesc,
+  LandingBottom,
+  LandingBottomLeft,
+  LandingBottomRight,
 } from './LandingPage.styled';
+import coneImg from '@src/assets/images/png/cone.png';
+import ArrowPointIcon from '@src/assets/images/svg/arrow-point';
+import StarIcon from '@src/assets/images/svg/star';
+import BigStarIcon from '@src/assets/images/svg/big-star';
+import StarRoundIcon from '@src/assets/images/svg/star-round';
+import { Button } from '@src/components/layouts/LendingPageHeader/Header.styled';
+import ArrowPointHorizontalIcon from '@src/assets/images/svg/arround-point-horizontal';
+import Footer from '@src/components/layouts/Footer';
 export default function LandingPage() {
   return (
     <LandingContainer>
