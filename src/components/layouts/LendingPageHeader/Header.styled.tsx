@@ -6,6 +6,12 @@ export const HeaderContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   background: #060606;
+  @media (max-width: 1024px) {
+    .star-icon {
+      display: none;
+    }
+    padding: 20px;
+  }
 `;
 
 export const Button = styled.button<{ padding?: string }>`
@@ -30,4 +36,14 @@ export const FlexContainer = styled.div`
 
 export const ButtonPrimary = styled(Button)`
   background: #6134fe;
+  @media (max-width: 1024px) {
+    display: none;
+  }
+`;
+
+export const ButtonPrimaryBurger = styled(ButtonPrimary)`
+  display: none;
+  @media (max-width: 1024px) {
+    display: block;
+  }
 `;

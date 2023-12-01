@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import wadeBg from '@src/assets/images/png/wade-bg.png';
+import { Button } from '@src/components/layouts/LendingPageHeader/Header.styled';
 
 export const LandingContainer = styled.div`
   background: #060606;
@@ -13,24 +14,66 @@ export const LandingInsideContainer = styled.div`
   height: 100%;
   min-height: 100vh;
   background-position: center;
-  max-width: 1200px;
+  max-width: 1920px;
   margin: auto;
+  position: relative;
 `;
 
 export const LandingMain = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
+  @media (max-width: 1024px) {
+    display: block;
+    text-align: center;
+  }
   img {
-    max-width: 600px;
+    max-width: 672px;
+    @media (max-width: 1280px) {
+      max-width: 600px;
+    }
+    @media (max-width: 1024px) {
+      max-width: 80vw;
+    }
     width: auto;
   }
-  padding: 0 40px;
+  padding: 0 160px;
+  @media (max-width: 1440px) {
+    padding: 0 120px;
+  }
+  @media (max-width: 1280px) {
+    padding: 0 100px 30px;
+  }
+  @media (max-width: 1024px) {
+    padding: 0 20px;
+  }
 `;
 
 export const LandingLeft = styled.div`
   width: 318px;
   padding-top: 96px;
+  @media (max-width: 1024px) {
+    display: none;
+  }
+`;
+
+export const LandingLeftMobile = styled.div`
+  display: none;
+  @media (max-width: 1024px) {
+    display: block;
+    margin-bottom: 20px;
+    max-width: 700px;
+  }
+`;
+
+export const LandingLeftDescMobile = styled.div`
+  font-size: 14px;
+  line-height: 24px;
+`;
+export const LandingLeftTitleMobile = styled.div`
+  font-size: 22px;
+  line-height: 32px;
+  margin: 10px 0;
 `;
 export const LandingLeftTitle = styled.div`
   font-size: 36px;
@@ -84,35 +127,35 @@ export const LogoItem3 = styled(LogoItem)`
 `;
 export const LandingRight = styled.div`
   padding-top: 70px;
-  width: 318px;
-  svg {
+  padding-left: 36px;
+  max-width: 320px;
+  .star-icon {
     display: block;
-    margin-right: 0;
-    margin-left: auto;
-    margin-top: 8px;
+    margin-top: 7px;
     margin-bottom: 32px;
+  }
+  @media (max-width: 1024px) {
+    display: none;
   }
 `;
 export const LandingRightTitle = styled.div`
-  font-size: 16px;
+  font-size: 30px;
   font-style: normal;
   font-weight: 600;
-  line-height: 24px; /* 111.111% */
-  margin-top: 60px;
-  margin-bottom: 20px;
+  line-height: 52px; /* 111.111% */
   width: 175px;
-  margin-right: 10px;
-  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  &:first-child {
+    margin-top: 60px;
+  }
 `;
 export const LandingRightDesc = styled.div`
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 16px;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
   margin-top: 20px;
-  width: 155px;
-  margin-right: 0;
-  margin-left: auto;
 `;
 
 export const LandingBottom = styled.div`
@@ -120,7 +163,19 @@ export const LandingBottom = styled.div`
   justify-content: space-between;
   align-items: flex-end;
   flex-wrap: wrap;
-  padding: 0 40px;
+  padding: 0 160px 30px;
+  @media (max-width: 1440px) {
+    padding: 0 120px 30px;
+  }
+  @media (max-width: 1280px) {
+    padding: 0 100px 30px;
+  }
+  @media (max-width: 1024px) {
+    padding: 0 20px 30px;
+    max-width: 700px;
+    margin: auto;
+    margin-top: -70px;
+  }
 `;
 
 export const LandingBottomLeft = styled.div`
@@ -129,10 +184,22 @@ export const LandingBottomLeft = styled.div`
   font-style: normal;
   font-weight: 600;
   line-height: 72px;
-  max-width: 650px;
+  max-width: 700px;
   svg {
     display: inline-block;
     margin-right: 10px;
+  }
+  @media (max-width: 1024px) {
+    font-size: 36px;
+    line-height: 36px;
+    svg {
+      width: 25px;
+      height: 25px;
+    }
+    span {
+      display: none;
+    }
+    margin: 0 auto;
   }
 `;
 export const LandingBottomRight = styled.div`
@@ -141,4 +208,31 @@ export const LandingBottomRight = styled.div`
   align-items: center;
   flex-wrap: wrap;
   gap: 8px;
+  @media (max-width: 1024px) {
+    display: none;
+  }
+`;
+export const ButtonPrimary = styled(Button)`
+  display: none;
+  @media (max-width: 1024px) {
+    display: flex;
+  }
+  background: #6134fe;
+  width: 100%;
+  justify-content: center;
+  margin: 5px 0 5px;
+  font-size: 14px;
+`;
+export const ButtonSecondary = styled(Button)`
+  display: none;
+  @media (max-width: 1024px) {
+    display: flex;
+  }
+  border: 1px solid#6134fe;
+  color: white;
+  width: 100%;
+  justify-content: center;
+  margin: 5px 0 5px;
+  font-weight: 400;
+  font-size: 14px;
 `;
