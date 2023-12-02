@@ -26,6 +26,12 @@ export const FooterContainer = styled.div`
 `;
 
 export const ReservedText = styled.div`
+  @media (min-width: 2560px) {
+    padding-left: 40px;
+  }
+  @media (min-height: 755px) {
+    padding-left: 40px;
+  }
   font-size: 12px;
   font-style: normal;
   font-weight: 400;
@@ -36,6 +42,12 @@ export const ReservedText = styled.div`
   }
 `;
 export const FooterMenu = styled.div`
+  @media (min-width: 2560px) {
+    padding-right: 40px;
+  }
+  @media (min-height: 755px) {
+    padding-right: 40px;
+  }
   font-size: 12px;
   font-style: normal;
   font-weight: 400;
