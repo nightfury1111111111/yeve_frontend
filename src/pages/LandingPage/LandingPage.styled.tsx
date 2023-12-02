@@ -6,14 +6,14 @@ export const LandingContainer = styled.div`
   background: #060606;
   width: 100%;
   min-height: 100vh;
+  background-image: url(${wadeBg});
+  background-size: cover;
+  background-position: center;
 `;
 
 export const LandingInsideContainer = styled.div`
-  background-image: url(${wadeBg});
-  background-size: cover;
   height: 100%;
   min-height: 100vh;
-  background-position: center;
   max-width: 1920px;
   margin: auto;
   position: relative;
@@ -28,15 +28,19 @@ export const LandingMain = styled.div`
     text-align: center;
   }
   img {
-    max-width: 672px;
+    max-width: 380px;
+    padding-top: 40px;
     @media (max-width: 1280px) {
-      max-width: 600px;
+      max-width: 380px;
     }
     @media (max-width: 1160px) {
-      max-width: 450px;
+      max-width: 380px;
     }
     @media (max-width: 1024px) {
-      max-width: 80vw;
+      max-width: 40vw;
+    }
+    @media (max-width: 430px) {
+      max-width: 270px;
     }
     width: auto;
   }
@@ -54,7 +58,7 @@ export const LandingMain = styled.div`
 
 export const LandingLeft = styled.div`
   width: 318px;
-  padding-top: 96px;
+  padding-top: 20px;
   @media (max-width: 1024px) {
     display: none;
   }
@@ -129,7 +133,7 @@ export const LogoItem3 = styled(LogoItem)`
   left: 90px;
 `;
 export const LandingRight = styled.div`
-  padding-top: 70px;
+  padding-top: 40px;
   padding-left: 36px;
   max-width: 320px;
   .star-icon {
@@ -151,7 +155,7 @@ export const LandingRightTitle = styled.div`
   align-items: center;
   gap: 8px;
   &:first-child {
-    margin-top: 60px;
+    margin-top: 20px;
   }
 `;
 export const LandingRightDesc = styled.div`
@@ -166,15 +170,15 @@ export const LandingBottom = styled.div`
   justify-content: space-between;
   align-items: flex-end;
   flex-wrap: wrap;
-  padding: 0 160px 30px;
+  padding: 0 160px 10px;
   @media (max-width: 1440px) {
-    padding: 0 120px 30px;
+    padding: 0 120px 10px;
   }
   @media (max-width: 1280px) {
-    padding: 0 100px 30px;
+    padding: 0 100px 10px;
   }
   @media (max-width: 1024px) {
-    padding: 0 20px 30px;
+    padding: 0 20px 10px;
     max-width: 700px;
     margin: auto;
     margin-top: -70px;
@@ -183,10 +187,10 @@ export const LandingBottom = styled.div`
 
 export const LandingBottomLeft = styled.div`
   font-family: 'Inter';
-  font-size: 72px;
+  font-size: 56px;
   font-style: normal;
   font-weight: 600;
-  line-height: 72px;
+  line-height: 66px;
   max-width: 700px;
   svg {
     display: inline-block;
@@ -249,7 +253,7 @@ export const ButtonGroup = styled.div`
   width: 100%;
   gap: 10px;
   display: none;
-  @media (max-width: 430px) {
+  @media (max-width: 1280px) {
     display: block;
   }
 `;
