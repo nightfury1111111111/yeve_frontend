@@ -9,10 +9,11 @@ import {
 import SolanaIcon from '@src/assets/images/svg/solana';
 import StarIcon from '@src/assets/images/svg/star';
 import BurgerMenuIcon from '@src/assets/images/svg/burger-menu';
+import Logo from '@src/assets/images/svg/logo';
 export default function LandingPageHeader() {
   return (
     <HeaderContainer>
-      <img src={logo} alt="logo" />
+      <Logo />
       <FlexContainer>
         <Button>
           <SolanaIcon />
