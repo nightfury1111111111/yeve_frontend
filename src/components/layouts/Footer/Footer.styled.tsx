@@ -1,7 +1,13 @@
 import styled from 'styled-components';
 
 export const FooterContainer = styled.div`
-  @media (min-height: 1028px) and (min-width: 2560px) {
+  @media (min-width: 2560px) {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 20px 0 20px;
+  }
+  @media (min-height: 755px) {
     position: absolute;
     bottom: 0;
     width: 100%;
