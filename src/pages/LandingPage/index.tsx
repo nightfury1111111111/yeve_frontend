@@ -72,8 +72,8 @@ export default function LandingPage() {
           <LandingBottomLeft>
             <span>&nbsp;&nbsp;&nbsp;</span>
             <BigStarIcon active />
-            The future of deep liquidity and ve3 <BigStarIcon /> simplicity on
-            Solana
+            The future of deep liquidity and ve3 simplicity on Solana{' '}
+            <BigStarIcon />
           </LandingBottomLeft>
           <LandingLeftMobile>
             <LandingLeftTitleMobile>

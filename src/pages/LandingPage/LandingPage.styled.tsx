@@ -195,6 +195,8 @@ export const LandingBottomLeft = styled.div`
   svg {
     display: inline-block;
     margin-right: 10px;
+    width: 45px;
+    height: 45px;
   }
   @media (max-width: 1024px) {
     font-size: 36px;
