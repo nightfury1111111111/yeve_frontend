@@ -9,6 +9,7 @@ import Footer from '@src/components/layouts/Footer';
 import {} from '@src/components/layouts/Layout.styles';
 import LandingPageHeader from '@src/components/layouts/LendingPageHeader';
 import {
+  ButtonGroup,
   ButtonPrimary,
   ButtonSecondary,
   LandingBottom,
@@ -83,8 +84,10 @@ export default function LandingPage() {
               all experience levels
             </LandingLeftDescMobile>
           </LandingLeftMobile>
-          <ButtonSecondary padding="12px 48px">See more</ButtonSecondary>
-          <ButtonPrimary padding="12px 48px">Launch app</ButtonPrimary>
+          <ButtonGroup>
+            <ButtonSecondary padding="12px 48px">See more</ButtonSecondary>
+            <ButtonPrimary padding="12px 48px">Launch app</ButtonPrimary>
+          </ButtonGroup>
 
           <LandingBottomRight>
             <StarRoundIcon />

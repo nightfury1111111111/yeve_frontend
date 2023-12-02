@@ -32,6 +32,9 @@ export const LandingMain = styled.div`
     @media (max-width: 1280px) {
       max-width: 600px;
     }
+    @media (max-width: 1160px) {
+      max-width: 450px;
+    }
     @media (max-width: 1024px) {
       max-width: 80vw;
     }
@@ -222,8 +225,11 @@ export const ButtonPrimary = styled(Button)`
   justify-content: center;
   margin: 5px 0 5px;
   font-size: 14px;
+  height: 50px;
 `;
 export const ButtonSecondary = styled(Button)`
+  height: 50px;
+
   display: none;
   @media (max-width: 1024px) {
     display: flex;
@@ -235,4 +241,14 @@ export const ButtonSecondary = styled(Button)`
   margin: 5px 0 5px;
   font-weight: 400;
   font-size: 14px;
+`;
+
+export const ButtonGroup = styled.div`
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 10px;
+  @media (max-width: 420px) {
+    display: block;
+  }
 `;
