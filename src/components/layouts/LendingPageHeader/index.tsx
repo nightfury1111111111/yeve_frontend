@@ -1,4 +1,3 @@
-import logo from '@src/assets/images/png/logo.png';
 import {
   Button,
   ButtonPrimary,
