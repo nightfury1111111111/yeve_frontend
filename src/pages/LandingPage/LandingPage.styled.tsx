@@ -248,6 +248,7 @@ export const ButtonGroup = styled.div`
   align-items: center;
   width: 100%;
   gap: 10px;
+  display: none;
   @media (max-width: 430px) {
     display: block;
   }
