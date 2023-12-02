@@ -10,7 +10,7 @@ export const HeaderContainer = styled.div`
     .star-icon {
       display: none;
     }
-    padding: 20px;
+    padding: 20px 0;
   }
 `;
 
