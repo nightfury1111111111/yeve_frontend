@@ -51,16 +51,24 @@ export const MenuItem = styled.div`
   gap: 4px;
   position: relative;
   cursor: pointer;
-  padding: 16px;
   border-radius: 4px;
   font-size: 16px;
   line-height: 24px;
+  padding: 16px;
+
+  &:last-child {
+    padding: 0;
+    > a {
+      display: block;
+      padding: 16px;
+    }
+  }
 
   &:hover {
     background: ${({ theme }) => theme.colors.header.menu.active};
 
     > img {
-      transform: rotate(180deg);
+      transform: rotate(0);
     }
 
     ${ChildMenu} {
@@ -79,4 +87,5 @@ export const MenuItemText = styled.span`
 export const MenuItemIcon = styled.img`
   transition: all ease-in 0.3s;
   width: 12px;
+  transform: rotate(180deg);
 `;

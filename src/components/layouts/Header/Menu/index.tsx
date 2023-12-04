@@ -17,7 +17,7 @@ export default function Menu({ themeConfig }: MenuProps) {
     <MenuContainer>
       <MenuItem>
         <MenuItemText>Trade</MenuItemText>
-        <MenuItemIcon src={themeConfig.images.downIcon} />
+        <MenuItemIcon src={themeConfig.images.upIcon} />
         <ChildMenu>
           <Link to="/swap">
             <ChildMenuItem>Swap</ChildMenuItem>
@@ -32,7 +32,7 @@ export default function Menu({ themeConfig }: MenuProps) {
       </MenuItem>
       <MenuItem>
         <MenuItemText>Earn</MenuItemText>
-        <MenuItemIcon src={themeConfig.images.downIcon} />
+        <MenuItemIcon src={themeConfig.images.upIcon} />
         <ChildMenu>
           <Link to="/fixed-earn">
             <ChildMenuItem>Fixed Earn</ChildMenuItem>
