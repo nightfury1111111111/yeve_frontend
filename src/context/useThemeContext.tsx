@@ -21,7 +21,7 @@ export const CustomThemeProvider: React.FC = ({
   children,
 }: Record<string, ReactNode>) => {
   const [theme, setTheme] = useState<Theme>(
-    getFromLocalStorage('yeve-theme') || THEME_MODE.LIGHT
+    getFromLocalStorage('yeve-theme') || THEME_MODE.DARK
   );
   const toggleTheme = () => {
     setTheme(theme === THEME_MODE.LIGHT ? THEME_MODE.DARK : THEME_MODE.LIGHT);

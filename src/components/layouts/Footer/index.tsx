@@ -1,8 +1,12 @@
 import { FooterContainer, FooterMenu, ReservedText } from './Footer.styled';
 
-export default function Footer() {
+type FooterProps = {
+  style: Record<string, any>;
+};
+
+export default function Footer({ style = {} }: FooterProps) {
   return (
-    <FooterContainer>
+    <FooterContainer style={style}>
       <ReservedText>© 2023 YEVE. All rights reserved.</ReservedText>
       <FooterMenu>
         <li>Documentation </li>

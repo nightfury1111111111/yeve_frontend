@@ -19,9 +19,10 @@ body {
 
 .app-content {
   flex: 1;
-  max-width: 1200px;
+  max-width: 1376px;
   margin: auto;
   width: 100%;
+  margin-bottom: 80px;
 }
 
 a {

@@ -13,7 +13,7 @@ export const HeaderContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  max-width: 1200px;
+  max-width: 1376px;
 `;
 
 export const Logo = styled.div`
