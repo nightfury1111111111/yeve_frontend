@@ -1,11 +1,17 @@
 import { styled } from 'styled-components';
 
 export const HeaderContainer = styled.div`
-  padding: 20px 40px;
+  padding: 8px 40px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   background: #060606;
+  @media (max-width: 1024px) {
+    .star-icon {
+      display: none;
+    }
+    padding: 20px 0;
+  }
 `;
 
 export const Button = styled.button<{ padding?: string }>`
@@ -31,4 +37,14 @@ export const FlexContainer = styled.div`
 export const ButtonPrimary = styled(Button)`
   background: #6134fe;
   cursor: pointer;
+  @media (max-width: 1024px) {
+    display: none;
+  }
+`;
+
+export const ButtonPrimaryBurger = styled(ButtonPrimary)`
+  display: none;
+  @media (max-width: 1024px) {
+    display: block;
+  }
 `;
