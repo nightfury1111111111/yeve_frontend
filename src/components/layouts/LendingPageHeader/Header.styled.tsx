@@ -36,6 +36,7 @@ export const FlexContainer = styled.div`
 
 export const ButtonPrimary = styled(Button)`
   background: #6134fe;
+  cursor: pointer;
   @media (max-width: 1024px) {
     display: none;
   }

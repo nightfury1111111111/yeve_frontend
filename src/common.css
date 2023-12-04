@@ -10,3 +10,20 @@ body {
 * {
   font-family: 'Be Vietnam Pro', sans-serif;
 }
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-content {
+  flex: 1;
+  max-width: 1200px;
+  margin: auto;
+  width: 100%;
+}
+
+a {
+  text-decoration: none;
+}

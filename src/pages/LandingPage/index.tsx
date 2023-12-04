@@ -6,8 +6,8 @@ import SolanaIconBig from '@src/assets/images/svg/solana-big';
 import StarIcon from '@src/assets/images/svg/star';
 import StarRoundIcon from '@src/assets/images/svg/star-round';
 import Footer from '@src/components/layouts/Footer';
-import {} from '@src/components/layouts/Layout.styles';
 import LandingPageHeader from '@src/components/layouts/LendingPageHeader';
+import { Button } from '@src/components/layouts/LendingPageHeader/Header.styled';
 import {
   ButtonGroup,
   ButtonPrimary,
@@ -31,9 +31,8 @@ import {
   LogoGroup,
   LogoItem1,
   LogoItem2,
-  LogoItem3,
+  LogoItem3
 } from './LandingPage.styled';
-import { Button } from '@src/components/layouts/LendingPageHeader/Header.styled';
 export default function LandingPage() {
   return (
     <LandingContainer>
