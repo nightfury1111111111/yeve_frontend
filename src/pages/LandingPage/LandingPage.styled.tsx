@@ -5,10 +5,23 @@ import { Button } from '@src/components/layouts/LendingPageHeader/Header.styled'
 export const LandingContainer = styled.div`
   background: #060606;
   width: 100%;
-  min-height: 100vh;
-  background-image: url(${wadeBg});
-  background-size: cover;
-  background-position: center;
+  height: 100vh;
+  /* background-image: url(${wadeBg}); */
+  /* background-size: cover; */
+  /* background-position: center; */
+  overflow: hidden;
+  position: relative;
+`;
+
+export const VideoBg = styled.div`
+  position: absolute;
+  width: 100vw;
+  height: 90vh;
+  video {
+    height: 90vh;
+    object-fit: fill;
+    width: 100%;
+  }
 `;
 
 export const LandingInsideContainer = styled.div`
@@ -27,9 +40,12 @@ export const LandingMain = styled.div`
     display: block;
     text-align: center;
   }
-  img {
-    max-width: 380px;
-    padding-top: 40px;
+
+  video {
+    width: 500px;
+    max-width: 500px;
+    height: auto;
+    margin-top: -50px;
     @media (max-width: 1280px) {
       max-width: 380px;
     }
@@ -37,10 +53,10 @@ export const LandingMain = styled.div`
       max-width: 380px;
     }
     @media (max-width: 1024px) {
-      max-width: 40vw;
+      max-width: 320px;
     }
     @media (max-width: 430px) {
-      max-width: 270px;
+      max-width: 320px;
     }
     width: auto;
   }
@@ -119,17 +135,24 @@ export const LogoItem = styled.div`
   width: 60px;
   height: 60px;
   border-radius: 50%;
+  box-shadow: 0px 4px 4.5px 0px rgba(0, 0, 0, 0.25);
+  img {
+    width: 32px;
+  }
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 export const LogoItem1 = styled(LogoItem)`
-  background: #f6f6f6;
+  background: #fff;
   left: 0;
 `;
 export const LogoItem2 = styled(LogoItem)`
-  background: #c9c9c9;
+  background: #fff;
   left: 45px;
 `;
 export const LogoItem3 = styled(LogoItem)`
-  background: #ababab;
+  background: #fff;
   left: 90px;
 `;
 export const LandingRight = styled.div`
@@ -138,8 +161,9 @@ export const LandingRight = styled.div`
   max-width: 320px;
   .star-icon {
     display: block;
-    margin-top: 7px;
-    margin-bottom: 32px;
+    /* margin-top: 7px; */
+    /* margin-bottom: 32px; */
+    margin-left: 5px;
   }
   @media (max-width: 1024px) {
     display: none;
@@ -150,7 +174,7 @@ export const LandingRightTitle = styled.div`
   font-style: normal;
   font-weight: 600;
   line-height: 52px; /* 111.111% */
-  width: 175px;
+  width: 237px;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -171,6 +195,7 @@ export const LandingBottom = styled.div`
   align-items: flex-end;
   flex-wrap: wrap;
   padding: 0 160px 10px;
+  margin-top: -50px;
   @media (max-width: 1440px) {
     padding: 0 120px 10px;
   }
@@ -233,6 +258,11 @@ export const ButtonPrimary = styled(Button)`
   font-size: 14px;
   height: 50px;
 `;
+export const ButtonPrimaryReadDoc = styled(ButtonPrimary)`
+  display: flex;
+  width: auto;
+  margin-top: 16px;
+`;
 export const ButtonSecondary = styled(Button)`
   height: 50px;
 
@@ -250,12 +280,14 @@ export const ButtonSecondary = styled(Button)`
 `;
 
 export const ButtonGroup = styled.div`
-  display: flex;
   align-items: center;
   width: 100%;
   gap: 10px;
   display: none;
   @media (max-width: 1280px) {
+    display: flex;
+  }
+  @media (max-width: 700px) {
     display: block;
   }
 `;
