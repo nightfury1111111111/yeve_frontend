@@ -10,7 +10,7 @@ export const HeaderContainer = styled.div`
     .star-icon {
       display: none;
     }
-    padding: 20px 0;
+    padding: 20px;
   }
 `;
 
@@ -26,6 +26,7 @@ export const Button = styled.button<{ padding?: string }>`
   display: flex;
   gap: 8px;
   align-items: center;
+  cursor: pointer;
 `;
 
 export const FlexContainer = styled.div`
