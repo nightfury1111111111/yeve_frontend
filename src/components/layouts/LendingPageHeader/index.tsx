@@ -24,8 +24,8 @@ export default function LandingPageHeader() {
           SOLANA
         </Button>
         <StarIcon />
-        <ButtonPrimary padding="12px 48px" onClick={() => navigate('/swap')}>
-          Launch app
+        <ButtonPrimary onClick={() => navigate('/swap')} padding="12px 48px">
+          COMING SOON
         </ButtonPrimary>
         <ButtonPrimaryBurger>
           <BurgerMenuIcon />
