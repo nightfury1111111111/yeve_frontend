@@ -1,7 +1,7 @@
 import { FooterContainer, FooterMenu, ReservedText } from './Footer.styled';
 
 type FooterProps = {
-  style: Record<string, any>;
+  style?: Record<string, any>;
 };
 
 export default function Footer({ style = {} }: FooterProps) {

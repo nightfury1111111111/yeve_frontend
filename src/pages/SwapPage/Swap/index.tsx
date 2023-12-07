@@ -1,3 +1,4 @@
+import ResetIcon from '@src/assets/images/svg/swap/resetIcon';
 import { ThemeContext } from '@src/context/useThemeContext';
 import { useContext, useState } from 'react';
 import SelectToken from './SelectToken';
@@ -11,9 +12,8 @@ import {
   SwapTab,
   SwapTabItem,
 } from './Swap.styled';
-import ResetIcon from '@src/assets/images/svg/swap/resetIcon';
-import SettingIcon from '@src/assets/images/svg/swap/settingIcon';
-import UnlockedIcon from '@src/assets/images/svg/swap/unlockedIcon';
+import LockIcon from '@src/assets/images/svg/swap/LockIcon';
+import SettingIcon from '@src/assets/images/svg/swap/SettingIcon';
 
 export default function Swap() {
   const { themeConfig } = useContext(ThemeContext);
@@ -28,7 +28,7 @@ export default function Swap() {
             className={selectedTab === 0 ? 'active' : ''}
             onClick={() => setSelectedTab(0)}
           >
-            Trade
+            Swap
           </SwapTabItem>
           <SwapTabItem
             className={selectedTab === 1 ? 'active' : ''}
@@ -42,10 +42,10 @@ export default function Swap() {
             <ResetIcon />
           </SwapControlItem>
           <SwapControlItem>
-            <img src={themeConfig.images.swap.unlockedIcon} />
+            <LockIcon />
           </SwapControlItem>
           <SwapControlItem>
-            <img src={themeConfig.images.swap.settingIcon} />
+            <SettingIcon />
           </SwapControlItem>
         </SwapControlList>
       </SwapHeader>

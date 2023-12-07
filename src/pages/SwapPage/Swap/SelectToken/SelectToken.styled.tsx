@@ -1,6 +1,6 @@
 import { styled } from 'styled-components';
 
-export const ArrowDownIconContainer = styled.div`
+export const SwitchIconContainer = styled.div`
   display: flex;
   justify-content: center;
   margin: 12px 0;
@@ -10,6 +10,10 @@ export const ArrowDownIconContainer = styled.div`
     background: ${({ theme }) => theme.colors.gray['800']};
     border-radius: 999px;
     cursor: pointer;
+
+    > path {
+      stroke: ${({ theme }) => theme.colors.gray['50']} !important;
+    }
   }
 `;
 
@@ -27,7 +31,7 @@ export const TokenDownIcon = styled.img`
 
 export const TokenSelect = styled.div`
   flex: 1;
-  background: ${({ theme }) => theme.colors.gray['850']};
+  background: ${({ theme }) => theme.colors.gray['950']};
   padding: 8px 16px 8px 8px;
   border-top-left-radius: 999px;
   border-bottom-left-radius: 999px;
@@ -46,7 +50,15 @@ export const TokenSelect = styled.div`
       font-size: 14px;
       font-weight: 600;
       line-height: 20px;
-      color: ${({ theme }) => theme.colors.swap.text};
+      color: ${({ theme }) => theme.colors.gray['50']};
+    }
+  }
+
+  > svg {
+    width: 12px;
+
+    > path {
+      stroke: ${({ theme }) => theme.colors.gray['50']} !important;
     }
   }
 `;
@@ -65,10 +77,10 @@ export const TokenButtonContainer = styled.div`
 
   > button {
     width: 60px;
-    background: ${({ theme }) => theme.colors.swap.button};
+    background: ${({ theme }) => theme.colors.purple['500']};
     padding: 4px 8px;
     border-radius: 4px;
-    color: ${({ theme }) => theme.colors.swap.text};
+    color: ${({ theme }) => theme.colors.gray['50']};
     font-weight: 500;
     font-size: 12px;
     line-height: 16px;
@@ -83,7 +95,7 @@ export const TokenValue = styled.div`
   font-size: 24px;
   font-weight: 600;
   line-height: 32px;
-  color: ${({ theme }) => theme.colors.swap.text};
+  color: ${({ theme }) => theme.colors.gray['50']};
 `;
 
 export const TokenItem = styled.div`
@@ -98,7 +110,7 @@ export const TokenItem = styled.div`
   }
 
   > span {
-    color: ${({ theme }) => theme.colors.swap.text};
+    color: ${({ theme }) => theme.colors.gray['50']};
     font-size: 14px;
     font-weight: 600;
     line-height: 20px;
@@ -114,7 +126,7 @@ export const TokenItem = styled.div`
 
 export const TokenContainer = styled.div`
   margin-top: 12px;
-  background: ${({ theme }) => theme.colors.gray['800']};
+  background: ${({ theme }) => theme.colors.gray['900']};
   border-radius: 4px;
   padding: 16px 0;
   gap: 16px;

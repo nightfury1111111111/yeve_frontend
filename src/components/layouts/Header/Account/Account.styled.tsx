@@ -5,7 +5,7 @@ export const SelectToken = styled.div`
   align-items: center;
   gap: 8px;
   padding: 16px;
-  background: ${({ theme }) => theme.colors.header.account.background};
+  background: ${({ theme }) => theme.colors.gray['950']};
   border-radius: 4px;
   cursor: pointer;
 
@@ -13,7 +13,7 @@ export const SelectToken = styled.div`
     margin-top: 1px;
     font-size: 16px;
     line-height: 16px;
-    color: ${({ theme }) => theme.colors.header.account.text};
+    color: ${({ theme }) => theme.colors.gray['50']};
     font-weight: 600;
   }
 `;

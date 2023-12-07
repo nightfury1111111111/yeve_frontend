@@ -1,11 +1,11 @@
+import DownIcon from '@src/assets/images/svg/menu/DownIcon';
 import {
   TokenButtonContainer,
   TokenContainer,
-  TokenDownIcon,
   TokenIcon,
   TokenItem,
   TokenSelect,
-  TokenValue,
+  TokenValue
 } from '../SelectToken.styled';
 
 type SelectTokenItemProps = {
@@ -22,7 +22,7 @@ export default function SelectTokenItem({ themeConfig }: SelectTokenItemProps) {
             <TokenIcon src={themeConfig.images.accountAvatar} />
             <span>YEVE</span>
           </div>
-          <TokenDownIcon src={themeConfig.images.upIcon} />
+          <DownIcon />
         </TokenSelect>
       </TokenItem>
       <TokenItem>
