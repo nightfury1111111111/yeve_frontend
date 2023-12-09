@@ -17,7 +17,6 @@ import {
   ButtonGroup,
   ButtonPrimary,
   ButtonPrimaryReadDoc,
-  ButtonSecondary,
   LandingBottom,
   LandingBottomLeft,
   LandingBottomRight,
