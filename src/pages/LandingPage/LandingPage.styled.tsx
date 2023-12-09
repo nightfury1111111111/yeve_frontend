@@ -214,11 +214,27 @@ export const LandingBottom = styled.div`
   flex-wrap: wrap;
   padding: 0 160px 10px;
   margin-top: -50px;
+  @media (max-width: 1500px) {
+    margin-top: 0;
+  }
   @media (max-width: 1440px) {
     padding: 0 120px 10px;
   }
   @media (max-width: 1280px) {
     padding: 0 100px 10px;
+    margin-top: 0;
+  }
+  @media (max-width: 1250px) {
+    padding: 0 100px 10px;
+    margin-top: 20px;
+  }
+  @media (max-width: 1190px) {
+    padding: 0 100px 10px;
+    margin-top: 30px;
+  }
+  @media (max-width: 1150px) {
+    padding: 0 100px 10px;
+    margin-top: 40px;
   }
   @media (max-width: 1024px) {
     padding: 0 20px 10px;
@@ -243,6 +259,17 @@ export const LandingBottomLeft = styled.div`
     margin-right: 10px;
     width: 45px;
     height: 45px;
+  }
+  @media (max-width: 1280px) {
+    font-size: 48px;
+    max-width: 600px;
+  }
+  @media (max-width: 1150px) {
+    max-width: 550px;
+  }
+  @media (max-width: 1060px) {
+    max-width: 500px;
+    font-size: 45px;
   }
   @media (max-width: 1024px) {
     font-size: 36px;
@@ -287,7 +314,20 @@ export const ButtonPrimaryReadDoc = styled(ButtonPrimary)`
   background: #ece8ff;
   color: #291782;
   border-color: #ede8ff;
-
+  @media (max-width: 1024px) {
+    display: flex;
+    width: 100%;
+    margin-top: 5px;
+  }
+`;
+export const ButtonPrimaryReadDocMobile = styled(ButtonPrimary)`
+  display: flex;
+  width: auto;
+  margin-top: 16px;
+  background: #ece8ff;
+  color: #291782;
+  border-color: #ede8ff;
+  display: none;
   @media (max-width: 1024px) {
     display: flex;
     width: 100%;
@@ -324,6 +364,24 @@ export const ButtonGroup = styled.div`
     gap: 0;
   }
 `;
+export const ButtonGroupMobile = styled.div`
+  align-items: center;
+  width: 100%;
+  gap: 10px;
+  display: none;
+  margin-top: 20px;
+  @media (max-width: 1280px) {
+    display: none;
+  }
+  @media (max-width: 1024px) {
+    display: flex;
+  }
+  @media (max-width: 700px) {
+    flex-direction: column;
+    gap: 0;
+  }
+`;
+
 export const LandingLeftMobile = styled.div`
   display: none;
   @media (max-width: 1024px) {
