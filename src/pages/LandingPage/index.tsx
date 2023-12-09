@@ -14,9 +14,10 @@ import Footer from '@src/components/layouts/Footer';
 import LandingPageHeader from '@src/components/layouts/LendingPageHeader';
 import { Button } from '@src/components/layouts/LendingPageHeader/Header.styled';
 import {
-  ButtonGroup,
+  ButtonGroupMobile,
   ButtonPrimary,
   ButtonPrimaryReadDoc,
+  ButtonPrimaryReadDocMobile,
   LandingBottom,
   LandingBottomLeft,
   LandingBottomRight,
@@ -109,12 +110,12 @@ export default function LandingPage() {
               solution for efficient cryptocurrency transactions.
             </LandingRightDesc>
           </LandingRightMobile>
-          <ButtonGroup>
-            <ButtonPrimaryReadDoc padding="12px 48px">
+          <ButtonGroupMobile>
+            <ButtonPrimaryReadDocMobile padding="12px 48px">
               READ DOCS
-            </ButtonPrimaryReadDoc>
+            </ButtonPrimaryReadDocMobile>
             <ButtonPrimary padding="12px 48px">COMING SOON</ButtonPrimary>
-          </ButtonGroup>
+          </ButtonGroupMobile>
 
           <LandingLeftMobile>
             <LandingLeftMobileLeft>
