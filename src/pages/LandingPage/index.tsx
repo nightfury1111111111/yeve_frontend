@@ -28,11 +28,13 @@ import {
   LandingLeftDesc,
   LandingLeftDescMobile,
   LandingLeftMobile,
+  LandingLeftMobileLeft,
   LandingLeftTitle,
   LandingLeftTitleMobile,
   LandingMain,
   LandingRight,
   LandingRightDesc,
+  LandingRightMobile,
   LandingRightTitle,
   LogoGroup,
   LogoItem1,
@@ -97,19 +99,51 @@ export default function LandingPage() {
             The future of deep liquidity and ve3 simplicity on Solana{' '}
             <BigStarIcon />
           </LandingBottomLeft>
-          <LandingLeftMobile>
-            <LandingLeftTitleMobile>
-              BE PART OF OUR COMMUNITY
-            </LandingLeftTitleMobile>
-            <LandingLeftDescMobile>
-              Join like-minded individuals on a crypto journey simplified to fit
-              all experience levels
-            </LandingLeftDescMobile>
-          </LandingLeftMobile>
+          <LandingRightMobile>
+            <LandingRightTitle>
+              BUILT ON
+              <SolanaIconBig /> SOLANA <StarIcon />
+            </LandingRightTitle>
+            <LandingRightDesc>
+              At the forefront of innovation harnessing the power and
+              scalability of Solana architecture. Providing a cutting-edge
+              solution for efficient cryptocurrency transactions.
+            </LandingRightDesc>
+          </LandingRightMobile>
           <ButtonGroup>
-            <ButtonSecondary padding="12px 48px">See more</ButtonSecondary>
-            <ButtonPrimary padding="12px 48px">Launch app</ButtonPrimary>
+            <ButtonPrimaryReadDoc padding="12px 48px">
+              READ DOCS
+            </ButtonPrimaryReadDoc>
+            <ButtonPrimary padding="12px 48px">COMING SOON</ButtonPrimary>
           </ButtonGroup>
+
+          <LandingLeftMobile>
+            <LandingLeftMobileLeft>
+              <LandingLeftTitleMobile>
+                BE PART OF OUR COMMUNITY
+              </LandingLeftTitleMobile>
+              <LandingLeftDescMobile>
+                Join like-minded individuals on a crypto journey simplified to
+                fit all experience levels
+              </LandingLeftDescMobile>
+            </LandingLeftMobileLeft>
+
+            <div>
+              <LandingLeftCommunityText>Community</LandingLeftCommunityText>
+              <LogoGroup>
+                <LogoItem1>
+                  <img src={social1Img} alt="social1Img" />
+                </LogoItem1>
+                <LogoItem2>
+                  <img src={social2Img} alt="social2Img" />
+                </LogoItem2>
+                <LogoItem3>
+                  <img src={social3Img} alt="social3Img" />
+                </LogoItem3>
+                <ArrowPointIcon />
+              </LogoGroup>
+            </div>
+          </LandingLeftMobile>
 
           <LandingBottomRight>
             <StarRoundIcon />

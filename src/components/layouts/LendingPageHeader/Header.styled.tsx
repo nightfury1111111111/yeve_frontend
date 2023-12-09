@@ -10,6 +10,12 @@ export const HeaderContainer = styled.div`
     .star-icon {
       display: none;
     }
+    padding: 20px 120px;
+  }
+  @media (max-width: 900px) {
+    .star-icon {
+      display: none;
+    }
     padding: 20px;
   }
 `;

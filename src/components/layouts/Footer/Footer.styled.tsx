@@ -19,9 +19,12 @@ export const FooterContainer = styled.div`
   background: #060606;
   padding: 20px 40px 20px;
   @media (max-width: 1024px) {
+    padding: 20px 0 20px;
+  }
+  @media (max-width: 900px) {
     display: block;
     text-align: center;
-    padding: 20px 20px 20px;
+    padding: 20px 0;
   }
 `;
 
@@ -30,7 +33,6 @@ export const ReservedText = styled.div`
     padding-left: 40px;
   }
   @media (min-height: 755px) {
-    padding-left: 40px;
   }
   font-size: 12px;
   font-style: normal;
@@ -39,6 +41,10 @@ export const ReservedText = styled.div`
   color: #ababab;
   @media (max-width: 1024px) {
     margin-bottom: 20px;
+    padding-left: 120px;
+  }
+  @media (max-width: 900px) {
+    padding-left: 0;
   }
 `;
 export const FooterMenu = styled.div`
@@ -60,5 +66,9 @@ export const FooterMenu = styled.div`
   }
   @media (max-width: 1024px) {
     justify-content: center;
+    padding-right: 120px;
+  }
+  @media (max-width: 900px) {
+    padding-right: 0;
   }
 `;

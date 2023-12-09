@@ -56,7 +56,7 @@ export const LandingMain = styled.div`
       max-width: 320px;
     }
     @media (max-width: 430px) {
-      max-width: 320px;
+      max-width: 370px;
     }
     width: auto;
   }
@@ -80,13 +80,8 @@ export const LandingLeft = styled.div`
   }
 `;
 
-export const LandingLeftMobile = styled.div`
-  display: none;
-  @media (max-width: 1024px) {
-    display: block;
-    margin-bottom: 20px;
-    max-width: 700px;
-  }
+export const LandingLeftMobileLeft = styled.div`
+  max-width: 417px;
 `;
 
 export const LandingLeftDescMobile = styled.div`
@@ -96,7 +91,7 @@ export const LandingLeftDescMobile = styled.div`
 export const LandingLeftTitleMobile = styled.div`
   font-size: 22px;
   line-height: 32px;
-  margin: 10px 0;
+  margin: 0 0 10px;
 `;
 export const LandingLeftTitle = styled.div`
   font-size: 36px;
@@ -104,6 +99,7 @@ export const LandingLeftTitle = styled.div`
   font-weight: 600;
   line-height: 40px; /* 111.111% */
   text-transform: uppercase;
+  margin-top: 60px;
 `;
 export const LandingLeftDesc = styled.div`
   font-size: 16px;
@@ -169,6 +165,7 @@ export const LandingRight = styled.div`
     display: none;
   }
 `;
+
 export const LandingRightTitle = styled.div`
   font-size: 30px;
   font-style: normal;
@@ -189,6 +186,23 @@ export const LandingRightDesc = styled.div`
   margin-top: 20px;
 `;
 
+export const LandingRightMobile = styled.div`
+  ${LandingRightTitle} {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 10px;
+    justify-content: center;
+    font-size: 30px;
+    @media (max-width: 400px) {
+      font-size: 20px;
+    }
+  }
+  ${LandingRightDesc} {
+    text-align: center;
+  }
+`;
+
 export const LandingBottom = styled.div`
   display: flex;
   justify-content: space-between;
@@ -206,7 +220,10 @@ export const LandingBottom = styled.div`
     padding: 0 20px 10px;
     max-width: 700px;
     margin: auto;
-    margin-top: -70px;
+    margin-top: -20px;
+  }
+  @media (max-width: 430px) {
+    margin-top: -40px;
   }
 `;
 
@@ -226,6 +243,7 @@ export const LandingBottomLeft = styled.div`
   @media (max-width: 1024px) {
     font-size: 36px;
     line-height: 36px;
+    text-align: center;
     svg {
       width: 25px;
       height: 25px;
@@ -262,6 +280,15 @@ export const ButtonPrimaryReadDoc = styled(ButtonPrimary)`
   display: flex;
   width: auto;
   margin-top: 16px;
+  background: #ece8ff;
+  color: #291782;
+  border-color: #ede8ff;
+
+  @media (max-width: 1024px) {
+    display: flex;
+    width: 100%;
+    margin-top: 5px;
+  }
 `;
 export const ButtonSecondary = styled(Button)`
   height: 50px;
@@ -284,10 +311,52 @@ export const ButtonGroup = styled.div`
   width: 100%;
   gap: 10px;
   display: none;
+  margin-top: 20px;
   @media (max-width: 1280px) {
     display: flex;
   }
   @media (max-width: 700px) {
-    display: block;
+    flex-direction: column;
+    gap: 0;
   }
+`;
+export const LandingLeftMobile = styled.div`
+  display: none;
+  @media (max-width: 1024px) {
+    display: flex;
+    margin-bottom: 20px;
+  }
+  @media (max-width: 768px) {
+    display: block;
+    margin-bottom: 20px;
+    text-align: center;
+    margin: auto;
+    ${LandingLeftCommunityText} {
+      margin-top: 20px;
+    }
+    ${LogoItem} {
+      position: relative;
+      left: 0;
+    }
+    ${LogoItem2} {
+      margin-left: -10px;
+    }
+    ${LogoItem3} {
+      margin-left: -10px;
+    }
+    ${LogoGroup} {
+      display: flex;
+      padding-left: 0;
+      margin: auto;
+      margin-top: 20px;
+      justify-content: center;
+      svg {
+        display: none;
+      }
+    }
+  }
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-top: 20px;
+  gap: 30px;
 `;
