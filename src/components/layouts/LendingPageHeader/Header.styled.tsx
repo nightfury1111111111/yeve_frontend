@@ -7,15 +7,12 @@ export const HeaderContainer = styled.div`
   align-items: center;
   background: #060606;
   @media (max-width: 1024px) {
-    .star-icon {
+    button:last-child {
       display: none;
     }
     padding: 20px 120px;
   }
   @media (max-width: 900px) {
-    .star-icon {
-      display: none;
-    }
     padding: 20px;
   }
 `;
