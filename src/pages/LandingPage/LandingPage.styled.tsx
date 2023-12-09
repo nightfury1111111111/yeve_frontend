@@ -187,6 +187,10 @@ export const LandingRightDesc = styled.div`
 `;
 
 export const LandingRightMobile = styled.div`
+  display: none;
+  @media (max-width: 1024px) {
+    dipslay: block;
+  }
   ${LandingRightTitle} {
     display: flex;
     align-items: center;

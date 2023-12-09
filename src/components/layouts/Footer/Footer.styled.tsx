@@ -39,6 +39,7 @@ export const ReservedText = styled.div`
   font-weight: 400;
   line-height: 16px;
   color: #ababab;
+  padding-left: 40px;
   @media (max-width: 1024px) {
     margin-bottom: 20px;
     padding-left: 120px;
