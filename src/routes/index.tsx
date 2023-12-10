@@ -2,6 +2,8 @@ import Layout from "@src/components/layouts";
 import LandingPage from "@src/pages/LandingPage";
 import SwapPage from "@src/pages/SwapPage";
 import LiquidityPoolPage from "@src/pages/LiquidityPool";
+import RewardsPage from "@src/pages/Rewards";
+import MyPoolPage from "@src/pages/MyPool";
 
 export const userRoutes: Record<string, unknown>[] = [
   {
@@ -20,8 +22,16 @@ export const userRoutes: Record<string, unknown>[] = [
             element: <SwapPage />,
           },
           {
-            path: "/liquidity-pool",
+            path: "/liquidity",
             element: <LiquidityPoolPage />,
+          },
+          {
+            path: "/my-pool",
+            element: <MyPoolPage />,
+          },
+          {
+            path: "/rewards",
+            element: <RewardsPage />,
           },
         ],
       },

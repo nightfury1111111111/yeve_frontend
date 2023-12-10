@@ -53,7 +53,7 @@ export const ChildMenu = styled.div`
     border-radius: 4px;
 
     &:hover {
-      background: ${({ theme }) => theme.colors.gray['800']};
+      background: ${({ theme }) => theme.colors.gray['900']};
     }
 
     svg {
@@ -136,7 +136,7 @@ export const MenuItem = styled.div`
   }
 
   &:hover {
-    background: ${({ theme }) => theme.colors.gray['800']};
+    background: ${({ theme }) => theme.colors.gray['950']};
 
     > svg {
       transform: rotate(180deg);

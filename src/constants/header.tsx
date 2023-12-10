@@ -47,7 +47,7 @@ const headerMenus = [
       {
         title: 'My Pool',
         route: '/my-pool',
-        disabled: true,
+        disabled: false,
         icon: <MyPoolIcon />,
       },
       {
