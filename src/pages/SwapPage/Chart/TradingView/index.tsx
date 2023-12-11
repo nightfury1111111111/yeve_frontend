@@ -1,11 +1,22 @@
 // TradingViewWidget.jsx
 
+import { ThemeContext } from '@src/context/useThemeContext';
+import TradingViewRangeType from '@src/types/TradingView';
+import { useContext } from 'react';
 import { AdvancedRealTimeChart } from 'react-ts-tradingview-widgets';
 
-export default function TradingViewWidget() {
+type TradingViewWidgetProps = {
+  range: TradingViewRangeType;
+};
+
+export default function TradingViewWidget({ range }: TradingViewWidgetProps) {
+  const { themeConfig } = useContext(ThemeContext);
+
+  console.log(themeConfig.colors.gray['950'])
+
   return (
     <AdvancedRealTimeChart
-      theme="dark"
+      theme={themeConfig.mode}
       autosize
       symbol="ETH/CRYPTOCAP:USDT"
       timezone="Etc/UTC"
@@ -15,7 +26,7 @@ export default function TradingViewWidget() {
       allow_symbol_change={true}
       hide_side_toolbar={false}
       enable_publishing={true}
-      range="ALL"
+      range={range}
     ></AdvancedRealTimeChart>
   );
 }

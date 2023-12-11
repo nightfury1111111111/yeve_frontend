@@ -1,18 +1,46 @@
 import { styled } from 'styled-components';
 
+export const SwapPrice = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  > label {
+    color: ${({ theme }) => theme.colors.gray['200']};
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px; /* 142.857% */
+  }
+
+  > span {
+    color: ${({ theme }) => theme.colors.success['500']};
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 20px; /* 142.857% */
+  }
+`;
+
 export const SwitchIconContainer = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  align-items: center;
   margin: 12px 0;
 
-  > svg {
+  > div:first-child {
     padding: 12px;
     background: ${({ theme }) => theme.colors.gray['800']};
     border-radius: 999px;
     cursor: pointer;
+    height: 40px;
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-    > path {
-      stroke: ${({ theme }) => theme.colors.gray['50']} !important;
+    > svg {
+      > path {
+        stroke: ${({ theme }) => theme.colors.gray['50']} !important;
+      }
     }
   }
 `;
@@ -103,6 +131,10 @@ export const TokenItem = styled.div`
   align-items: center;
   justify-content: space-between;
   padding: 0 16px 16px 16px;
+
+  &:last-child {
+    padding-bottom: 0;
+  }
 
   &.select {
     padding-right: 0;
