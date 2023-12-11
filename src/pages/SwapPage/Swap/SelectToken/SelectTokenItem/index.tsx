@@ -5,22 +5,39 @@ import {
   TokenIcon,
   TokenItem,
   TokenSelect,
-  TokenValue
+  TokenValue,
 } from '../SelectToken.styled';
+import { useState } from 'react';
+import TokenModal from '../TokenModal';
 
 type SelectTokenItemProps = {
   themeConfig: Record<string, any>;
+  buttonMax?: boolean;
+  token: Record<string, any>;
+  setToken: (token: Record<string, any>) => void;
 };
 
-export default function SelectTokenItem({ themeConfig }: SelectTokenItemProps) {
+export default function SelectTokenItem({
+  buttonMax,
+  token,
+  setToken,
+}: SelectTokenItemProps) {
+  const [openTokenModal, setOpenTokenModal] = useState(false);
+
   return (
     <TokenContainer>
+      {openTokenModal && (
+        <TokenModal
+          onClose={() => setOpenTokenModal(false)}
+          handleSelect={setToken}
+        />
+      )}
       <TokenItem className="select">
         <span>FROM</span>
-        <TokenSelect>
+        <TokenSelect onClick={() => setOpenTokenModal(true)}>
           <div>
-            <TokenIcon src={themeConfig.images.accountAvatar} />
-            <span>YEVE</span>
+            <TokenIcon src={token.image} />
+            <span>{token.symbol}</span>
           </div>
           <DownIcon />
         </TokenSelect>
@@ -33,7 +50,7 @@ export default function SelectTokenItem({ themeConfig }: SelectTokenItemProps) {
         <label>Balance</label>
         <TokenButtonContainer>
           <label>18.7685</label>
-          <button>MAX</button>
+          {buttonMax && <button>MAX</button>}
         </TokenButtonContainer>
       </TokenItem>
     </TokenContainer>

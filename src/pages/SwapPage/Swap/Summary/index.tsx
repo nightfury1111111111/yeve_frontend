@@ -2,21 +2,16 @@ import {
   SummaryContainer,
   SummaryItem,
   SummaryItemList,
-  SummaryItemPrice,
 } from './Summary.styled';
-import ResetIcon from '@src/assets/images/svg/swap/reset';
 
-export default function Summary() {
+type SummaryProps = {
+  summary: Record<string, any>;
+};
+
+export default function Summary({ summary }: SummaryProps) {
   return (
     <SummaryContainer>
       <SummaryItemList>
-        <SummaryItem>
-          <label>Price</label>
-          <SummaryItemPrice>
-            <span>1 YEVE = 2 USDT</span>
-            <ResetIcon />
-          </SummaryItemPrice>
-        </SummaryItem>
         <SummaryItem>
           <label>Minimum Received</label>
           <span>18.7685</span>
@@ -27,7 +22,7 @@ export default function Summary() {
         </SummaryItem>
         <SummaryItem>
           <label>Slippage</label>
-          <span>1.0%</span>
+          <span>{summary.slippage}%</span>
         </SummaryItem>
         <SummaryItem>
           <label>Price Impact</label>
