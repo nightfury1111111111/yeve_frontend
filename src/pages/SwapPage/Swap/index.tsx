@@ -18,7 +18,7 @@ import SlippageSetting from './SlippageSetting';
 export default function Swap() {
   const { themeConfig } = useContext(ThemeContext);
 
-  const [openSlippageSetting, setSlippageSetting] = useState(true);
+  const [openSlippageSetting, setSlippageSetting] = useState(false);
   const [summary, setSummary] = useState<Record<string, any>>({
     slippage: '1.00',
   });

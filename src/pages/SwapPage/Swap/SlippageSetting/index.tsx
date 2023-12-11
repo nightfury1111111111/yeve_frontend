@@ -1,5 +1,7 @@
 import FilterIcon from '@src/assets/images/svg/filter-icon';
-import { useEffect, useRef, useState } from 'react';
+import InfoIcon from '@src/assets/images/svg/info-icon';
+import { SLIPPAGE_OPTIONS } from '@src/example-data/slippage';
+import { useEffect, useRef } from 'react';
 import { useOnClickOutside } from 'usehooks-ts';
 import {
   DeadlineInput,
@@ -10,8 +12,6 @@ import {
   TokenModalContainer,
   TokenModalForm,
 } from './SlippageSetting.styled';
-import InfoIcon from '@src/assets/images/svg/info-icon';
-import { SLIPPAGE_OPTIONS } from '@src/example-data/slippage';
 
 type SlippageSettingProps = {
   summary: Record<string, any>;

@@ -10,7 +10,7 @@ type SelectTokenProps = {
 };
 
 export default function SelectToken({ themeConfig }: SelectTokenProps) {
-  const [fromToken, setFromToken] = useState({
+  const [fromToken, setFromToken] = useState<Record<string, any>>({
     address: '1',
     name: 'YEVE',
     symbol: 'YEVE',
@@ -18,7 +18,7 @@ export default function SelectToken({ themeConfig }: SelectTokenProps) {
     balance: 10.2,
   });
 
-  const [toToken, setToToken] = useState({
+  const [toToken, setToToken] = useState<Record<string, any>>({
     address: '1',
     name: 'Tether',
     symbol: 'USDT',
