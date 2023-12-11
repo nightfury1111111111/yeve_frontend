@@ -1,20 +1,19 @@
+import ResetIcon from '@src/assets/images/svg/swap/resetIcon';
+import { ThemeContext } from '@src/context/useThemeContext';
 import { useContext, useState } from 'react';
+import SelectToken from './SelectToken';
+import Summary from './Summary';
 import {
+  SwapButton,
   SwapContainer,
+  SwapControlItem,
+  SwapControlList,
   SwapHeader,
   SwapTab,
   SwapTabItem,
-  SwapControlList,
-  SwapControlItem,
-  TokenContainer,
-  TokenItem,
-  TokenValue,
-  TokenButtonContainer,
-  TokenSelect,
-  TokenIcon,
-  TokenDownIcon,
 } from './Swap.styled';
-import { ThemeContext } from '@src/context/useThemeContext';
+import LockIcon from '@src/assets/images/svg/swap/LockIcon';
+import SettingIcon from '@src/assets/images/svg/swap/SettingIcon';
 
 export default function Swap() {
   const { themeConfig } = useContext(ThemeContext);
@@ -29,7 +28,7 @@ export default function Swap() {
             className={selectedTab === 0 ? 'active' : ''}
             onClick={() => setSelectedTab(0)}
           >
-            Trade
+            Swap
           </SwapTabItem>
           <SwapTabItem
             className={selectedTab === 1 ? 'active' : ''}
@@ -40,39 +39,19 @@ export default function Swap() {
         </SwapTab>
         <SwapControlList>
           <SwapControlItem>
-            <img src={themeConfig.images.swap.resetIcon} />
+            <ResetIcon />
           </SwapControlItem>
           <SwapControlItem>
-            <img src={themeConfig.images.swap.unlockedIcon} />
+            <LockIcon />
           </SwapControlItem>
           <SwapControlItem>
-            <img src={themeConfig.images.swap.settingIcon} />
+            <SettingIcon />
           </SwapControlItem>
         </SwapControlList>
       </SwapHeader>
-      <TokenContainer>
-        <TokenItem className="select">
-          <span>FROM</span>
-          <TokenSelect>
-            <div>
-              <TokenIcon src={themeConfig.images.accountAvatar} />
-              <span>YEVE</span>
-            </div>
-            <TokenDownIcon src={themeConfig.images.upIcon} />
-          </TokenSelect>
-        </TokenItem>
-        <TokenItem>
-          <label>Amount</label>
-          <TokenValue>48.38572</TokenValue>
-        </TokenItem>
-        <TokenItem>
-          <label>Balance</label>
-          <TokenButtonContainer>
-            <label>18.7685</label>
-            <button>MAX</button>
-          </TokenButtonContainer>
-        </TokenItem>
-      </TokenContainer>
+      <SelectToken themeConfig={themeConfig} />
+      <Summary />
+      <SwapButton>Swap</SwapButton>
     </SwapContainer>
   );
 }

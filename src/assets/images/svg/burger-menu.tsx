@@ -10,9 +10,9 @@ const BurgerMenuIcon = () => {
       <path
         d="M3 12H21M3 6H21M3 18H21"
         stroke="white"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   );

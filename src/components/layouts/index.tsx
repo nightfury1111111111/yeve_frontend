@@ -17,7 +17,7 @@ export default function Layout() {
         <div className="app-content">
           <Outlet />
         </div>
-        <Footer />
+        <Footer style={{ position: 'unset' }} />
       </div>
     </Container>
   );

@@ -5,7 +5,7 @@ export const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: ${({ theme }) => theme.colors.body};
+  background-color: ${({ theme }) => theme.colors.gray['1000']};
 `;
 
 export const HeaderContainer = styled.div`
@@ -13,7 +13,7 @@ export const HeaderContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  max-width: 1200px;
+  max-width: 1376px;
 `;
 
 export const Logo = styled.div`
@@ -23,5 +23,9 @@ export const Logo = styled.div`
     text-decoration: none;
     font-size: 32px;
     font-weight: 700;
+
+    > svg path {
+      stroke: ${({ theme }) => theme.colors.gray['50']};
+    }
   }
 `;

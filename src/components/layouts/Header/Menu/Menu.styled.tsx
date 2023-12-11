@@ -5,7 +5,21 @@ export const MenuContainer = styled.div`
   align-items: center;
   gap: 8px;
   flex: 1;
-  color: ${({ theme }) => theme.colors.text};
+  color: ${({ theme }) => theme.colors.gray['50']};
+`;
+
+export const MenuIcon = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+export const ChildMenuItem = styled.div`
+  text-align: left;
+  color: ${({ theme }) => theme.colors.gray['50']};
+  text-wrap: nowrap;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
 `;
 
 export const ChildMenu = styled.div`
@@ -15,9 +29,11 @@ export const ChildMenu = styled.div`
   top: calc(100% + 24px);
   left: 0;
   width: fit-content;
+  min-width: 120px;
   flex-direction: column;
+  gap: 4px;
   padding: 12px;
-  background: ${({ theme }) => theme.colors.header.menu.sub};
+  background: ${({ theme }) => theme.colors.gray['950']};
   transition: all ease-in 1s;
 
   &::before {
@@ -28,51 +44,48 @@ export const ChildMenu = styled.div`
     width: 70%;
     height: 32px;
   }
-`;
 
-export const ChildMenuItem = styled.div`
-  padding: 8px 12px;
-  text-align: left;
-  color: ${({ theme }) => theme.colors.text};
-  border-radius: 4px;
-  text-wrap: nowrap;
-  font-weight: 600;
-  font-size: 16px;
-  line-height: 24px;
+  > a {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    border-radius: 4px;
 
-  &:hover {
-    background: ${({ theme }) => theme.colors.header.menu.active};
-  }
-`;
+    &:hover {
+      background: ${({ theme }) => theme.colors.gray['900']};
+    }
 
-export const MenuItem = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  position: relative;
-  cursor: pointer;
-  border-radius: 4px;
-  font-size: 16px;
-  line-height: 24px;
-  padding: 16px;
-
-  &:last-child {
-    padding: 0;
-    > a {
-      display: block;
-      padding: 16px;
+    svg {
+      path {
+        stroke: ${({ theme }) => theme.colors.gray['50']} !important;
+      }
     }
   }
 
-  &:hover {
-    background: ${({ theme }) => theme.colors.header.menu.active};
-
-    > img {
-      transform: rotate(0);
+  .active {
+    > div {
+      color: ${({ theme }) => theme.colors.purple['500']};
     }
 
-    ${ChildMenu} {
-      display: flex;
+    > div > svg {
+      path {
+        stroke: ${({ theme }) => theme.colors.purple['500']} !important;
+      }
+    }
+  }
+
+  .disabled {
+    background: ${({ theme }) => theme.colors.gray['900']} !important;
+
+    > div {
+      color: ${({ theme }) => theme.colors.gray['750']} !important;
+    }
+
+    > div > svg {
+      path {
+        stroke: ${({ theme }) => theme.colors.gray['750']} !important;
+      }
     }
   }
 `;
@@ -81,11 +94,71 @@ export const MenuItemText = styled.span`
   font-weight: 600;
   line-height: 24px;
   font-size: 16px;
-  color: ${({ theme }) => theme.colors.text};
+  color: ${({ theme }) => theme.colors.gray['50']};
 `;
 
-export const MenuItemIcon = styled.img`
-  transition: all ease-in 0.3s;
-  width: 12px;
-  transform: rotate(180deg);
+export const MenuItem = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 16px;
+  line-height: 24px;
+  padding: 16px;
+
+  &.active {
+    > ${MenuIcon} {
+      display: flex;
+      > svg > path {
+        stroke: ${({ theme }) => theme.colors.purple['500']} !important;
+      }
+    }
+
+    ${MenuItemText} {
+      color: ${({ theme }) => theme.colors.purple['500']} !important;
+    }
+
+    > svg > path {
+      stroke: ${({ theme }) => theme.colors.purple['500']} !important;
+    }
+  }
+
+  &:last-child {
+    padding: 0;
+    > a {
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+  }
+
+  &:hover {
+    background: ${({ theme }) => theme.colors.gray['950']};
+
+    > svg {
+      transform: rotate(180deg);
+    }
+
+    ${ChildMenu} {
+      display: flex;
+    }
+  }
+
+  ${MenuIcon} {
+    display: flex;
+    > svg > path {
+      stroke: ${({ theme }) => theme.colors.gray['50']} !important;
+    }
+  }
+
+  > svg {
+    transition: all ease-in 0.3s;
+    width: 12px;
+    > path {
+      stroke: ${({ theme }) => theme.colors.gray['50']} !important;
+    }
+  }
 `;
