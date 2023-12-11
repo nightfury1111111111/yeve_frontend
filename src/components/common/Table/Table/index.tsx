@@ -1,5 +1,6 @@
 import SortIcon from '@src/assets/images/svg/sort-icon';
 import { TableContainer } from './Table.styled';
+import { PropsWithChildren } from 'react';
 
 type Column = {
   value: string;
@@ -8,10 +9,12 @@ type Column = {
 
 type TableHeadingProps = {
   columnNames: Column[];
-  data: Record<string, any>[];
 };
 
-export function Table({ columnNames }: TableHeadingProps) {
+export function Table({
+  columnNames,
+  children,
+}: PropsWithChildren<TableHeadingProps>) {
   return (
     <TableContainer>
       <thead>
@@ -26,6 +29,7 @@ export function Table({ columnNames }: TableHeadingProps) {
           ))}
         </tr>
       </thead>
+      <tbody>{children}</tbody>
     </TableContainer>
   );
 }

@@ -1,17 +1,20 @@
+import token1Image from '@src/assets/images/png/token-1.png';
+import token2Image from '@src/assets/images/png/token-2.png';
+
 export const LIQUIDITY_POOLS_DATA = [
   {
     pair: {
       name: 'YEVE/USDT',
-      type: 'stable',
+      type: 'Stable',
       value: 0.3,
       tokens: [
         {
           name: 'YEVE',
-          image: '',
+          image: token1Image,
         },
         {
           name: 'USDT',
-          image: '',
+          image: token2Image,
         },
       ],
     },
@@ -43,7 +46,7 @@ export const LIQUIDITY_POOLS_DATA = [
       ],
     },
     fees24h: {
-      usd: '1,090.61',
+      usd: '1090.61',
       tokens: [
         {
           name: 'USDC',
