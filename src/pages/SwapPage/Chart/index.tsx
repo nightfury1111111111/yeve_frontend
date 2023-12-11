@@ -1,7 +1,10 @@
-import { ChartContainer } from './Chart.styled'
+import { ChartContainer } from './Chart.styled';
+import TradingViewWidget from './TradingView';
 
 export default function Chart() {
   return (
-    <ChartContainer>Chart</ChartContainer>
-  )
+    <ChartContainer>
+      <TradingViewWidget />
+    </ChartContainer>
+  );
 }
