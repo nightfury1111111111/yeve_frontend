@@ -24,3 +24,34 @@ export const LIQUIDITY_POOL_COLUMN_NAMES = [
     sort: false,
   },
 ];
+
+export const MY_POOL_COLUMN_NAMES = [
+  {
+    value: 'Pair',
+    sort: false,
+  },
+  {
+    value: 'Type',
+    sort: true,
+  },
+  {
+    value: 'Range',
+    sort: true,
+  },
+  {
+    value: 'My Pool Size',
+    sort: true,
+  },
+  {
+    value: 'Rewards',
+    sort: true,
+  },
+  {
+    value: 'Status',
+    sort: true,
+  },
+  {
+    value: '',
+    sort: false,
+  },
+];

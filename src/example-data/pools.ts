@@ -1,3 +1,4 @@
+import zeroTokenImage from '@src/assets/images/png/account-avatar.png';
 import token1Image from '@src/assets/images/png/token-1.png';
 import token2Image from '@src/assets/images/png/token-2.png';
 
@@ -58,5 +59,54 @@ export const LIQUIDITY_POOLS_DATA = [
         },
       ],
     },
+  },
+];
+
+export const MY_POOLS_DATA = [
+  {
+    pair: {
+      name: 'ZERO/USDT',
+      type: 'Stable',
+      value: 0.3,
+      tokens: [
+        {
+          name: 'YEVE',
+          image: zeroTokenImage,
+        },
+        {
+          name: 'USDT',
+          image: token2Image,
+        },
+      ],
+    },
+    type: 'GAMMA',
+    range: 'In Range',
+    poolSize: {
+      usd: '18220',
+      tokens: [
+        {
+          name: 'USDC',
+          value: '23890000',
+        },
+        {
+          name: 'wUSDR',
+          value: '23270000',
+        },
+      ],
+    },
+    rewards: {
+      usd: '363',
+      tokens: [
+        {
+          name: 'USDC',
+          value: '190102.26',
+        },
+        {
+          name: 'wUSDR',
+          value: '161144.69',
+        },
+      ],
+    },
+    status: 'Receiving rewards',
   },
 ];

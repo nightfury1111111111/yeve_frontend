@@ -1,5 +1,65 @@
 import { styled } from 'styled-components';
 
+export const Status = styled.div`
+  align-items: center;
+  
+  > div {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 8px;
+    background: ${({ theme }) => theme.colors.success['700']};
+    border-radius: 4px;
+
+    > span {
+      font-size: 12px;
+      font-weight: 600;
+      line-height: 16px;
+      color: ${({ theme }) => theme.colors.success['200']};
+    }
+
+    > svg {
+      width: 12px;
+      height: 12px;
+      cursor: pointer;
+
+      > path {
+        stroke: ${({ theme }) => theme.colors.success['200']} !important;
+      }
+    }
+  }
+`;
+
+export const Type = styled.div`
+  align-items: center;
+  > div {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 8px;
+    background: ${({ theme }) => theme.colors.gray['950']};
+    border-radius: 4px;
+
+    > span {
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 20px;
+      color: ${({ theme }) => theme.colors.gray['50']};
+      text-transform: uppercase;
+    }
+
+    > svg {
+      width: 12px;
+      height: 12px;
+      cursor: pointer;
+
+      > path {
+        stroke: ${({ theme }) => theme.colors.gray['50']} !important;
+      }
+    }
+  }
+`;
+
 export const Info = styled.div`
   flex-direction: column;
   justify-content: center;
@@ -146,7 +206,6 @@ export const TableContainer = styled.table`
             border-top-right-radius: 4px;
             border-bottom-right-radius: 4px;
           }
-
         }
 
         > div {
