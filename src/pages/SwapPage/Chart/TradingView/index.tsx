@@ -30,21 +30,24 @@ export default function TradingViewWidget() {
 
     function createWidget() {
       if (
-        document.getElementById('tradingview_ec741') &&
+        document.getElementById('tradingview_00eed') &&
         'TradingView' in window
       ) {
         new window.TradingView.widget({
           autosize: true,
-          symbol: 'CRYPTOCAP:BTC',
-          interval: 'D',
+          symbol: 'ETH/CRYPTOCAP:USDT',
+          interval: '30',
           timezone: 'Etc/UTC',
           theme: 'dark',
           style: '1',
           locale: 'en',
-          enable_publishing: false,
+          enable_publishing: true,
           hide_legend: true,
-          hide_side_toolbar: false,
-          container_id: 'tradingview_ec741',
+          withdateranges: true,
+          allow_symbol_change: true,
+          save_image: false,
+          hide_volume: true,
+          container_id: 'tradingview_00eed',
         });
       }
     }
@@ -56,18 +59,9 @@ export default function TradingViewWidget() {
       style={{ height: '100%', width: '100%' }}
     >
       <div
-        id="tradingview_ec741"
+        id="tradingview_00eed"
         style={{ height: 'calc(100% - 32px)', width: '100%' }}
       />
-      <div className="tradingview-widget-copyright">
-        <a
-          href="https://www.tradingview.com/"
-          rel="noopener nofollow"
-          target="_blank"
-        >
-          <span className="blue-text">Track all markets on TradingView</span>
-        </a>
-      </div>
     </div>
   );
 }
