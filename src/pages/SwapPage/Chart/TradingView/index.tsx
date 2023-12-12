@@ -12,8 +12,6 @@ type TradingViewWidgetProps = {
 export default function TradingViewWidget({ range }: TradingViewWidgetProps) {
   const { themeConfig } = useContext(ThemeContext);
 
-  console.log(themeConfig.colors.gray['950'])
-
   return (
     <AdvancedRealTimeChart
       theme={themeConfig.mode}
