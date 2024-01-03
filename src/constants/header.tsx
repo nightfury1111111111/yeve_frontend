@@ -8,6 +8,7 @@ import LiquidityIcon from '@src/assets/images/svg/menu/LiquidityIcon';
 import MyPoolIcon from '@src/assets/images/svg/menu/MyPoolIcon';
 import RewardsIcon from '@src/assets/images/svg/menu/RewardsIcon';
 import LockIcon from '@src/assets/images/svg/menu/LockIcon';
+import MoreIcon from '@src/assets/images/svg/menu/MoreIcon';
 
 const headerMenus = [
   {
@@ -23,7 +24,7 @@ const headerMenus = [
       {
         title: 'Limit',
         route: '/limit',
-        disabled: true,
+        disabled: false,
         icon: <LimitIcon />,
       },
       {
@@ -65,7 +66,7 @@ const headerMenus = [
       {
         title: 'Vote',
         route: '/vote',
-        disabled: true,
+        disabled: false,
         icon: <VoteIcon />,
       },
       {
@@ -77,9 +78,16 @@ const headerMenus = [
     ],
   },
   {
-    title: 'Bribe',
-    icon: <BribeIcon />,
-    route: '/bribe',
+    title: 'More',
+    icon: <MoreIcon />,
+    children: [
+      {
+        title: 'Bribe',
+        route: '/bribe',
+        disabled: false,
+        icon: <BribeIcon />,
+      },
+    ],
   },
 ];
 

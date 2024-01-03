@@ -11,8 +11,8 @@ import SolanaIconBig from '@src/assets/images/svg/solana-big';
 import StarIcon from '@src/assets/images/svg/star';
 import StarRoundIcon from '@src/assets/images/svg/star-round';
 import Footer from '@src/components/layouts/Footer';
-import LandingPageHeader from '@src/components/layouts/LendingPageHeader';
-import { Button } from '@src/components/layouts/LendingPageHeader/Header.styled';
+import LandingPageHeader from '@src/components/layouts/LandingPageHeader';
+import { Button } from '@src/components/layouts/LandingPageHeader/Header.styled';
 import {
   ButtonGroupMobile,
   ButtonPrimary,

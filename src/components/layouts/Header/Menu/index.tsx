@@ -25,7 +25,7 @@ export default function Menu() {
 
   return (
     <MenuContainer>
-      {headerMenus.map((menu, index) => (
+      {headerMenus.map((menu: Record<string, any>, index) => (
         <MenuItem key={index} className={isActiveLink(menu) ? 'active' : ''}>
           {menu.route ? (
             <Link to={menu.route}>

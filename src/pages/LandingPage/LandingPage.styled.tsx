@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import wadeBg from '@src/assets/images/png/wade-bg.png';
-import { Button } from '@src/components/layouts/LendingPageHeader/Header.styled';
+import { Button } from '@src/components/layouts/LandingPageHeader/Header.styled';
 
 export const LandingContainer = styled.div`
   background: #060606;
