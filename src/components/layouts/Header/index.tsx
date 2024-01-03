@@ -1,9 +1,9 @@
 import { ThemeContext } from '@src/context/useThemeContext';
 import { useContext } from 'react';
-import { Link } from 'react-router-dom';
 import Account from './Account';
-import { Container, HeaderContainer, Logo } from './Header.styled';
+import { Container, HeaderContainer } from './Header.styled';
 import Menu from './Menu';
+import Logo from './Logo';
 
 export default function Header() {
   const { themeConfig } = useContext(ThemeContext);
@@ -11,13 +11,8 @@ export default function Header() {
   return (
     <Container>
       <HeaderContainer>
+        <Logo themeConfig={themeConfig} />
         <Menu />
-
-        <Logo>
-          <Link to="/">
-            <img src={themeConfig.images.header?.logo} />
-          </Link>
-        </Logo>
         <Account themeConfig={themeConfig} />
       </HeaderContainer>
     </Container>

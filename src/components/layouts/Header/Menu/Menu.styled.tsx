@@ -3,9 +3,16 @@ import { styled } from 'styled-components';
 export const MenuContainer = styled.div`
   display: flex;
   align-items: center;
+  justify-content: flex-end;
   gap: 8px;
   flex: 1;
   color: ${({ theme }) => theme.colors.gray['50']};
+  flex: 1;
+  margin-right: 24px;
+  
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
 `;
 
 export const MenuIcon = styled.div`
@@ -122,16 +129,6 @@ export const MenuItem = styled.div`
 
     > svg > path {
       stroke: ${({ theme }) => theme.colors.purple['500']} !important;
-    }
-  }
-
-  &:last-child {
-    padding: 0;
-    > a {
-      padding: 16px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
     }
   }
 

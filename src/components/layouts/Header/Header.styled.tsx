@@ -6,6 +6,10 @@ export const Container = styled.div`
   justify-content: center;
   align-items: center;
   background-color: ${({ theme }) => theme.colors.gray['1000']};
+
+  @media screen and (max-width: 768px) {
+    background-color: ${({ theme }) => theme.colors.gray['950']};
+  }
 `;
 
 export const HeaderContainer = styled.div`
@@ -14,18 +18,8 @@ export const HeaderContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   max-width: 1376px;
-`;
 
-export const Logo = styled.div`
-  flex: 1;
-  text-align: center;
-  & > a {
-    text-decoration: none;
-    font-size: 32px;
-    font-weight: 700;
-
-    > svg path {
-      stroke: ${({ theme }) => theme.colors.gray['50']};
-    }
+  @media screen and (max-width: 768px) {
+    padding: 16px;
   }
 `;
