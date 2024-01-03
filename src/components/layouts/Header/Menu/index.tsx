@@ -1,3 +1,5 @@
+import DownIcon from '@src/assets/images/svg/menu/DownIcon';
+import headerMenus from '@src/constants/header';
 import { Link, useLocation } from 'react-router-dom';
 import {
   ChildMenu,
@@ -7,8 +9,6 @@ import {
   MenuItem,
   MenuItemText,
 } from './Menu.styled';
-import DownIcon from '@src/assets/images/svg/menu/DownIcon';
-import headerMenus from '@src/constants/header';
 
 export default function Menu() {
   const { pathname } = useLocation();
@@ -38,7 +38,7 @@ export default function Menu() {
               <MenuItemText>{menu.title}</MenuItemText>
               <DownIcon />
               <ChildMenu>
-                {menu.children?.map((child, i) => (
+                {menu.children?.map((child: Record<string, any>, i: number) => (
                   <Link
                     to={child.disabled ? '#' : child.route}
                     key={i}

@@ -1,5 +1,5 @@
 import WalletIcon from '@src/assets/images/svg/wallet-icon';
-import { AccountContainer, SelectToken, AccountInfo, Network, ConnectButton } from './Account.styled';
+import { AccountContainer, ConnectButton, Network } from './Account.styled';
 
 type AccountProps = {
   themeConfig: Record<string, any>;

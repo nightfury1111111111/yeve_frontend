@@ -9,7 +9,11 @@ export default function Layout() {
   return (
     <Container>
       <div className="app">
-        
+        <Toaster
+          position="top-center"
+          reverseOrder={false}
+          toastOptions={{ duration: 2500 }}
+        />
         <Header />
         <div className="app-content">
           <Outlet />
