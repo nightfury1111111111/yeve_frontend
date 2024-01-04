@@ -22,13 +22,14 @@ export const SearchInputContainer = styled.div`
   gap: 8px;
   border-radius: 4px;
   flex: 1;
+  height: 48px;
 
   svg {
     width: 16px;
     height: 16px;
 
     path {
-      stroke: ${({ theme }) => theme.colors.gray['50']} !important;
+      stroke: ${({ theme }) => theme.colors.purple['500']} !important;
     }
   }
 
@@ -39,6 +40,13 @@ export const SearchInputContainer = styled.div`
     color: ${({ theme }) => theme.colors.gray['50']} !important;
     font-size: 14px;
     flex: 1;
+
+    &::-webkit-input-placeholder {
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 20px;
+      color: ${({ theme }) => theme.colors.gray['400']};
+    }
   }
 
   > span {
