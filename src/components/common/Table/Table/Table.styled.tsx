@@ -2,20 +2,20 @@ import { styled } from 'styled-components';
 
 export const Status = styled.div`
   align-items: center;
-  
+
   > div {
     display: flex;
     align-items: center;
     gap: 4px;
     padding: 4px 8px;
-    background: ${({ theme }) => theme.colors.success['700']};
+    border: 1px solid ${({ theme }) => theme.colors.success['500']};
     border-radius: 4px;
 
     > span {
       font-size: 12px;
       font-weight: 600;
       line-height: 16px;
-      color: ${({ theme }) => theme.colors.success['200']};
+      color: ${({ theme }) => theme.colors.success['500']};
     }
 
     > svg {
@@ -24,7 +24,7 @@ export const Status = styled.div`
       cursor: pointer;
 
       > path {
-        stroke: ${({ theme }) => theme.colors.success['200']} !important;
+        stroke: ${({ theme }) => theme.colors.success['500']} !important;
       }
     }
   }
@@ -95,22 +95,41 @@ export const AvgApr = styled.div`
   align-items: center;
   gap: 6px;
 
-  > span {
-    color: ${({ theme }) => theme.colors.gray['0']};
-    font-size: 14px;
-    font-weight: 600;
-    line-height: 20px;
-  }
+  > div {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: ${({ theme }) => theme.colors.gray['850']};
+    padding: 4px 8px;
+    border-radius: 4px;
 
-  > svg {
-    width: 12px;
-    height: 12px;
-    cursor: pointer;
+    > span {
+      color: ${({ theme }) => theme.colors.gray['50']};
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 20px;
+    }
 
-    > path {
-      stroke: ${({ theme }) => theme.colors.gray['0']} !important;
+    > svg {
+      width: 12px;
+      height: 12px;
+      cursor: pointer;
+
+      > path {
+        stroke: ${({ theme }) => theme.colors.gray['50']} !important;
+      }
     }
   }
+`;
+
+export const PairInfoLabel = styled.div`
+  background: ${({ theme }) => theme.colors.gray['850']};
+  padding: 4px 8px;
+  color: ${({ theme }) => theme.colors.gray['50']};
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 16px;
 `;
 
 export const PairInfo = styled.div`

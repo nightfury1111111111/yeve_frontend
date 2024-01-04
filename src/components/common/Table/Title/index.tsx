@@ -1,3 +1,4 @@
+import ClockIcon from '@src/assets/images/svg/clock-icon';
 import { Title } from './Title.styled';
 
 type TableTitleProps = {
@@ -10,6 +11,7 @@ export function TableTitle({ title, info }: TableTitleProps) {
     <Title>
       <span>{title}</span>
       <div>
+        <ClockIcon />
         <span>{info.time}</span>
         <div>{info.label}</div>
       </div>

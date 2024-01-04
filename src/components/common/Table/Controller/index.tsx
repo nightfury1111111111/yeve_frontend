@@ -50,8 +50,11 @@ export function TableController({
       <SearchContainer>
         <SearchInputContainer>
           <FindIcon />
-          <input onChange={(e) => search.handle(e)} value={search.value} />
-          {!search.value && <span>Search</span>}
+          <input
+            placeholder="Search"
+            onChange={(e) => search.handle(e)}
+            value={search.value}
+          />
         </SearchInputContainer>
         {button && (
           <ButtonController onClick={() => button.handle()}>

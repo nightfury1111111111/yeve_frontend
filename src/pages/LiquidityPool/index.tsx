@@ -17,6 +17,7 @@ import {
   PairElement,
   PairImageContainer,
   PairInfo,
+  PairInfoLabel,
 } from '@src/components/common/Table/Table/Table.styled';
 import InfoIcon from '@src/assets/images/svg/info-icon';
 import { convertToInternationalCurrencySystem } from '@src/utils/convert';
@@ -72,12 +73,15 @@ export default function LiquidityPoolPage() {
                       {item.pair.type} {item.pair.value}%
                     </span>
                   </PairInfo>
+                  <PairInfoLabel>Info</PairInfoLabel>
                 </PairElement>
               </td>
               <td>
                 <AvgApr>
-                  <span>{item.avgApr}%</span>
-                  <InfoIcon />
+                  <div>
+                    <span>{item.avgApr}%</span>
+                    <InfoIcon />
+                  </div>
                 </AvgApr>
               </td>
               <td>

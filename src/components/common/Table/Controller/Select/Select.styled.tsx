@@ -38,7 +38,7 @@ export const ListOptions = styled.div`
 
 export const SelectedOption = styled.div`
   background: ${({ theme }) => theme.colors.gray['900']};
-  color: ${({ theme }) => theme.colors.gray['50']};
+  color: ${({ theme }) => theme.colors.gray['500']};
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -53,7 +53,7 @@ export const SelectedOption = styled.div`
 
   svg {
     path {
-      stroke: ${({ theme }) => theme.colors.gray['50']} !important;
+      stroke: ${({ theme }) => theme.colors.gray['500']} !important;
     }
   }
 `;

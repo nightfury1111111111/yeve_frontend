@@ -86,7 +86,6 @@ export default function MyPoolPage() {
               <td>
                 <Status>
                   <div>
-                    <PolygonIcon />
                     <span>{item.range}</span>
                   </div>
                 </Status>
@@ -123,7 +122,9 @@ export default function MyPoolPage() {
               </td>
               <td>
                 <Status>
-                  <div>{item.status}</div>
+                  <div>
+                    <span>{item.status}</span>
+                  </div>
                 </Status>
               </td>
               <td>
