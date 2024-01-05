@@ -1,36 +1,36 @@
-import Layout from "@src/components/layouts";
-import LandingPage from "@src/pages/LandingPage";
-import SwapPage from "@src/pages/SwapPage";
-import LiquidityPoolPage from "@src/pages/LiquidityPool";
-import RewardsPage from "@src/pages/Rewards";
-import MyPoolPage from "@src/pages/MyPool";
+import Layout from '@src/components/layouts';
+import LandingPage from '@src/pages/LandingPage';
+import SwapPage from '@src/pages/SwapPage';
+import LiquidityPoolPage from '@src/pages/LiquidityPool';
+import RewardsPage from '@src/pages/Rewards';
+import MyPoolPage from '@src/pages/MyPool';
 
 export const userRoutes: Record<string, unknown>[] = [
   {
-    path: "/",
+    path: '/',
     children: [
       {
-        path: "/",
+        path: '/',
         element: <LandingPage />,
       },
       {
-        path: "/",
+        path: '/',
         element: <Layout />,
         children: [
           {
-            path: "/swap",
+            path: '/swap',
             element: <SwapPage />,
           },
           {
-            path: "/liquidity",
+            path: '/liquidity',
             element: <LiquidityPoolPage />,
           },
           {
-            path: "/my-pool",
+            path: '/my-pool',
             element: <MyPoolPage />,
           },
           {
-            path: "/rewards",
+            path: '/rewards',
             element: <RewardsPage />,
           },
         ],

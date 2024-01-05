@@ -1,30 +1,24 @@
-import WalletIcon from '@src/assets/images/svg/wallet-icon';
-import { AccountContainer, ConnectButton, Network } from './Account.styled';
+import { AccountContainer, SelectToken, AccountInfo } from './Account.styled';
+import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
 
 type AccountProps = {
   themeConfig: Record<string, any>;
 };
 export default function Account({ themeConfig }: AccountProps) {
-  const handleConnectWallet = () => {
+  const renderWalletButton = () => {
+    return <WalletMultiButton className="bg-secondary hover:bg-[#15539a]" />;
+  };
 
-  }
-
-  
   return (
     <AccountContainer>
-      <Network>
+      <SelectToken>
         <img src={themeConfig.images.solanaLogo} />
         <span>SOLANA</span>
-      </Network>
-      {/* <AccountInfo>
+      </SelectToken>
+      <AccountInfo>
         <img src={themeConfig.images.accountAvatar} />
-        <span>0x12...282723f1</span>
+        {renderWalletButton()}
       </AccountInfo>
-       */}
-       <ConnectButton onClick={handleConnectWallet}>
-        <WalletIcon />
-        <span>Connect wallet</span>
-       </ConnectButton>
     </AccountContainer>
   );
 }
