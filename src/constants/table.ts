@@ -55,3 +55,30 @@ export const MY_POOL_COLUMN_NAMES = [
     sort: false,
   },
 ];
+
+export const LOCKS_COLUMNS_NAME = [
+  {
+    value: 'Lock',
+    sort: false,
+  },
+  {
+    value: 'Locked Amount',
+    sort: true,
+  },
+  {
+    value: 'Voting Power',
+    sort: true,
+  },
+  {
+    value: 'Lock Expire',
+    sort: true,
+  },
+  {
+    value: 'Votes Used',
+    sort: true,
+  },
+  {
+    value: '',
+    sort: false,
+  },
+];

@@ -110,3 +110,111 @@ export const MY_POOLS_DATA = [
     status: 'Receiving rewards',
   },
 ];
+export const LOCKS_DATA = [
+  {
+    pair: {
+      name: 'Lock ID 1234',
+      type: 'Manage',
+      token:
+      {
+        name: 'YEVE',
+        image: token1Image,
+      },
+
+    },
+    avgApr: 278.35,
+    tvl: {
+      usd: '46520000',
+      tokens: [
+        {
+          name: 'USDC',
+          value: '23890000',
+        },
+        {
+          name: 'wUSDR',
+          value: '23270000',
+        },
+      ],
+    },
+    volume24h: {
+      usd: '363536.52',
+      tokens: [
+        {
+          name: 'USDC',
+          value: '190102.26',
+        },
+        {
+          name: 'wUSDR',
+          value: '161144.69',
+        },
+      ],
+    },
+    voteUsed: false,
+    fees24h: {
+      usd: '1090.61',
+      tokens: [
+        {
+          name: 'USDC',
+          value: '570.31',
+        },
+        {
+          name: 'wUSDR',
+          value: '484.43',
+        },
+      ],
+    },
+  },
+  {
+    pair: {
+      name: 'Lock ID 2345',
+      type: 'Manage',
+      token:
+      {
+        name: 'YEVE',
+        image: token1Image,
+      },
+
+    },
+    avgApr: 278.35,
+    tvl: {
+      usd: '46520000',
+      tokens: [
+        {
+          name: 'USDC',
+          value: '23890000',
+        },
+        {
+          name: 'wUSDR',
+          value: '23270000',
+        },
+      ],
+    },
+    volume24h: {
+      usd: '363536.52',
+      tokens: [
+        {
+          name: 'USDC',
+          value: '190102.26',
+        },
+        {
+          name: 'wUSDR',
+          value: '161144.69',
+        },
+      ],
+    },
+    voteUsed: true,
+    fees24h: {
+      usd: '1090.61',
+      tokens: [
+        {
+          name: 'USDC',
+          value: '570.31',
+        },
+        {
+          name: 'wUSDR',
+          value: '484.43',
+        },
+      ],
+    },
+  },
+];
