@@ -10,15 +10,13 @@ import {
   PairElement,
   PairImageContainer,
   PairInfo,
-  Status,
-  Type,
+  Type
 } from '@src/components/common/Table/Table/Table.styled';
 import {
-  MY_POOL_COLUMN_NAMES,
-  REWARDS_COLUMN_NAMES,
+  REWARDS_COLUMN_NAMES
 } from '@src/constants/table';
 import { REWARD_TABS } from '@src/constants/table-tabs';
-import { MY_POOLS_DATA, REWARDS_DATA } from '@src/example-data/pools';
+import { REWARDS_DATA } from '@src/example-data/pools';
 import { convertToInternationalCurrencySystem } from '@src/utils/convert';
 import { useState } from 'react';
 import { PageContainer } from './Rewards.styled';
