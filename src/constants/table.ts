@@ -82,3 +82,26 @@ export const LOCKS_COLUMNS_NAME = [
     sort: false,
   },
 ];
+
+export const REWARDS_COLUMN_NAMES = [
+  {
+    value: 'Pair',
+    sort: false,
+  },
+  {
+    value: 'Manage by',
+    sort: true,
+  },
+  {
+    value: 'Rewards',
+    sort: true,
+  },
+  {
+    value: 'Emission APR',
+    sort: true,
+  },
+  {
+    value: '',
+    sort: false,
+  },
+];

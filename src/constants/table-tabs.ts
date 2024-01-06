@@ -8,3 +8,14 @@ export const LIQUIDITY_TABS = [
     route: '/my-pool'
   }
 ]
+
+export const REWARD_TABS = [
+  {
+    name: 'Liquidity rewards',
+    route: '/rewards'
+  },
+  {
+    name: 'Voting rewards',
+    route: '/voting-rewards'
+  }
+]

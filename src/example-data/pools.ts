@@ -115,12 +115,10 @@ export const LOCKS_DATA = [
     pair: {
       name: 'Lock ID 1234',
       type: 'Manage',
-      token:
-      {
+      token: {
         name: 'YEVE',
         image: token1Image,
       },
-
     },
     avgApr: 278.35,
     tvl: {
@@ -168,12 +166,10 @@ export const LOCKS_DATA = [
     pair: {
       name: 'Lock ID 2345',
       type: 'Manage',
-      token:
-      {
+      token: {
         name: 'YEVE',
         image: token1Image,
       },
-
     },
     avgApr: 278.35,
     tvl: {
@@ -216,5 +212,40 @@ export const LOCKS_DATA = [
         },
       ],
     },
+  },
+];
+
+export const REWARDS_DATA = [
+  {
+    pair: {
+      name: 'ZERO/USDT',
+      type: 'Stable',
+      value: 0.3,
+      tokens: [
+        {
+          name: 'YEVE',
+          image: zeroTokenImage,
+        },
+        {
+          name: 'USDT',
+          image: token2Image,
+        },
+      ],
+    },
+    manage: 'KAMINO',
+    rewards: {
+      usd: '363',
+      tokens: [
+        {
+          name: 'USDC',
+          value: '190102.26',
+        },
+        {
+          name: 'wUSDR',
+          value: '161144.69',
+        },
+      ],
+    },
+    emissionAPR: '278.35',
   },
 ];
