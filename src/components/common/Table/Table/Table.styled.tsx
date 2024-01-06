@@ -2,14 +2,15 @@ import { styled } from 'styled-components';
 
 export const Status = styled.div`
   align-items: center;
-
   > div {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 4px;
     padding: 4px 8px;
     border: 1px solid ${({ theme }) => theme.colors.success['500']};
     border-radius: 4px;
+    min-width: 40px;
 
     > span {
       font-size: 12px;
@@ -122,7 +123,7 @@ export const AvgApr = styled.div`
   }
 `;
 
-export const PairInfoLabel = styled.div`
+export const PairInfoLabel = styled.div<{ mt?: string }>`
   background: ${({ theme }) => theme.colors.gray['850']};
   padding: 4px 8px;
   color: ${({ theme }) => theme.colors.gray['50']};
@@ -130,6 +131,8 @@ export const PairInfoLabel = styled.div`
   font-size: 12px;
   font-weight: 600;
   line-height: 16px;
+  text-align: center;
+  margin-top: ${(p) => p.mt};
 `;
 
 export const PairInfo = styled.div`
@@ -255,6 +258,38 @@ export const TableContainer = styled.table`
             cursor: pointer;
           }
         }
+      }
+    }
+  }
+`;
+
+export const StatusError = styled.div`
+  align-items: center;
+
+  > div {
+    min-width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    padding: 4px 8px;
+    border: 1px solid ${({ theme }) => theme.colors.alert['500']};
+    border-radius: 4px;
+
+    > span {
+      font-size: 12px;
+      font-weight: 600;
+      line-height: 16px;
+      color: ${({ theme }) => theme.colors.alert['500']};
+    }
+
+    > svg {
+      width: 12px;
+      height: 12px;
+      cursor: pointer;
+
+      > path {
+        stroke: ${({ theme }) => theme.colors.alert['500']} !important;
       }
     }
   }

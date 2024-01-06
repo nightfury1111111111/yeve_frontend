@@ -3,6 +3,7 @@ import { useContext } from 'react';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import { userRoutes } from './routes';
+import 'rc-slider/assets/index.css';
 
 const router = createBrowserRouter(userRoutes);
 

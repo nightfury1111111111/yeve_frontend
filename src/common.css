@@ -1,5 +1,5 @@
-@import url("https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@100;200;300;400;500;600;700;800;900&display=swap");
-@import url("https://fonts.googleapis.com/css?family=Inter");
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Inter');
 
 body {
   padding: 0;
@@ -8,7 +8,7 @@ body {
 }
 
 * {
-  font-family: "Be Vietnam Pro", sans-serif;
+  font-family: 'Be Vietnam Pro', sans-serif;
   box-sizing: border-box;
 }
 
@@ -32,4 +32,36 @@ a {
 
 .tradingview-widget-copyright {
   display: none !important;
+}
+
+.lockSlider .rc-slider-rail {
+  background: #30158d;
+}
+
+.lockSlider .rc-slider-handle {
+  border-radius: 4px;
+  width: 20px;
+  height: 20px;
+  margin-top: -8px;
+  border: none;
+  background: #eee8ff;
+}
+
+.lockSlider .rc-slider-dot {
+  display: none;
+}
+
+.rc-slider-handle-dragging {
+  border: none !important;
+  box-shadow: none !important;
+}
+.rc-slider-mark-text {
+  min-width: 70px;
+  margin-top: 10px;
+}
+.rc-slider-mark-text:last-child {
+  transform: translateX(-80%) !important;
+}
+.rc-slider-mark-text:first-child {
+  transform: translateX(-20%) !important;
 }

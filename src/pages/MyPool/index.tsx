@@ -1,3 +1,4 @@
+import InfoIcon from '@src/assets/images/svg/info-icon';
 import {
   Table,
   TableContainer,
@@ -20,8 +21,6 @@ import { MY_POOLS_DATA } from '@src/example-data/pools';
 import { convertToInternationalCurrencySystem } from '@src/utils/convert';
 import { useState } from 'react';
 import { PageContainer } from './MyPool.styled';
-import InfoIcon from '@src/assets/images/svg/info-icon';
-import PolygonIcon from '@src/assets/images/svg/polygon-icon';
 
 export default function MyPoolPage() {
   const [search, setSearch] = useState('');

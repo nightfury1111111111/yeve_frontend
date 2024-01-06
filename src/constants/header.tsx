@@ -71,7 +71,7 @@ const headerMenus = [
       },
       {
         title: 'Lock',
-        route: '/lock',
+        route: '/locks',
         disabled: false,
         icon: <LockIcon />,
       },
