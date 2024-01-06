@@ -1,17 +1,17 @@
-import InfoIcon from '@src/assets/images/svg/info-icon';
 import {
   Table,
   TableContainer,
   TableController,
   TableTitle,
 } from '@src/components/common/Table';
+import TableControlSelect from '@src/components/common/Table/Controller/Select';
 import {
   Info,
   PairElement,
   PairImageContainer,
-  PairInfo,
-  Type,
+  PairInfo
 } from '@src/components/common/Table/Table/Table.styled';
+import { VOTING_REWARDS_LOCK_IDS } from '@src/constants/select-options';
 import { VOTING_REWARDS_COLUMN_NAMES } from '@src/constants/table';
 import { REWARD_TABS } from '@src/constants/table-tabs';
 import { VOTING_REWARDS_DATA } from '@src/example-data/pools';
@@ -23,8 +23,6 @@ import {
   SectionTitle,
   TableHeadingSection,
 } from './Rewards.styled';
-import TableControlSelect from '@src/components/common/Table/Controller/Select';
-import { VOTING_REWARDS_LOCK_IDS } from '@src/constants/select-options';
 
 export default function VotingRewardsPage() {
   const [search, setSearch] = useState('');

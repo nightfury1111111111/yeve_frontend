@@ -31,7 +31,7 @@ export default function SelectPairElements() {
     setToToken(from);
   };
 
-  const handleTokenChange = (data) => {
+  const handleTokenChange = (data: Record<string, any>) => {
     if (tokenModalMode === 'from') {
       setFromToken(data);
     } else if (tokenModalMode === 'to') {
@@ -44,7 +44,7 @@ export default function SelectPairElements() {
     <SelectPair>
       {tokenModalMode && (
         <TokenModal
-          onClose={() => tokenModalMode('')}
+          onClose={() => setTokenModalMode('')}
           handleSelect={handleTokenChange}
         />
       )}
