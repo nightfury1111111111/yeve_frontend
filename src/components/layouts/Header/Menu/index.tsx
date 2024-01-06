@@ -15,6 +15,14 @@ export default function Menu() {
 
   const isActiveLink = (menu: Record<string, any>) => {
     if (menu.children) {
+      if (
+        menu.external_routes &&
+        menu.external_routes.find(
+          (item: Record<string, any>) => item.route === pathname
+        )
+      )
+        return true;
+
       const item = menu.children.find(
         (item: Record<string, any>) => item.route === pathname
       );

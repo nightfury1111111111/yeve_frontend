@@ -41,7 +41,7 @@ const headerMenus = [
     children: [
       {
         title: 'Liquidity',
-        route: '/liquidity',
+        route: '/liquidity-pool',
         disabled: false,
         icon: <LiquidityIcon />,
       },
@@ -56,6 +56,16 @@ const headerMenus = [
         route: '/rewards',
         disabled: false,
         icon: <RewardsIcon />,
+      },
+    ],
+    external_routes: [
+      {
+        title: 'Rewards',
+        route: '/voting-rewards',
+      },
+      {
+        title: 'Liquidity',
+        route: '/liquidity-pool/create',
       },
     ],
   },

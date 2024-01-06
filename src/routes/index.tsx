@@ -6,6 +6,8 @@ import RewardsPage from '@src/pages/Rewards';
 import MyPoolPage from '@src/pages/MyPool';
 import LocksPage from '@src/pages/Locks';
 import CreateLockPage from '@src/pages/CreateLock';
+import VotingRewardsPage from '@src/pages/VotingRewards';
+import CreateLiquidityPoolPage from '@src/pages/LiquidityPool/Create';
 
 export const userRoutes: Record<string, unknown>[] = [
   {
@@ -24,8 +26,17 @@ export const userRoutes: Record<string, unknown>[] = [
             element: <SwapPage />,
           },
           {
-            path: '/liquidity',
-            element: <LiquidityPoolPage />,
+            path: '/liquidity-pool',
+            children: [
+              {
+                path: '/liquidity-pool',
+                element: <LiquidityPoolPage />,
+              },
+              {
+                path: '/liquidity-pool/create',
+                element: <CreateLiquidityPoolPage />,
+              },
+            ],
           },
           {
             path: '/my-pool',
@@ -42,6 +53,10 @@ export const userRoutes: Record<string, unknown>[] = [
           {
             path: '/create-lock',
             element: <CreateLockPage />,
+          },
+          {
+            path: '/voting-rewards',
+            element: <VotingRewardsPage />,
           },
         ],
       },

@@ -1,16 +1,11 @@
-import { LIQUIDITY_TABS } from '@src/constants/table-tabs';
-import { PageContainer } from './LiquidityPool.styled';
+import InfoIcon from '@src/assets/images/svg/info-icon';
 import {
+  Table,
   TableContainer,
   TableController,
   TableTitle,
-  Table,
 } from '@src/components/common/Table';
 import TableControlSelect from '@src/components/common/Table/Controller/Select';
-import { LIQUIDITY_TYPES, POOL_VERSIONS } from '@src/constants/select-options';
-import { useState } from 'react';
-import { LIQUIDITY_POOL_COLUMN_NAMES } from '@src/constants/table';
-import { LIQUIDITY_POOLS_DATA } from '@src/example-data/pools';
 import {
   AvgApr,
   Info,
@@ -19,14 +14,21 @@ import {
   PairInfo,
   PairInfoLabel,
 } from '@src/components/common/Table/Table/Table.styled';
-import InfoIcon from '@src/assets/images/svg/info-icon';
+import { LIQUIDITY_TYPES, POOL_VERSIONS } from '@src/constants/select-options';
+import { LIQUIDITY_POOL_COLUMN_NAMES } from '@src/constants/table';
+import { LIQUIDITY_TABS } from '@src/constants/table-tabs';
+import { LIQUIDITY_POOLS_DATA } from '@src/example-data/pools';
 import { convertToInternationalCurrencySystem } from '@src/utils/convert';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { PageContainer } from './LiquidityPool.styled';
 
 export default function LiquidityPoolPage() {
+  const navigate = useNavigate();
   const [search, setSearch] = useState('');
 
   const handleControlPool = () => {
-    console.log('add/remove pools');
+    navigate('/liquidity-pool/create');
   };
 
   return (

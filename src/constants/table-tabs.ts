@@ -1,7 +1,7 @@
 export const LIQUIDITY_TABS = [
   {
     name: 'All Pools',
-    route: '/liquidity'
+    route: '/liquidity-pool'
   },
   {
     name: 'My pools',

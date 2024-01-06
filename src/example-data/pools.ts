@@ -249,3 +249,62 @@ export const REWARDS_DATA = [
     emissionAPR: '278.35',
   },
 ];
+
+export const VOTING_REWARDS_DATA = [
+  {
+    pair: {
+      name: 'ZERO/USDT',
+      type: 'Stable',
+      value: 0.3,
+      tokens: [
+        {
+          name: 'YEVE',
+          image: zeroTokenImage,
+        },
+        {
+          name: 'USDT',
+          image: token2Image,
+        },
+      ],
+    },
+    totalRewards: {
+      usd: '17200',
+      tokens: [
+        {
+          name: 'YEVE',
+          value: '8.893',
+        },
+        {
+          name: 'USDT',
+          value: '8.275',
+        },
+      ],
+    },
+    bribes: {
+      usd: '17200',
+      tokens: [
+        {
+          name: 'YEVE',
+          value: '8.893',
+        },
+        {
+          name: 'USDT',
+          value: '8.275',
+        },
+      ],
+    },
+    fees: {
+      usd: '17200',
+      tokens: [
+        {
+          name: 'YEVE',
+          value: '8.893',
+        },
+        {
+          name: 'USDT',
+          value: '8.275',
+        },
+      ],
+    },
+  },
+];

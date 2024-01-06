@@ -105,3 +105,26 @@ export const REWARDS_COLUMN_NAMES = [
     sort: false,
   },
 ];
+
+export const VOTING_REWARDS_COLUMN_NAMES = [
+  {
+    value: 'Pair',
+    sort: false,
+  },
+  {
+    value: 'Bribes',
+    sort: true,
+  },
+  {
+    value: 'Fees',
+    sort: true,
+  },
+  {
+    value: 'Total Rewards',
+    sort: true,
+  },
+  {
+    value: '',
+    sort: false,
+  },
+];

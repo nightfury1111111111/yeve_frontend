@@ -51,6 +51,10 @@ export const SelectedOption = styled.div`
   border-radius: 4px;
   cursor: pointer;
 
+  > span {
+    margin-right: 8px;
+  }
+
   svg {
     path {
       stroke: ${({ theme }) => theme.colors.gray['500']} !important;
