@@ -308,3 +308,49 @@ export const VOTING_REWARDS_DATA = [
     },
   },
 ];
+
+export const CREATE_POOL_FREE_TIER_LIST = [
+  {
+    apr: '0.01',
+    desc: 'Best for very stable pairs.',
+    selectPercent: '4',
+  },
+  {
+    apr: '0.05',
+    desc: 'Best for very stable pairs.',
+    selectPercent: '12',
+  },
+  {
+    apr: '0.3',
+    desc: 'Best for most pairs.',
+    selectPercent: '64',
+  },
+  {
+    apr: '1',
+    desc: 'Best for very stable pairs.',
+    selectPercent: '8',
+  },
+];
+
+export const CREATE_POOL_PRICE_RANGE = [
+  {
+    label: 'Full Range',
+    risk: 1,
+    profit: 1,
+  },
+  {
+    label: 'Safe',
+    risk: 3,
+    profit: 3,
+  },
+  {
+    label: 'Common',
+    risk: 2,
+    profit: 2,
+  },
+  {
+    label: 'Expert',
+    risk: 4,
+    profit: 4,
+  },
+];

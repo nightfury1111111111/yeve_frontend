@@ -3,7 +3,7 @@ import tetherImage from '@src/assets/images/png/token-2.png';
 import DownIcon from '@src/assets/images/svg/menu/DownIcon';
 import SwapIcon from '@src/assets/images/svg/pools/swap-icon';
 import { useState } from 'react';
-import { SelectPair, SelectPairItem } from '../CreateLiqudityPool';
+import { SelectPair, SelectPairItem } from '../CreateLiquidityPool';
 import TokenModal from './TokenModal';
 
 export default function SelectPairElements() {

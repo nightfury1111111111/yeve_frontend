@@ -8,6 +8,7 @@ import LocksPage from '@src/pages/Locks';
 import CreateLockPage from '@src/pages/CreateLock';
 import VotingRewardsPage from '@src/pages/VotingRewards';
 import CreateLiquidityPoolPage from '@src/pages/LiquidityPool/Create';
+import ManageMyPoolPage from '@src/pages/MyPool/Manage/[id]';
 
 export const userRoutes: Record<string, unknown>[] = [
   {
@@ -40,7 +41,16 @@ export const userRoutes: Record<string, unknown>[] = [
           },
           {
             path: '/my-pool',
-            element: <MyPoolPage />,
+            children: [
+              {
+                path: '/my-pool',
+                element: <MyPoolPage />,
+              },
+              {
+                path: '/my-pool/:id',
+                element: <ManageMyPoolPage />,
+              },
+            ],
           },
           {
             path: '/rewards',

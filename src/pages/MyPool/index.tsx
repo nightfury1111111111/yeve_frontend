@@ -131,7 +131,7 @@ export default function MyPoolPage() {
               </td>
               <td>
                 <div className="btn-wrap">
-                  <button>Manage</button>
+                  <button onClick={() => navigate('/my-pool/123')}>Manage</button>
                 </div>
               </td>
             </tr>

@@ -1,4 +1,4 @@
-import { PoolStats } from '../CreateLiqudityPool';
+import { PoolStats } from '../CreateLiquidityPool';
 
 export default function CurrentPoolStats() {
   return (
