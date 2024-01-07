@@ -1,11 +1,11 @@
 import { ThemeContext } from '@src/context/useThemeContext';
-import { useContext, useState, useEffect } from 'react';
+import 'rc-slider/assets/index.css';
+import { useContext, useState } from 'react';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
+import Notification from './Notification';
 import WalletContextProvider from './WalletContextProvider';
-import Notification, { infoToast } from './Notification';
 import { userRoutes } from './routes';
-import 'rc-slider/assets/index.css';
 
 export type SolanaNetworkType = 'mainnet-beta' | 'devnet';
 
@@ -13,8 +13,7 @@ const router = createBrowserRouter(userRoutes);
 
 function App() {
   const { themeConfig } = useContext(ThemeContext);
-  const [solanaNetwork, setSolanaNetwork] =
-    useState<SolanaNetworkType>('devnet');
+  const [solanaNetwork] = useState<SolanaNetworkType>('devnet');
 
   // useEffect(() => {
   //   if (solanaNetwork) {
