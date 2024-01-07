@@ -115,12 +115,10 @@ export const LOCKS_DATA = [
     pair: {
       name: 'Lock ID 1234',
       type: 'Manage',
-      token:
-      {
+      token: {
         name: 'YEVE',
         image: token1Image,
       },
-
     },
     avgApr: 278.35,
     tvl: {
@@ -168,12 +166,10 @@ export const LOCKS_DATA = [
     pair: {
       name: 'Lock ID 2345',
       type: 'Manage',
-      token:
-      {
+      token: {
         name: 'YEVE',
         image: token1Image,
       },
-
     },
     avgApr: 278.35,
     tvl: {
@@ -216,5 +212,145 @@ export const LOCKS_DATA = [
         },
       ],
     },
+  },
+];
+
+export const REWARDS_DATA = [
+  {
+    pair: {
+      name: 'ZERO/USDT',
+      type: 'Stable',
+      value: 0.3,
+      tokens: [
+        {
+          name: 'YEVE',
+          image: zeroTokenImage,
+        },
+        {
+          name: 'USDT',
+          image: token2Image,
+        },
+      ],
+    },
+    manage: 'KAMINO',
+    rewards: {
+      usd: '363',
+      tokens: [
+        {
+          name: 'USDC',
+          value: '190102.26',
+        },
+        {
+          name: 'wUSDR',
+          value: '161144.69',
+        },
+      ],
+    },
+    emissionAPR: '278.35',
+  },
+];
+
+export const VOTING_REWARDS_DATA = [
+  {
+    pair: {
+      name: 'ZERO/USDT',
+      type: 'Stable',
+      value: 0.3,
+      tokens: [
+        {
+          name: 'YEVE',
+          image: zeroTokenImage,
+        },
+        {
+          name: 'USDT',
+          image: token2Image,
+        },
+      ],
+    },
+    totalRewards: {
+      usd: '17200',
+      tokens: [
+        {
+          name: 'YEVE',
+          value: '8.893',
+        },
+        {
+          name: 'USDT',
+          value: '8.275',
+        },
+      ],
+    },
+    bribes: {
+      usd: '17200',
+      tokens: [
+        {
+          name: 'YEVE',
+          value: '8.893',
+        },
+        {
+          name: 'USDT',
+          value: '8.275',
+        },
+      ],
+    },
+    fees: {
+      usd: '17200',
+      tokens: [
+        {
+          name: 'YEVE',
+          value: '8.893',
+        },
+        {
+          name: 'USDT',
+          value: '8.275',
+        },
+      ],
+    },
+  },
+];
+
+export const CREATE_POOL_FREE_TIER_LIST = [
+  {
+    apr: '0.01',
+    desc: 'Best for very stable pairs.',
+    selectPercent: '4',
+  },
+  {
+    apr: '0.05',
+    desc: 'Best for very stable pairs.',
+    selectPercent: '12',
+  },
+  {
+    apr: '0.3',
+    desc: 'Best for most pairs.',
+    selectPercent: '64',
+  },
+  {
+    apr: '1',
+    desc: 'Best for very stable pairs.',
+    selectPercent: '8',
+  },
+];
+
+export const CREATE_POOL_PRICE_RANGE = [
+  {
+    label: 'Full Range',
+    risk: 1,
+    profit: 1,
+  },
+  {
+    label: 'Safe',
+    risk: 3,
+    profit: 3,
+  },
+  {
+    label: 'Common',
+    risk: 2,
+    profit: 2,
+  },
+  {
+    label: 'Expert',
+    risk: 4,
+    profit: 4,
   },
 ];

@@ -9,6 +9,7 @@ export const ListOptions = styled.div`
   border-radius: 4px;
   background: ${({ theme }) => theme.colors.gray['900']};
   min-width: 100%;
+  z-index: 1000;
 
   > span {
     width: 100%;
@@ -50,6 +51,10 @@ export const SelectedOption = styled.div`
   padding: 14px 16px;
   border-radius: 4px;
   cursor: pointer;
+
+  > span {
+    margin-right: 8px;
+  }
 
   svg {
     path {

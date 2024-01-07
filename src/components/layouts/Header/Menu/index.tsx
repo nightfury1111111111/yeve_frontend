@@ -9,12 +9,22 @@ import {
   MenuItem,
   MenuItemText,
 } from './Menu.styled';
-
+import Account from '../Account';
+import { ThemeContext } from '@src/context/useThemeContext';
+import { useContext } from 'react';
 export default function Menu() {
   const { pathname } = useLocation();
 
   const isActiveLink = (menu: Record<string, any>) => {
     if (menu.children) {
+      if (
+        menu.external_routes &&
+        menu.external_routes.find(
+          (item: Record<string, any>) => item.route === pathname
+        )
+      )
+        return true;
+
       const item = menu.children.find(
         (item: Record<string, any>) => item.route === pathname
       );
@@ -22,6 +32,7 @@ export default function Menu() {
     }
     return pathname === menu.route;
   };
+  const { themeConfig } = useContext(ThemeContext);
 
   return (
     <MenuContainer>
@@ -55,6 +66,7 @@ export default function Menu() {
           )}
         </MenuItem>
       ))}
+      <Account themeConfig={themeConfig} />
     </MenuContainer>
   );
 }

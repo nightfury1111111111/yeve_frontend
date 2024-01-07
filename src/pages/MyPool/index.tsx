@@ -20,13 +20,16 @@ import { LIQUIDITY_TABS } from '@src/constants/table-tabs';
 import { MY_POOLS_DATA } from '@src/example-data/pools';
 import { convertToInternationalCurrencySystem } from '@src/utils/convert';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { PageContainer } from './MyPool.styled';
 
 export default function MyPoolPage() {
+  const navigate = useNavigate();
+
   const [search, setSearch] = useState('');
 
   const handleControlPool = () => {
-    console.log('add/remove pools');
+    navigate('/liquidity-pool/create');
   };
 
   return (
@@ -128,7 +131,7 @@ export default function MyPoolPage() {
               </td>
               <td>
                 <div className="btn-wrap">
-                  <button>Manage</button>
+                  <button onClick={() => navigate('/my-pool/123')}>Manage</button>
                 </div>
               </td>
             </tr>

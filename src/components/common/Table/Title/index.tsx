@@ -11,6 +11,7 @@ type TableTitleProps = {
   info: Record<string, any>;
   button?: Button;
   hideClock?: boolean;
+  isRewardPage?: boolean;
 };
 
 export function TableTitle({
@@ -18,15 +19,25 @@ export function TableTitle({
   info,
   button,
   hideClock,
+  isRewardPage = false,
 }: TableTitleProps) {
   return (
     <Title>
       <span>{title}</span>
       {!hideClock && (
         <div>
-          <ClockIcon />
-          <span>{info.time}</span>
-          <div>{info.label}</div>
+          {isRewardPage ? (
+            <div className="reward-title">
+              <span>{info.time}</span>
+              <div>{info.label}</div>
+            </div>
+          ) : (
+            <>
+              <ClockIcon />
+              <span>{info.time}</span>
+              <div>{info.label}</div>
+            </>
+          )}
         </div>
       )}
       {button && (

@@ -23,6 +23,26 @@ export const Title = styled.div`
     align-items: center;
     gap: 8px;
 
+    > .reward-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      > span {
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 20px;
+        color: ${({ theme }) => theme.colors.gray['200']};
+      }
+
+      > div {
+        font-size: 18px;
+        font-weight: 600;
+        line-height: 28px;
+        color: ${({ theme }) => theme.colors.gray['50']};
+      }
+    }
+
     > svg > path {
       stroke: ${({ theme }) => theme.colors.purple['50']} !important;
     }

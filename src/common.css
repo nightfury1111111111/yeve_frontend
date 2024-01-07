@@ -65,3 +65,10 @@ a {
 .rc-slider-mark-text:first-child {
   transform: translateX(-20%) !important;
 }
+
+button {
+  cursor: pointer;
+}
+.wallet-adapter-button-trigger {
+  width: 160px;
+}

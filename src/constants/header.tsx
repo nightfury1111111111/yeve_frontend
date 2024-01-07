@@ -41,7 +41,7 @@ const headerMenus = [
     children: [
       {
         title: 'Liquidity',
-        route: '/liquidity',
+        route: '/liquidity-pool',
         disabled: false,
         icon: <LiquidityIcon />,
       },
@@ -56,6 +56,16 @@ const headerMenus = [
         route: '/rewards',
         disabled: false,
         icon: <RewardsIcon />,
+      },
+    ],
+    external_routes: [
+      {
+        title: 'Rewards',
+        route: '/voting-rewards',
+      },
+      {
+        title: 'Liquidity',
+        route: '/liquidity-pool/create',
       },
     ],
   },
@@ -84,6 +94,18 @@ const headerMenus = [
       {
         title: 'Bribe',
         route: '/bribe',
+        disabled: false,
+        icon: <BribeIcon />,
+      },
+      {
+        title: 'oYEVE',
+        route: '/oyeve',
+        disabled: false,
+        icon: <BribeIcon />,
+      },
+      {
+        title: 'Presale',
+        route: '/presale',
         disabled: false,
         icon: <BribeIcon />,
       },

@@ -82,3 +82,70 @@ export const LOCKS_COLUMNS_NAME = [
     sort: false,
   },
 ];
+
+export const REWARDS_COLUMN_NAMES = [
+
+  {
+    value: 'bve Rewards',
+    sort: true,
+  },
+  {
+    value: 'Rewards Estimate',
+    sort: true,
+  },
+  {
+    value: 'Your Vote',
+    sort: true,
+  },
+  {
+    value: 'Enter Vote',
+    sort: false,
+  },
+];
+export const VOTING_REWARDS_COLUMN_NAMES = [
+  {
+    value: 'Pair',
+    sort: false,
+  },
+  {
+    value: 'Bribes',
+    sort: true,
+  },
+  {
+    value: 'Fees',
+    sort: true,
+  },
+  {
+    value: 'Total Rewards',
+    sort: true,
+  },
+  {
+    value: '',
+    sort: false,
+  },
+]; export const VOTE_COLUMN_NAMES = [
+  {
+    value: 'Pair',
+    sort: false,
+  },
+  {
+    value: 'APR',
+    sort: true,
+  },
+  {
+    value: 'Total Votes',
+    sort: true,
+  },
+  {
+    value: 'Rewards',
+    sort: true,
+  },
+  {
+    value: 'Emission APR',
+    sort: true,
+  },
+  {
+    value: '',
+    sort: false,
+  },
+];

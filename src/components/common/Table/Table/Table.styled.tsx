@@ -238,6 +238,7 @@ export const TableContainer = styled.table`
           &.btn-wrap {
             align-items: center;
             justify-content: flex-end;
+            gap: 12px;
           }
 
           > button {
@@ -256,6 +257,11 @@ export const TableContainer = styled.table`
             line-height: 24px;
             height: fit-content;
             cursor: pointer;
+            text-wrap: nowrap;
+
+            &.disable {
+              background: ${({ theme }) => theme.colors.gray['850']};
+            }
           }
         }
       }

@@ -109,7 +109,13 @@ export default function LocksPage() {
               </td>
               <td>
                 <div className="btn-wrap">
-                  <button>Vote</button>
+                  <button
+                    onClick={() => {
+                      navigate('/vote');
+                    }}
+                  >
+                    Vote
+                  </button>
                 </div>
               </td>
             </tr>
