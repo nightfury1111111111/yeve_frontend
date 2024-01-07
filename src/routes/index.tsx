@@ -71,6 +71,8 @@ export const userRoutes: Record<string, unknown>[] = [
           {
             path: '/voting-rewards',
             element: <VotingRewardsPage />,
+          },
+          {
             path: '/vote',
             element: <VotePage />,
           },
