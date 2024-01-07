@@ -1,18 +1,11 @@
-import React, { useMemo } from 'react';
 import {
   ConnectionProvider,
   WalletProvider,
 } from '@solana/wallet-adapter-react';
-import {
-  PhantomWalletAdapter,
-  SolflareWalletAdapter,
-  SolletExtensionWalletAdapter,
-  SolletWalletAdapter,
-} from '@solana/wallet-adapter-wallets';
 import { WalletModalProvider } from '@solana/wallet-adapter-react-ui';
-import { clusterApiUrl } from '@solana/web3.js';
-import { SolanaNetworkType } from '../App';
 import '@solana/wallet-adapter-react-ui/styles.css';
+import React, { useMemo } from 'react';
+import { SolanaNetworkType } from '../App';
 
 export default function WalletContextProvider({
   children,
@@ -27,10 +20,10 @@ export default function WalletContextProvider({
 
   const wallets = useMemo(
     () => [
-      new PhantomWalletAdapter(),
-      new SolflareWalletAdapter(),
-      new SolletExtensionWalletAdapter(),
-      new SolletWalletAdapter(),
+      // new PhantomWalletAdapter(),
+      // new SolflareWalletAdapter(),
+      // new SolletExtensionWalletAdapter(),
+      // new SolletWalletAdapter(),
     ],
     [solanaNetwork]
   );
