@@ -34,7 +34,7 @@ import PlusIcon from '@src/assets/images/svg/pools/plus-icon';
 export default function CreateLiquidityPoolPage() {
   const navigate = useNavigate();
 
-  const [type, setType] = useState(CREATE_POOL_TYPE.MANUAL);
+  const [type, setType] = useState(CREATE_POOL_TYPE.AUTOMATIC);
   const [freeTierType, setFreeTierType] = useState('0.3');
   const [priceRange, setPriceRange] = useState('Full Range');
 

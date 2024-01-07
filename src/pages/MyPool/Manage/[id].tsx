@@ -23,13 +23,14 @@ import {
 import token1Image from '@src/assets/images/png/token-1.png';
 import token2Image from '@src/assets/images/png/token-2.png';
 import DepositAmountsComponent from './DepositAmounts';
+import Slider from 'rc-slider';
 
 export default function ManageMyPoolPage() {
   const navigate = useNavigate();
 
   const [modeManagement, setModeManagement] = useState('ADD');
   const [tokenRangeType, setTokenRangeType] = useState('USDT/YEVE');
-  const [rangePercent, setRangePercent] = useState('25');
+  const [rangePercent, setRangePercent] = useState<any>(25);
 
   return (
     <PageContainer>
@@ -97,12 +98,7 @@ export default function ManageMyPoolPage() {
               <span>100% USDT</span>
             </div>
           </TokenRangeInfo>
-          <input
-            type="range"
-            min="0"
-            max="100"
-            defaultValue={48}
-          />
+          <input type="range" min="0" max="100" defaultValue={48} />
         </TokenRange>
         <PoolValue>
           <PoolValueLeft>
@@ -208,12 +204,20 @@ export default function ManageMyPoolPage() {
                     </div>
                   </div>
                 </div>
-                <input
+                {/* <input
                   type="range"
                   min="0"
                   max="100"
                   value={rangePercent}
                   onChange={(e) => setRangePercent(e.target.value)}
+                /> */}
+                <Slider
+                  min={0}
+                  max={100}
+                  included={false}
+                  value={Number(rangePercent)}
+                  onChange={(value) => setRangePercent(value)}
+                  className="lockSlider"
                 />
               </RangePercent>
             </SectionItem>

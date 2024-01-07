@@ -72,6 +72,10 @@ export const RangePercent = styled.div`
       }
     }
   }
+
+  .rc-slider-handle {
+    margin-top: 0 !important;
+  }
 `;
 
 export const AddLiquidityButton = styled.button`
