@@ -17,5 +17,15 @@ export const REWARD_TABS = [
   {
     name: 'Voting rewards',
     route: '/voting-rewards'
+  }]
+
+export const VOTE_TABS = [
+  {
+    name: 'All',
+    route: '/vote'
+  },
+  {
+    name: 'My Vote',
+    route: '/'
   }
 ]

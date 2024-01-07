@@ -9,7 +9,9 @@ import {
   MenuItem,
   MenuItemText,
 } from './Menu.styled';
-
+import Account from '../Account';
+import { ThemeContext } from '@src/context/useThemeContext';
+import { useContext } from 'react';
 export default function Menu() {
   const { pathname } = useLocation();
 
@@ -30,6 +32,7 @@ export default function Menu() {
     }
     return pathname === menu.route;
   };
+  const { themeConfig } = useContext(ThemeContext);
 
   return (
     <MenuContainer>
@@ -63,6 +66,7 @@ export default function Menu() {
           )}
         </MenuItem>
       ))}
+      <Account themeConfig={themeConfig} />
     </MenuContainer>
   );
 }

@@ -69,3 +69,6 @@ a {
 button {
   cursor: pointer;
 }
+.wallet-adapter-button-trigger {
+  width: 160px;
+}

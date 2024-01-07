@@ -9,6 +9,7 @@ export const ListOptions = styled.div`
   border-radius: 4px;
   background: ${({ theme }) => theme.colors.gray['900']};
   min-width: 100%;
+  z-index: 1000;
 
   > span {
     width: 100%;

@@ -9,6 +9,10 @@ import CreateLockPage from '@src/pages/CreateLock';
 import VotingRewardsPage from '@src/pages/VotingRewards';
 import CreateLiquidityPoolPage from '@src/pages/LiquidityPool/Create';
 import ManageMyPoolPage from '@src/pages/MyPool/Manage/[id]';
+import VotePage from '@src/pages/Vote';
+import Bribe from '@src/pages/Bribe';
+import OYeve from '@src/pages/OYeve';
+import Presale from '@src/pages/Presale';
 
 export const userRoutes: Record<string, unknown>[] = [
   {
@@ -67,6 +71,20 @@ export const userRoutes: Record<string, unknown>[] = [
           {
             path: '/voting-rewards',
             element: <VotingRewardsPage />,
+            path: '/vote',
+            element: <VotePage />,
+          },
+          {
+            path: '/bribe',
+            element: <Bribe />,
+          },
+          {
+            path: '/oyeve',
+            element: <OYeve />,
+          },
+          {
+            path: '/presale',
+            element: <Presale />,
           },
         ],
       },

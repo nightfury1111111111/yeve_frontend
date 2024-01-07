@@ -97,6 +97,18 @@ const headerMenus = [
         disabled: false,
         icon: <BribeIcon />,
       },
+      {
+        title: 'oYEVE',
+        route: '/oyeve',
+        disabled: false,
+        icon: <BribeIcon />,
+      },
+      {
+        title: 'Presale',
+        route: '/presale',
+        disabled: false,
+        icon: <BribeIcon />,
+      },
     ],
   },
 ];
