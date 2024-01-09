@@ -90,6 +90,12 @@ export const AddLiquidityButton = styled.button`
   font-size: 16px;
   font-weight: 600;
   line-height: 24px;
+  border: 2px solid ${({ theme }) => theme.colors.purple['500']};
+
+  &:hover {
+    background: ${({ theme }) => theme.colors.purple['600']};
+    border-color: ${({ theme }) => theme.colors.purple['300']};
+  }
 `;
 
 export const DepositAmountValue = styled.div`
@@ -378,6 +384,12 @@ export const Info = styled.div`
       }
     }
   }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: baseline;
+    gap: 8px;
+  }
 `;
 
 export const SwitchType = styled.div`
@@ -443,6 +455,11 @@ export const Heading = styled.div`
     font-size: 36px;
     font-weight: 600;
     line-height: 40px;
+
+    @media (max-width: 1240px) {
+      font-size: 24px;
+      line-height: 32px;
+    }
   }
 
   > button {
@@ -457,6 +474,14 @@ export const Heading = styled.div`
     padding: 8px 24px;
     cursor: pointer;
 
+    > div {
+      display: none;
+
+      > svg > path {
+        stroke: ${({ theme }) => theme.colors.gray['500']} !important;
+      }
+    }
+
     > svg > path {
       stroke: ${({ theme }) => theme.colors.gray['500']} !important;
     }
@@ -466,6 +491,17 @@ export const Heading = styled.div`
       font-weight: 600;
       line-height: 24px;
       color: ${({ theme }) => theme.colors.gray['50']};
+    }
+
+    @media (max-width: 768px) {
+      > div {
+        display: block;
+      }
+
+      > svg,
+      > span {
+        display: none;
+      }
     }
   }
 `;
@@ -488,4 +524,13 @@ export const PageContainer = styled.div`
   justify-content: center;
   align-items: flex-start;
   gap: 32px;
+  padding: 0 16px;
+
+  @media (max-width: 1024px) {
+    flex-direction: column;
+
+    ${Section} {
+      width: 100%;
+    }
+  }
 `;

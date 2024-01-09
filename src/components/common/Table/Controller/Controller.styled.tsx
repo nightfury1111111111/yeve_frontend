@@ -12,6 +12,13 @@ export const ButtonController = styled.button`
   font-style: normal;
   font-weight: 600;
   line-height: 24px;
+
+  border: 2px solid ${({ theme }) => theme.colors.purple['500']};
+
+  &:hover {
+    background: ${({ theme }) => theme.colors.purple['600']};
+    border-color: ${({ theme }) => theme.colors.purple['300']};
+  }
 `;
 
 export const SearchInputContainer = styled.div`

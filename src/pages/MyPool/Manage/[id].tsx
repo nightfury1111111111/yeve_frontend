@@ -24,6 +24,7 @@ import token1Image from '@src/assets/images/png/token-1.png';
 import token2Image from '@src/assets/images/png/token-2.png';
 import DepositAmountsComponent from './DepositAmounts';
 import Slider from 'rc-slider';
+import ReturnIcon from '@src/assets/images/svg/return-svg';
 
 export default function ManageMyPoolPage() {
   const navigate = useNavigate();
@@ -38,6 +39,9 @@ export default function ManageMyPoolPage() {
         <Heading>
           <span>Manage Position</span>
           <button onClick={() => navigate('/my-pool')}>
+            <div>
+              <ReturnIcon />
+            </div>
             <ArrowLeftIcon />
             <span>Back to All Pools</span>
           </button>
