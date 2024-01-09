@@ -93,13 +93,13 @@
         },
         {
           "name": "tokenVaultA",
-          "isMut": false,
-          "isSigner": false
+          "isMut": true,
+          "isSigner": true
         },
         {
           "name": "tokenVaultB",
-          "isMut": false,
-          "isSigner": false
+          "isMut": true,
+          "isSigner": true
         },
         {
           "name": "feeTier",
@@ -2505,6 +2505,6 @@
     }
   ],
   "metadata": {
-    "address": "9AH3eYznKG1nxM1ZDFyn91N1KQnDc4GW9djDcah3tdi4"
+    "address": "2QE2SSJJvLdFAUkCzKkmX3UmiKsFbJ9qn8mmufeokx6p"
   }
 }

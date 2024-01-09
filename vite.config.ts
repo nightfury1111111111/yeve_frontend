@@ -1,17 +1,32 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react-swc';
+import { NodeGlobalsPolyfillPlugin } from '@esbuild-plugins/node-globals-polyfill';
 import inject from '@rollup/plugin-inject';
 import path from 'path';
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
   return {
+    optimizeDeps: {
+      esbuildOptions: {
+        // Node.js global to browser globalThis
+        define: {
+          global: 'globalThis',
+        },
+        // Enable esbuild polyfill plugins
+        plugins: [
+          NodeGlobalsPolyfillPlugin({
+            buffer: true,
+          }),
+        ],
+      },
+    },
     plugins: [react()],
     build:
       mode === 'production'
         ? {
             rollupOptions: {
-              plugins: [inject({ Buffer: ['buffer', 'Buffer'] })],
+              plugins: [inject({ Buffer: ['buffer/', 'Buffer'] })],
             },
             'process.env': {},
           }
