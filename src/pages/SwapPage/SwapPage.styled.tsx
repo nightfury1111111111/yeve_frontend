@@ -10,5 +10,6 @@ export const SwapPageContainer = styled.div`
 
   @media screen and (max-width: 960px) {
     grid-template-columns: 1fr;
+    margin-top: 10px;
   }
 `;

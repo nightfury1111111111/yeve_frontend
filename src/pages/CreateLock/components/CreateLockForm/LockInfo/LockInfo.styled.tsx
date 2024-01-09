@@ -8,6 +8,10 @@ export const LockInfoContainer = styled.div`
   padding: 24px;
   position: relative;
   width: 400px;
+  @media screen and (max-width: 768px) {
+    width: 92vw;
+    margin-top: 20px;
+  }
 `;
 
 export const LockInfoTitle = styled.div`

@@ -1,5 +1,11 @@
 import { styled } from 'styled-components';
-
+export const TableWrapper = styled.div`
+  @media (max-width: 1200px) {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+`;
 export const Status = styled.div`
   align-items: center;
   > div {
@@ -176,8 +182,11 @@ export const TableContainer = styled.table`
   width: 100%;
   margin-top: 30px;
   border-spacing: unset;
-  border-collapse: collapse;
-
+  overflow: auto;
+  @media (max-width: 1200px) {
+    width: 900px;
+    display: table;
+  }
   thead {
     tr {
       th {

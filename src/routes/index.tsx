@@ -91,7 +91,7 @@ export const userRoutes: Record<string, unknown>[] = [
             element: <VeYEVE />,
           },
           {
-            path: '/oYEVE',
+            path: '/xYEVE',
             element: <OYeve />,
           },
           {

@@ -11,5 +11,7 @@ export const CreateLockPageContainer = styled.div`
 
   @media screen and (max-width: 768px) {
     grid-template-columns: 1fr;
+    margin-top: 10px;
+    display: block;
   }
 `;

@@ -28,8 +28,8 @@ const headerMenus = [
         icon: <LimitIcon />,
       },
       {
-        title: 'oYEVE',
-        route: '/oYEVE',
+        title: 'xYEVE',
+        route: '/xYEVE',
         disabled: false,
         icon: <OYeveIcon />,
       },
