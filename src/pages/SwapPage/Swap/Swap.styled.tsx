@@ -8,6 +8,12 @@ export const SwapButton = styled(Button)`
   line-height: 24px;
   padding: 12px 32px;
   margin-top: 12px;
+  border: 2px solid ${({ theme }) => theme.colors.purple['500']};
+
+  &:hover {
+    background: ${({ theme }) => theme.colors.purple['600']};
+    border-color: ${({ theme }) => theme.colors.purple['300']};
+  }
 `;
 
 export const SwapControlItem = styled.div`

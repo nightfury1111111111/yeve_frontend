@@ -24,7 +24,7 @@ const headerMenus = [
       {
         title: 'Limit',
         route: '/limit',
-        disabled: false,
+        disabled: true,
         icon: <LimitIcon />,
       },
       {

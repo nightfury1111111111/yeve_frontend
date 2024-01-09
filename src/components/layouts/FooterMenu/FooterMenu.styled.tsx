@@ -126,7 +126,7 @@ export const Container = styled.div`
   z-index: 999;
   background-color: ${({ theme }) => theme.colors.gray['950']};
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 960px) {
     display: block;
   }
 `;

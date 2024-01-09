@@ -8,7 +8,7 @@ export const SwapPageContainer = styled.div`
   grid-auto-rows: auto;
   padding: 16px;
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 960px) {
     grid-template-columns: 1fr;
   }
 `;

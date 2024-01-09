@@ -6,7 +6,6 @@ import {
   TableTitle,
 } from '@src/components/common/Table';
 import {
-  Info,
   PairElement,
   PairImageContainer,
   PairInfo,
@@ -17,7 +16,6 @@ import {
 } from '@src/constants/table';
 import { REWARD_TABS } from '@src/constants/table-tabs';
 import { REWARDS_DATA } from '@src/example-data/pools';
-import { convertToInternationalCurrencySystem } from '@src/utils/convert';
 import { useState } from 'react';
 import { PageContainer } from './Rewards.styled';
 
@@ -82,7 +80,7 @@ export default function RewardsPage() {
                   </div>
                 </Type>
               </td>
-              <td>
+              {/* <td>
                 <Info>
                   <h4>
                     ~ ${convertToInternationalCurrencySystem(item.rewards.usd)}
@@ -104,7 +102,7 @@ export default function RewardsPage() {
                     <InfoIcon />
                   </div>
                 </Type>
-              </td>
+              </td> */}
               <td>
                 <div className="btn-wrap">
                   <button className="disable">Claim Fees</button>
