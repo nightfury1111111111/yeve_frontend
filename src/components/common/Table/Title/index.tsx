@@ -12,12 +12,14 @@ type TableTitleProps = {
   button?: Button;
   hideClock?: boolean;
   isRewardPage?: boolean;
+  controlButton?: Button;
 };
 
 export function TableTitle({
   title,
   info,
   button,
+  controlButton,
   hideClock,
   isRewardPage = false,
 }: TableTitleProps) {
@@ -29,20 +31,24 @@ export function TableTitle({
           <div>
             {isRewardPage ? (
               <div className="reward-title">
-                <span>{info.time}</span>
+                <label>
+                  <span>{info.time}</span>
+                </label>
                 <div>{info.label}</div>
               </div>
             ) : (
               <>
-                <ClockIcon />
-                <span>{info.time}</span>
+                <label>
+                  <ClockIcon />
+                  <span>{info.time}</span>
+                </label>
                 <div>{info.label}</div>
               </>
             )}
           </div>
-          {button && (
-            <ButtonController onClick={() => button.handle()}>
-              {button.text}
+          {controlButton && (
+            <ButtonController onClick={() => controlButton.handle()}>
+              {controlButton.text}
             </ButtonController>
           )}
         </div>

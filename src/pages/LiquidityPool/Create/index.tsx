@@ -30,6 +30,7 @@ import {
 import CheckIcon from '@src/assets/images/svg/pools/check-icon';
 import SubtractIcon from '@src/assets/images/svg/pools/subtract-icon';
 import PlusIcon from '@src/assets/images/svg/pools/plus-icon';
+import ReturnIcon from '@src/assets/images/svg/return-svg';
 
 export default function CreateLiquidityPoolPage() {
   const navigate = useNavigate();
@@ -44,6 +45,9 @@ export default function CreateLiquidityPoolPage() {
         <Heading>
           <span>New Pools</span>
           <button onClick={() => navigate('/liquidity-pool')}>
+            <div>
+              <ReturnIcon />
+            </div>
             <ArrowLeftIcon />
             <span>Back to All Pools</span>
           </button>

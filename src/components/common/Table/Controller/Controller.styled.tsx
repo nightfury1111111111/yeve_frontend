@@ -62,6 +62,10 @@ export const SearchContainer = styled.div`
   align-items: center;
   flex: 1;
   gap: 12px;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
 export const TabContainer = styled.div`
@@ -80,6 +84,15 @@ export const TabContainer = styled.div`
 
     &.active {
       background: ${({ theme }) => theme.colors.purple['500']};
+    }
+  }
+
+  @media (max-width: 768px) {
+    width: 100%;
+
+    > a {
+      flex: 1;
+      text-align: center;
     }
   }
 `;

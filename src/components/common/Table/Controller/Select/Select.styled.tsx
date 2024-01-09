@@ -65,4 +65,8 @@ export const SelectedOption = styled.div`
 
 export const SelectContainer = styled.div`
   position: relative;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;

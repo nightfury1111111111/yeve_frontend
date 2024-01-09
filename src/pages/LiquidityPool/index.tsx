@@ -37,6 +37,10 @@ export default function LiquidityPoolPage() {
         <TableTitle
           title="Liquidity Pools"
           info={{ time: '00h 47m', label: 'Since last oYEVE distribution' }}
+          controlButton={{
+            text: 'Add/Remove Pool',
+            handle: handleControlPool,
+          }}
         />
         <TableController
           tabs={LIQUIDITY_TABS}
