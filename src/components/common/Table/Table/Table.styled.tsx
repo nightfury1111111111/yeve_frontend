@@ -259,8 +259,21 @@ export const TableContainer = styled.table`
             cursor: pointer;
             text-wrap: nowrap;
 
+            border: 2px solid ${({ theme }) => theme.colors.purple['500']};
+
+            &:hover {
+              background: ${({ theme }) => theme.colors.purple['600']};
+              border-color: ${({ theme }) => theme.colors.purple['300']};
+            }
+
             &.disable {
               background: ${({ theme }) => theme.colors.gray['850']};
+              border-color: ${({ theme }) => theme.colors.gray['850']};
+
+              &:hover {
+                background: ${({ theme }) => theme.colors.gray['800']};
+                border-color: ${({ theme }) => theme.colors.gray['700']};
+              }
             }
           }
         }

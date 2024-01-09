@@ -9,7 +9,7 @@ import {
   Info,
   PairElement,
   PairImageContainer,
-  PairInfo
+  PairInfo,
 } from '@src/components/common/Table/Table/Table.styled';
 import { VOTING_REWARDS_LOCK_IDS } from '@src/constants/select-options';
 import { VOTING_REWARDS_COLUMN_NAMES } from '@src/constants/table';
@@ -41,6 +41,10 @@ export default function VotingRewardsPage() {
             label: '$329.29 (4.530 oYEVE)',
           }}
           isRewardPage={true}
+          controlButton={{
+            text: 'Claim All Voting Rewards',
+            handle: handleClaimRewards,
+          }}
         />
         <TableController
           tabs={REWARD_TABS}

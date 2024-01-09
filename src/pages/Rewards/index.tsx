@@ -9,11 +9,9 @@ import {
   PairElement,
   PairImageContainer,
   PairInfo,
-  Type
+  Type,
 } from '@src/components/common/Table/Table/Table.styled';
-import {
-  REWARDS_COLUMN_NAMES
-} from '@src/constants/table';
+import { REWARDS_COLUMN_NAMES } from '@src/constants/table';
 import { REWARD_TABS } from '@src/constants/table-tabs';
 import { REWARDS_DATA } from '@src/example-data/pools';
 import { useState } from 'react';
@@ -36,6 +34,10 @@ export default function RewardsPage() {
             label: '$329.29 (4.530 oYEVE)',
           }}
           isRewardPage={true}
+          controlButton={{
+            text: 'Claim All Liquidity Rewards',
+            handle: handleClaimRewards,
+          }}
         />
         <TableController
           tabs={REWARD_TABS}

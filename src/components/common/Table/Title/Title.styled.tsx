@@ -39,6 +39,12 @@ export const Title = styled.div`
         align-items: center;
         gap: 8px;
 
+        @media (max-width: 768px) {
+          align-items: baseline;
+          flex-direction: column;
+          gap: 8px;
+        }
+
         > label {
           > span {
             font-size: 14px;
