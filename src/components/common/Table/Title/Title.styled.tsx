@@ -20,6 +20,10 @@ export const Title = styled.div`
     gap: 12px;
     justify-content: space-between;
 
+    @media (max-width: 768px) {
+      align-items: stretch;
+    }
+
     > button {
       display: none;
     }
@@ -40,7 +44,7 @@ export const Title = styled.div`
         gap: 8px;
 
         @media (max-width: 768px) {
-          align-items: baseline;
+          width: 100%;
           flex-direction: column;
           gap: 8px;
         }

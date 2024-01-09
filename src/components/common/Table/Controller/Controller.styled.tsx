@@ -108,5 +108,6 @@ export const Controller = styled.div`
   display: flex;
   align-items: center;
   margin-top: 32px;
+  flex-wrap: wrap;
   gap: 12px;
 `;
