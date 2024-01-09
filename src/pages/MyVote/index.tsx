@@ -18,17 +18,19 @@ import {
   EnterVoteWrap,
   NormalText,
   PageContainer,
+  PairImageContainerSmall,
+  Percentage,
   SmallText,
-  VotingInfo,
-  DefaultButton,
-  VotingPower,
-  Status,
+  YourVoteContainer,
+  YourVoteItem,
 } from './Vote.styled';
 import { VoteController } from './components/VoteController';
 import { VoteTableTitle } from './components/VoteTableTitle';
-import { SwapButton } from '../SwapPage/Swap/Swap.styled';
+import token1Image from '@src/assets/images/png/token-1.png';
+import token2Image from '@src/assets/images/png/token-2.png';
+import CloseIconCircle from '@src/assets/images/svg/close-icon-circle';
 
-export default function VotePage() {
+export default function MyVotePage() {
   const [search, setSearch] = useState('');
 
   const handleControlPool = () => {
@@ -37,20 +39,6 @@ export default function VotePage() {
 
   return (
     <PageContainer>
-      <VotingInfo>
-        <div>
-          <span>Voting Power:</span>
-          <VotingPower>100%</VotingPower>
-        </div>
-        <div>
-          <span>Voting Power Used:</span>
-          <Status>No</Status>
-        </div>
-        <div>
-          <DefaultButton w="100px">Reset</DefaultButton>
-          <SwapButton>Cast vote</SwapButton>
-        </div>
-      </VotingInfo>
       <TableContainer>
         <VoteTableTitle
           title="Vote"
@@ -70,11 +58,37 @@ export default function VotePage() {
           <TableControlSelect options={POOL_VERSIONS} />
           <TableControlSelect options={LIQUIDITY_TYPES} />
         </VoteController>
+        <YourVoteContainer>
+          <YourVoteItem>
+            <Percentage>10%</Percentage>
+            <PairImageContainerSmall>
+              <img src={token1Image} />
+              <img src={token2Image} />
+            </PairImageContainerSmall>
+            YEVE/USDT
+            <CloseIconCircle />
+          </YourVoteItem>
+          <YourVoteItem>
+            <Percentage>10%</Percentage>
+            <PairImageContainerSmall>
+              <img src={token1Image} />
+              <img src={token2Image} />
+            </PairImageContainerSmall>
+            YEVE/USDT
+            <CloseIconCircle />
+          </YourVoteItem>
+          <YourVoteItem>
+            <Percentage>10%</Percentage>
+            <PairImageContainerSmall>
+              <img src={token1Image} />
+              <img src={token2Image} />
+            </PairImageContainerSmall>
+            YEVE/USDT
+            <CloseIconCircle />
+          </YourVoteItem>
+        </YourVoteContainer>
         <Table columnNames={VOTE_COLUMN_NAMES}>
           {[
-            ...LIQUIDITY_POOLS_DATA,
-            ...LIQUIDITY_POOLS_DATA,
-            ...LIQUIDITY_POOLS_DATA,
             ...LIQUIDITY_POOLS_DATA,
             ...LIQUIDITY_POOLS_DATA,
             ...LIQUIDITY_POOLS_DATA,

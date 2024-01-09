@@ -1,44 +1,39 @@
-import yeveImage from '@src/assets/images/png/token-1.png';
-import DownIcon from '@src/assets/images/svg/menu/DownIcon';
-import { useState } from 'react';
-import {
-  TokenIcon,
-  TokenSelect,
-} from '../SwapPage/Swap/SelectToken/SelectToken.styled';
 import { SwapButton } from '../SwapPage/Swap/Swap.styled';
 import {
-  BalanceContainer,
-  BalanceRow,
   BribeBox,
   BribeContainer,
-  Flex,
-  InputContainer,
   Label,
-  SwapTab,
-  SwapTabItem,
   Title,
-} from './OYeve.styled';
+  SwapTab,
+  BalanceContainer,
+  BalanceRow,
+  InputContainer,
+  SwapTabItem,
+} from './VEYeve.styled';
+import { useState } from 'react';
+import yeveImage from '@src/assets/images/png/token-1.png';
+import { TokenIcon } from '../SwapPage/Swap/SelectToken/SelectToken.styled';
 
-export default function OYeve() {
+export default function VeYEVE() {
   const [selectedTab, setSelectedTab] = useState(0);
 
   return (
     <BribeContainer>
       <BribeBox>
-        <Title>Convert</Title>
+        <Title>Options</Title>
         <div>Redeem into</div>
         <SwapTab>
           <SwapTabItem
             className={selectedTab === 0 ? 'active' : ''}
             onClick={() => setSelectedTab(0)}
           >
-            xYEVE
+            veYEVE
           </SwapTabItem>
           <SwapTabItem
             className={selectedTab === 1 ? 'active' : ''}
             onClick={() => setSelectedTab(1)}
           >
-            veYEVE
+            YEVE
           </SwapTabItem>
         </SwapTab>
 
@@ -47,33 +42,35 @@ export default function OYeve() {
             <div>oYEVE Balance:</div>
             <div>70.0 oYEVE</div>
           </BalanceRow>
+          <BalanceRow>
+            <div>CASH Balance:</div>
+            <div>239 CASH</div>
+          </BalanceRow>
+          <BalanceRow>
+            <div>Discount:</div>
+            <div>20%</div>
+          </BalanceRow>
         </BalanceContainer>
-        <Label>Your redeem</Label>
+        <Label>Your redeem YEVE</Label>
         <InputContainer>
-          <TokenSelect>
-            <div>
-              <TokenIcon src={yeveImage} />
-              <span>YEVE</span>
-            </div>
-            <DownIcon />
-          </TokenSelect>
-          <Flex>
-            <input placeholder="0.00" />
-            <button>MAX</button>
-          </Flex>
+          <TokenIcon src={yeveImage} />
+
+          <button>MAX</button>
+        </InputContainer>
+        <Label>You pay CASH</Label>
+        <InputContainer>
+          <TokenIcon src={yeveImage} />
+
+          <button>MAX</button>
         </InputContainer>
         <BalanceContainer>
           <BalanceRow>
-            <div>Voting power:</div>
-            <div>70.0 oYEVE</div>
-          </BalanceRow>
-          <BalanceRow>
-            <div>Unlocking at:</div>
-            <div>07.09.2025</div>
+            <div>You get:</div>
+            <div>240 YEVE</div>
           </BalanceRow>
         </BalanceContainer>
         <SwapButton>
-          Redeem in to {selectedTab === 0 ? 'xYEVE' : 'veYEVE'}
+          Redeem in to {selectedTab === 1 ? 'veYEVE' : 'YEVE'}
         </SwapButton>
       </BribeBox>
     </BribeContainer>

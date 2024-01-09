@@ -71,4 +71,13 @@ button {
 }
 .wallet-adapter-button-trigger {
   width: 160px;
+  background: transparent;
+  justify-content: center;
+}
+.wallet-adapter-button {
+  padding: 0 16px;
+}
+textarea:focus,
+input:focus {
+  outline: none;
 }
