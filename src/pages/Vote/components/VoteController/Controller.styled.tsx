@@ -104,11 +104,11 @@ export const Status = styled.div`
 `;
 export const StatusInfo = styled.div`
   background: ${({ theme }) => theme.colors.gray['900']};
-  padding: 18px 20px;
+  padding: 18px 36px;
   border-radius: 4px;
   font-size: 14px;
   display: flex;
-  gap: 45px;
+  gap: 70px;
   div div:last-child {
     margin-top: 8px;
   }

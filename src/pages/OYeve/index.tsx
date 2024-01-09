@@ -1,6 +1,6 @@
 import yeveImage from '@src/assets/images/png/token-1.png';
 import DownIcon from '@src/assets/images/svg/menu/DownIcon';
-import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   TokenIcon,
   TokenSelect,
@@ -20,26 +20,15 @@ import {
 } from './OYeve.styled';
 
 export default function OYeve() {
-  const [selectedTab, setSelectedTab] = useState(0);
-
+  const navigate = useNavigate();
   return (
     <BribeContainer>
       <BribeBox>
         <Title>Convert</Title>
         <div>Redeem into</div>
         <SwapTab>
-          <SwapTabItem
-            className={selectedTab === 0 ? 'active' : ''}
-            onClick={() => setSelectedTab(0)}
-          >
-            xYEVE
-          </SwapTabItem>
-          <SwapTabItem
-            className={selectedTab === 1 ? 'active' : ''}
-            onClick={() => setSelectedTab(1)}
-          >
-            veYEVE
-          </SwapTabItem>
+          <SwapTabItem className={'active'}>xYEVE</SwapTabItem>
+          <SwapTabItem onClick={() => navigate('/veYEVE')}>veYEVE</SwapTabItem>
         </SwapTab>
 
         <BalanceContainer>
@@ -72,9 +61,7 @@ export default function OYeve() {
             <div>07.09.2025</div>
           </BalanceRow>
         </BalanceContainer>
-        <SwapButton>
-          Redeem in to {selectedTab === 0 ? 'xYEVE' : 'veYEVE'}
-        </SwapButton>
+        <SwapButton>Redeem in to YEVE</SwapButton>
       </BribeBox>
     </BribeContainer>
   );

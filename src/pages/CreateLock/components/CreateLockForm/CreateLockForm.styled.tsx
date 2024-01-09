@@ -19,6 +19,10 @@ export const DefaultButton = styled(Button)<{ w?: string }>`
   background: ${({ theme }) => theme.colors.gray['900']};
   width: ${(p) => p.w || 'auto'};
   color: ${({ theme }) => theme.colors.gray['250']}!important;
+  @media screen and (max-width: 768px) {
+    padding: 6px 8px;
+    font-size: 12px;
+  }
 `;
 
 export const SwapControlItem = styled.div`
@@ -40,6 +44,9 @@ export const AmountLockContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   margin-top: 16px;
+  @media screen and (max-width: 768px) {
+    display: block;
+  }
 `;
 export const SwapTabItem = styled.div`
   font-weight: 600;
@@ -62,6 +69,10 @@ export const SwapTab = styled.div`
   align-items: center;
   justify-content: flex-end;
   gap: 10px;
+  @media screen and (max-width: 768px) {
+    justify-content: flex-start;
+    margin-top: 10px;
+  }
 `;
 
 export const SwapControlList = styled.div`
@@ -83,8 +94,15 @@ export const SwapContainer = styled.div`
   background: ${({ theme }) => theme.colors.gray['950']};
   padding: 24px;
   width: 55%;
+  @media screen and (max-width: 768px) {
+    width: 92vw;
+    padding: 12px;
+  }
 `;
 
 export const Title = styled.div`
   font-size: 36px;
+  @media screen and (max-width: 768px) {
+    font-size: 24px;
+  }
 `;

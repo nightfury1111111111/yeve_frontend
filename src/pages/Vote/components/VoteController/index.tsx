@@ -60,10 +60,6 @@ export function VoteController({
             <div>$20,437</div>
           </div>
           <div>
-            <div>Total bveBribes</div>
-            <div>$8,029</div>
-          </div>
-          <div>
             <div>Total Fees</div>
             <div>$15,748</div>
           </div>

@@ -141,7 +141,11 @@ export const VOTING_REWARDS_COLUMN_NAMES = [
     sort: true,
   },
   {
-    value: 'Emission APR',
+    value: 'Rewards Estimate',
+    sort: true,
+  },
+  {
+    value: 'Your Votes',
     sort: true,
   },
   {

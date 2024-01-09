@@ -21,11 +21,12 @@ export const BribeContainer = styled.div`
   justify-content: flex-start;
   @media screen and (max-width: 768px) {
     grid-template-columns: 1fr;
+    margin-top: 10px;
   }
 `;
 
 export const BribeBox = styled.div`
-  border-radius: 16px;
+  border-radius: 8px;
   border: 2px solid;
   border-color: ${({ theme }) => theme.colors.gray['800']};
   background: ${({ theme }) => theme.colors.gray['950']};
