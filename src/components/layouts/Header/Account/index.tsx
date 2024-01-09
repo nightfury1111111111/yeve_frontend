@@ -1,5 +1,9 @@
-import { AccountContainer, SelectToken, AccountInfo } from './Account.styled';
 import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
+import {
+  AccountContainer,
+  AccountInfo,
+  SolanaContainer,
+} from './Account.styled';
 
 type AccountProps = {
   themeConfig: Record<string, any>;
@@ -11,12 +15,12 @@ export default function Account({ themeConfig }: AccountProps) {
 
   return (
     <AccountContainer>
-      <SelectToken>
+      <SolanaContainer>
         <img src={themeConfig.images.solanaLogo} />
         <span>SOLANA</span>
-      </SelectToken>
+      </SolanaContainer>
       <AccountInfo>
-        <img src={themeConfig.images.accountAvatar} />
+        {/* <img src={themeConfig.images.accountAvatar} /> */}
         {renderWalletButton()}
       </AccountInfo>
     </AccountContainer>

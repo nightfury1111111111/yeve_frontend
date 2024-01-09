@@ -120,27 +120,4 @@ export const InputContainer = styled.div`
     height: 30px;
     color: white;
   }
-  > div {
-    width: 120px;
-    flex: 0;
-    gap: 10px;
-    align-items: center;
-    background: transparent;
-    padding: 0;
-    svg {
-      margin-top: 5px;
-    }
-  }
-`;
-
-export const Flex = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 6px;
-  width: 100%;
-  input {
-    width: 50px;
-    min-width: 0;
-  }
 `;

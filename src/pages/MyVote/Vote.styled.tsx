@@ -94,3 +94,44 @@ export const Status = styled.div<{ yes?: boolean }>`
   background: ${({ theme, yes }) =>
     yes ? theme.colors.success['700'] : theme.colors.alert['700']};
 `;
+
+export const YourVoteContainer = styled.div`
+  display: flex;
+  gap: 10px;
+  margin-top: 30px;
+`;
+
+export const YourVoteItem = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: ${({ theme }) => theme.colors.gray['900']};
+  padding: 8px 12px;
+  font-size: 14px;
+  border-radius: 4px;
+  color: ${({ theme }) => theme.colors.gray['250']}!important;
+`;
+
+export const Percentage = styled.div`
+  background: ${({ theme }) => theme.colors.gray['950']};
+  font-size: 12px;
+  padding: 5px 10px;
+  border-radius: 4px;
+`;
+export const Text = styled.div``;
+
+export const PairImageContainerSmall = styled.div`
+  display: flex;
+  align-items: center;
+
+  > img {
+    width: 24px;
+    height: 24px;
+    border-radius: 9999px;
+
+    &:last-child {
+      margin-left: -8px;
+    }
+  }
+`;
