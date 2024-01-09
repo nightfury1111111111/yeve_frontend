@@ -9,9 +9,9 @@ export const MenuContainer = styled.div`
   color: ${({ theme }) => theme.colors.gray['50']};
   flex: 1;
   margin-right: 24px;
-  
-  @media screen and (max-width: 768px) {
-    display: none;
+
+  @media screen and (max-width: 1375px) {
+    margin-right: 16px;
   }
 `;
 
@@ -33,7 +33,7 @@ export const ChildMenu = styled.div`
   display: none;
   position: absolute;
   border-radius: 4px;
-  top: calc(100% + 24px);
+  top: calc(100% + 16px);
   left: 0;
   width: fit-content;
   min-width: 120px;
@@ -114,6 +114,10 @@ export const MenuItem = styled.div`
   font-size: 16px;
   line-height: 24px;
   padding: 16px;
+
+  @media screen and (max-width: 960px) {
+    display: none;
+  }
 
   &.active {
     > ${MenuIcon} {

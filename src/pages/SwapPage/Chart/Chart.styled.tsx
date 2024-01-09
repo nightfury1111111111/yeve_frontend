@@ -59,11 +59,12 @@ export const ButtonControl = styled.div`
     font-size: 16px;
     font-weight: 600;
     line-height: 24px;
-    padding: 8px 16px;
+    padding: 8px 0;
     outline: none;
     border: none;
     background: ${({ theme }) => theme.colors.gray['950']};
     cursor: pointer;
+    width: 72px;
 
     &:first-child {
       border-top-left-radius: 4px;
@@ -126,4 +127,8 @@ export const ChartContainer = styled.div`
   padding: 24px;
   display: flex;
   flex-direction: column;
+
+  @media screen and (max-width: 960px) {
+    height: 600px;
+  }
 `;

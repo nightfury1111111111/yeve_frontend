@@ -26,17 +26,24 @@ export function TableTitle({
       <span>{title}</span>
       {!hideClock && (
         <div>
-          {isRewardPage ? (
-            <div className="reward-title">
-              <span>{info.time}</span>
-              <div>{info.label}</div>
-            </div>
-          ) : (
-            <>
-              <ClockIcon />
-              <span>{info.time}</span>
-              <div>{info.label}</div>
-            </>
+          <div>
+            {isRewardPage ? (
+              <div className="reward-title">
+                <span>{info.time}</span>
+                <div>{info.label}</div>
+              </div>
+            ) : (
+              <>
+                <ClockIcon />
+                <span>{info.time}</span>
+                <div>{info.label}</div>
+              </>
+            )}
+          </div>
+          {button && (
+            <ButtonController onClick={() => button.handle()}>
+              {button.text}
+            </ButtonController>
           )}
         </div>
       )}

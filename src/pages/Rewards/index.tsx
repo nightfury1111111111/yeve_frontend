@@ -82,7 +82,7 @@ export default function RewardsPage() {
                   </div>
                 </Type>
               </td>
-              <td>
+              {/* <td>
                 <Info>
                   <h4>
                     ~ ${convertToInternationalCurrencySystem(item.rewards.usd)}
@@ -104,7 +104,7 @@ export default function RewardsPage() {
                     <InfoIcon />
                   </div>
                 </Type>
-              </td>
+              </td> */}
               <td>
                 <div className="btn-wrap">
                   <button className="disable">Claim Fees</button>
