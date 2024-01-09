@@ -70,3 +70,10 @@ export const AccountContainer = styled.div`
   justify-content: flex-end;
   gap: 8px;
 `;
+
+export const SolanaContainer = styled.div`
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  margin-right: 10px;
+`;

@@ -13,6 +13,8 @@ import VotePage from '@src/pages/Vote';
 import Bribe from '@src/pages/Bribe';
 import OYeve from '@src/pages/OYeve';
 import Presale from '@src/pages/Presale';
+import MyVotePage from '@src/pages/MyVote';
+import VeYEVE from '@src/pages/VEYeve';
 
 export const userRoutes: Record<string, unknown>[] = [
   {
@@ -77,11 +79,19 @@ export const userRoutes: Record<string, unknown>[] = [
             element: <VotePage />,
           },
           {
+            path: '/my-vote',
+            element: <MyVotePage />,
+          },
+          {
             path: '/bribe',
             element: <Bribe />,
           },
           {
-            path: '/oyeve',
+            path: '/veyeve',
+            element: <VeYEVE />,
+          },
+          {
+            path: '/oYEVE',
             element: <OYeve />,
           },
           {

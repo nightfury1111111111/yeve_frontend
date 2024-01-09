@@ -26,6 +26,6 @@ export const VOTE_TABS = [
   },
   {
     name: 'My Vote',
-    route: '/'
+    route: '/my-vote'
   }
 ]

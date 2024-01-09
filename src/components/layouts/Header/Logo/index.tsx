@@ -13,11 +13,11 @@ export default function Logo({ themeConfig }: LogoProps) {
       </Link>
       <Information>
         TVL:
-        <span>$12.000.000</span>
+        <span>$50.000.000</span>
       </Information>
       <Information>
         APR:
-        <span>+121%</span>
+        <span>+200%</span>
       </Information>
     </Container>
   );
