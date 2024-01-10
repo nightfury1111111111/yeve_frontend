@@ -1,4 +1,4 @@
-import FilterIcon from '@src/assets/images/svg/filter-icon';
+import CloseIcon from '@src/assets/images/svg/close-icon';
 import InfoIcon from '@src/assets/images/svg/info-icon';
 import { SLIPPAGE_OPTIONS } from '@src/example-data/slippage';
 import { useEffect, useRef } from 'react';
@@ -12,7 +12,6 @@ import {
   TokenModalContainer,
   TokenModalForm,
 } from './SlippageSetting.styled';
-import CloseIcon from '@src/assets/images/svg/close-icon';
 
 type SlippageSettingProps = {
   summary: Record<string, any>;
