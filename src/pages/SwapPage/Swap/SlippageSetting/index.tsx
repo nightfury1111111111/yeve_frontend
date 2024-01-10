@@ -1,4 +1,4 @@
-import FilterIcon from '@src/assets/images/svg/filter-icon';
+import CloseIcon from '@src/assets/images/svg/close-icon';
 import InfoIcon from '@src/assets/images/svg/info-icon';
 import { SLIPPAGE_OPTIONS } from '@src/example-data/slippage';
 import { useEffect, useRef } from 'react';
@@ -51,12 +51,11 @@ export default function SlippageSetting({
   return (
     <TokenModalContainer>
       <TokenModalForm ref={ref}>
-        <Heading onClick={handleClose}>
-          <div>
-            <FilterIcon />
-            <span>Back to swap</span>
-          </div>
+        <Heading>
           <button>Reset</button>
+          <div onClick={handleClose}>
+            <CloseIcon />
+          </div>
         </Heading>
         <div>
           <SlippageTolerance>

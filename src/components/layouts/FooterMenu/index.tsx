@@ -40,6 +40,11 @@ export default function FooterMenu() {
     }
   };
 
+  const handleNavigate = (route: string) => {
+    navigate(route);
+    setSubMenu([]);
+  };
+
   return (
     <Container>
       <Menu>
@@ -49,7 +54,7 @@ export default function FooterMenu() {
               <SubMenuItem
                 key={index}
                 className={isActiveLink(menu) ? 'active' : ''}
-                onClick={() => navigate(menu.route)}
+                onClick={() => handleNavigate(menu.route)}
               >
                 {menu.icon}
                 <span>{menu.title}</span>

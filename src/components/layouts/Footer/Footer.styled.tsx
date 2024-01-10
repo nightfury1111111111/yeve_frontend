@@ -7,6 +7,9 @@ export const FooterContainer = styled.div`
     width: 100%;
     padding: 20px 0 20px;
   }
+  @media screen and (max-width: 960px) {
+    margin-bottom: 105px;
+  }
   @media (min-height: 755px) {
     position: absolute;
     bottom: 0;

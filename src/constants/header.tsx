@@ -24,12 +24,12 @@ const headerMenus = [
       {
         title: 'Limit',
         route: '/limit',
-        disabled: false,
+        disabled: true,
         icon: <LimitIcon />,
       },
       {
-        title: 'oYEVE',
-        route: '/oYEVE',
+        title: 'xYEVE',
+        route: '/xYEVE',
         disabled: false,
         icon: <OYeveIcon />,
       },

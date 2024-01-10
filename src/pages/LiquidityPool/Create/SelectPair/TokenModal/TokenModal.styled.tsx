@@ -183,4 +183,5 @@ export const TokenModalContainer = styled.div`
   justify-content: center;
   z-index: 999;
   background: ${({ theme }) => `${theme.colors.gray['1000']}80`};
+  backdrop-filter: blur(4px);
 `;

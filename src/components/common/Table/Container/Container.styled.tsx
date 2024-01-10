@@ -8,4 +8,7 @@ export const TableContainer = styled.div`
   border-radius: 8px;
   max-width: 1200px;
   margin: auto;
+  @media (max-width: 1200px) {
+    width: 92%;
+  }
 `;

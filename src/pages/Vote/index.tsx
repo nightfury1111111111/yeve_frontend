@@ -66,6 +66,7 @@ export default function VotePage() {
             text: 'Add/Remove Pool',
             handle: handleControlPool,
           }}
+          lock={112843}
         >
           <TableControlSelect options={POOL_VERSIONS} />
           <TableControlSelect options={LIQUIDITY_TYPES} />
@@ -121,15 +122,11 @@ export default function VotePage() {
               </td>
               <td>
                 <Info>
-                  <NormalText>25.55%</NormalText>
-                </Info>
-              </td>
-              <td>
-                <Info>
                   <NormalText>$4693.32</NormalText>
                   <SmallText>per 1000 votes</SmallText>
                 </Info>
               </td>
+
               <td>
                 <Info>
                   <NormalText>$25.00</NormalText>

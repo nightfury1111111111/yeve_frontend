@@ -12,7 +12,7 @@ export const Information = styled.div`
     margin-left: 8px;
   }
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 1265px) {
     display: none;
   }
 `;
@@ -21,4 +21,16 @@ export const Container = styled.div`
   display: flex;
   align-items: center;
   gap: 8px;
+
+  @media screen and (max-width: 1375px) {
+    > a > img {
+      margin-left: 16px;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    > a > img {
+      margin-left: 0px;
+    }
+  }
 `;

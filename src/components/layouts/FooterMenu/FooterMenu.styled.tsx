@@ -123,10 +123,10 @@ export const Container = styled.div`
   width: 100vw;
   height: fit-content;
   display: none;
-  z-index: 999;
+  z-index: 1001;
   background-color: ${({ theme }) => theme.colors.gray['950']};
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 960px) {
     display: block;
   }
 `;

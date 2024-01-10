@@ -6,18 +6,14 @@ import {
   TableTitle,
 } from '@src/components/common/Table';
 import {
-  Info,
   PairElement,
   PairImageContainer,
   PairInfo,
-  Type
+  Type,
 } from '@src/components/common/Table/Table/Table.styled';
-import {
-  REWARDS_COLUMN_NAMES
-} from '@src/constants/table';
+import { REWARDS_COLUMN_NAMES } from '@src/constants/table';
 import { REWARD_TABS } from '@src/constants/table-tabs';
 import { REWARDS_DATA } from '@src/example-data/pools';
-import { convertToInternationalCurrencySystem } from '@src/utils/convert';
 import { useState } from 'react';
 import { PageContainer } from './Rewards.styled';
 
@@ -38,6 +34,10 @@ export default function RewardsPage() {
             label: '$329.29 (4.530 oYEVE)',
           }}
           isRewardPage={true}
+          controlButton={{
+            text: 'Claim All Liquidity Rewards',
+            handle: handleClaimRewards,
+          }}
         />
         <TableController
           tabs={REWARD_TABS}
@@ -82,7 +82,7 @@ export default function RewardsPage() {
                   </div>
                 </Type>
               </td>
-              <td>
+              {/* <td>
                 <Info>
                   <h4>
                     ~ ${convertToInternationalCurrencySystem(item.rewards.usd)}
@@ -104,7 +104,7 @@ export default function RewardsPage() {
                     <InfoIcon />
                   </div>
                 </Type>
-              </td>
+              </td> */}
               <td>
                 <div className="btn-wrap">
                   <button className="disable">Claim Fees</button>

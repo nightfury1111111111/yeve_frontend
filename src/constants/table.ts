@@ -93,14 +93,14 @@ export const REWARDS_COLUMN_NAMES = [
     value: 'Rewards Estimate',
     sort: true,
   },
-  {
-    value: 'Your Vote',
-    sort: true,
-  },
-  {
-    value: 'Enter Vote',
-    sort: false,
-  },
+  // {
+  //   value: 'Your Vote',
+  //   sort: true,
+  // },
+  // {
+  //   value: 'Enter Vote',
+  //   sort: false,
+  // },
 ];
 export const VOTING_REWARDS_COLUMN_NAMES = [
   {
@@ -141,7 +141,11 @@ export const VOTING_REWARDS_COLUMN_NAMES = [
     sort: true,
   },
   {
-    value: 'Emission APR',
+    value: 'Rewards Estimate',
+    sort: true,
+  },
+  {
+    value: 'Your Votes',
     sort: true,
   },
   {

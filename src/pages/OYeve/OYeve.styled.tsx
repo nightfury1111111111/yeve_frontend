@@ -15,13 +15,16 @@ export const BribeContainer = styled.div`
 `;
 
 export const BribeBox = styled.div`
-  border-radius: 16px;
+  border-radius: 8px;
   border: 2px solid;
   border-color: ${({ theme }) => theme.colors.gray['800']};
   background: ${({ theme }) => theme.colors.gray['950']};
   padding: 24px;
   width: 55%;
   margin: auto;
+  @media screen and (max-width: 768px) {
+    width: 92vw;
+  }
   input {
     background: ${({ theme }) => theme.colors.gray['900']};
     color: ${({ theme }) => theme.colors.gray['500']};
@@ -81,6 +84,7 @@ export const BalanceContainer = styled.div`
   background: ${({ theme }) => theme.colors.gray['900']};
   padding: 6px 16px;
   margin-top: 16px;
+  border-radius: 4px;
 `;
 export const BalanceRow = styled.div`
   display: flex;

@@ -1,21 +1,21 @@
+import yeveImage from '@src/assets/images/png/token-1.png';
+import { useNavigate } from 'react-router-dom';
+import { TokenIcon } from '../SwapPage/Swap/SelectToken/SelectToken.styled';
 import { SwapButton } from '../SwapPage/Swap/Swap.styled';
 import {
-  BribeBox,
-  BribeContainer,
-  Label,
-  Title,
-  SwapTab,
   BalanceContainer,
   BalanceRow,
+  BribeBox,
+  BribeContainer,
   InputContainer,
+  Label,
+  SwapTab,
   SwapTabItem,
+  Title,
 } from './VEYeve.styled';
-import { useState } from 'react';
-import yeveImage from '@src/assets/images/png/token-1.png';
-import { TokenIcon } from '../SwapPage/Swap/SelectToken/SelectToken.styled';
 
 export default function VeYEVE() {
-  const [selectedTab, setSelectedTab] = useState(0);
+  const navigate = useNavigate();
 
   return (
     <BribeContainer>
@@ -23,18 +23,8 @@ export default function VeYEVE() {
         <Title>Options</Title>
         <div>Redeem into</div>
         <SwapTab>
-          <SwapTabItem
-            className={selectedTab === 0 ? 'active' : ''}
-            onClick={() => setSelectedTab(0)}
-          >
-            veYEVE
-          </SwapTabItem>
-          <SwapTabItem
-            className={selectedTab === 1 ? 'active' : ''}
-            onClick={() => setSelectedTab(1)}
-          >
-            YEVE
-          </SwapTabItem>
+          <SwapTabItem onClick={() => navigate('/xYEVE')}>xYEVE</SwapTabItem>
+          <SwapTabItem className={'active'}>veYEVE</SwapTabItem>
         </SwapTab>
 
         <BalanceContainer>
@@ -69,9 +59,7 @@ export default function VeYEVE() {
             <div>240 YEVE</div>
           </BalanceRow>
         </BalanceContainer>
-        <SwapButton>
-          Redeem in to {selectedTab === 1 ? 'veYEVE' : 'YEVE'}
-        </SwapButton>
+        <SwapButton>Redeem in to veYEVE</SwapButton>
       </BribeBox>
     </BribeContainer>
   );

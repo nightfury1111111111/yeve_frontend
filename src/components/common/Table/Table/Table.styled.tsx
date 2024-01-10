@@ -1,5 +1,11 @@
 import { styled } from 'styled-components';
-
+export const TableWrapper = styled.div`
+  @media (max-width: 1200px) {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+`;
 export const Status = styled.div`
   align-items: center;
   > div {
@@ -176,14 +182,21 @@ export const TableContainer = styled.table`
   width: 100%;
   margin-top: 30px;
   border-spacing: unset;
-  border-collapse: collapse;
-
+  overflow: auto;
+  @media (max-width: 1200px) {
+    /* width: 900px; */
+    display: table;
+  }
   thead {
     tr {
       th {
         text-align: left;
         padding: 10px 0;
         cursor: pointer;
+
+        @media (max-width: 1100px) {
+          padding-right: 40px;
+        }
 
         &:first-child {
           padding-left: 16px;
@@ -208,6 +221,10 @@ export const TableContainer = styled.table`
       border-bottom: 8px solid ${({ theme }) => theme.colors.gray['950']};
 
       td {
+        @media (max-width: 1100px) {
+          padding-right: 40px;
+        }
+
         &:first-child {
           border-top-left-radius: 4px;
           border-bottom-left-radius: 4px;
@@ -259,8 +276,21 @@ export const TableContainer = styled.table`
             cursor: pointer;
             text-wrap: nowrap;
 
+            border: 2px solid ${({ theme }) => theme.colors.purple['500']};
+
+            &:hover {
+              background: ${({ theme }) => theme.colors.purple['600']};
+              border-color: ${({ theme }) => theme.colors.purple['300']};
+            }
+
             &.disable {
               background: ${({ theme }) => theme.colors.gray['850']};
+              border-color: ${({ theme }) => theme.colors.gray['850']};
+
+              &:hover {
+                background: ${({ theme }) => theme.colors.gray['800']};
+                border-color: ${({ theme }) => theme.colors.gray['700']};
+              }
             }
           }
         }

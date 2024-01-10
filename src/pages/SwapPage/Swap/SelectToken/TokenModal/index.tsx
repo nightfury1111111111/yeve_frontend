@@ -10,6 +10,7 @@ import {
   TokenItem,
   BookmarkList,
   BookmarkItem,
+  TokenAddress,
 } from './TokenModal.styled';
 import FindIcon from '@src/assets/images/svg/find-icon';
 import { TOKEN_LIST } from '@src/example-data/tokens';
@@ -18,6 +19,7 @@ import BookmarkFull from '@src/assets/images/svg/bookmark-full';
 import { useEffect, useRef, useState } from 'react';
 import CloseIcon from '@src/assets/images/svg/close-icon';
 import { useOnClickOutside } from 'usehooks-ts';
+import ArrowUpRightIcon from '@src/assets/images/svg/pools/arrow-up-right-icon';
 
 type TokenModalProps = {
   onClose: () => void;
@@ -29,7 +31,13 @@ export default function TokenModal({ onClose, handleSelect }: TokenModalProps) {
 
   const [bookmark, setBookmark] = useState<Record<string, any>>({});
 
-  const handleBookMark = (item: Record<string, any>) => {
+  const handleBookMark = (
+    item: Record<string, any>,
+    event?: Record<string, any>
+  ) => {
+    if (event) {
+      event.stopPropagation();
+    }
     const newBookmark = JSON.parse(JSON.stringify(bookmark));
     if (item.address in bookmark) {
       delete newBookmark[item.address];
@@ -89,14 +97,32 @@ export default function TokenModal({ onClose, handleSelect }: TokenModalProps) {
         <TokenList>
           {Object.values(TOKEN_LIST).map((item, index) => (
             <TokenItem key={index} onClick={() => handleSelectToken(item)}>
-              <img src={item.image} />
-              <TokenInfo>
-                <div>{item.name}</div>
-                <span>{item.symbol}</span>
-              </TokenInfo>
-              <TokenBalance>{item.balance}</TokenBalance>
-              <div onClick={() => handleBookMark(item)}>
-                {bookmark[item.address] ? <BookmarkFull /> : <BookmarkEmpty />}
+              <div>
+                <img src={item.image} />
+                <TokenInfo>
+                  <div>{item.name}</div>
+                  <span>{item.symbol}</span>
+                </TokenInfo>
+              </div>
+              <TokenAddress>
+                <div>
+                  <span>{item.address}</span>
+                  <ArrowUpRightIcon />
+                </div>
+              </TokenAddress>
+              <div>
+                <TokenBalance>{item.balance}</TokenBalance>
+                <div
+                  onClick={(event: Record<string, any>) =>
+                    handleBookMark(item, event)
+                  }
+                >
+                  {bookmark[item.address] ? (
+                    <BookmarkFull />
+                  ) : (
+                    <BookmarkEmpty />
+                  )}
+                </div>
               </div>
             </TokenItem>
           ))}
