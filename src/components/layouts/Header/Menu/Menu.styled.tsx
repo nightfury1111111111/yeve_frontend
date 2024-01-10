@@ -13,9 +13,9 @@ export const MenuContainer = styled.div`
   @media screen and (max-width: 1375px) {
     margin-right: 16px;
   }
-  @media screen and (max-width: 768px) {
+  /* @media screen and (max-width: 768px) {
     display: none;
-  }
+  } */
 `;
 
 export const MenuIcon = styled.div`

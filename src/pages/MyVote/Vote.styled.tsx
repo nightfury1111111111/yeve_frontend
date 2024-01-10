@@ -99,6 +99,11 @@ export const YourVoteContainer = styled.div`
   display: flex;
   gap: 10px;
   margin-top: 30px;
+  overflow-y: scroll;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 export const YourVoteItem = styled.div`

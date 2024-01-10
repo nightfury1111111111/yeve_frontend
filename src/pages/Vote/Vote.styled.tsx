@@ -51,7 +51,8 @@ export const EnterVoteWrap = styled.div`
 export const VotingInfo = styled.div`
   position: fixed;
   z-index: 1000;
-  left: 35%;
+  left: 50%;
+  transform: translateX(-50%);
   bottom: 40px;
   width: 360px;
   padding: 6px 16px 16px 24px;
@@ -67,6 +68,12 @@ export const VotingInfo = styled.div`
   }
   button {
     font-size: 14px;
+  }
+
+  @media screen and (max-width: 960px) {
+    bottom: 120px;
+    left: 50%;
+    transform: translateX(-50%);
   }
 `;
 export const DefaultButton = styled(Button)<{ w?: string }>`

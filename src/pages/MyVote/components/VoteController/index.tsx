@@ -1,9 +1,10 @@
 import FindIcon from '@src/assets/images/svg/find-icon';
-import { PropsWithChildren } from 'react';
+import { PropsWithChildren, useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import {
   ButtonController,
   Controller,
+  MobileTabContainer,
   Reward,
   SearchContainer,
   SearchInputContainer,
@@ -26,17 +27,39 @@ type TableControllerProps = {
   tabs: Record<string, any>[];
   search: Search;
   button?: Button;
+  lock?: string | number;
 };
 
 export function VoteController({
   tabs,
   search,
   button,
+  lock,
 }: PropsWithChildren<TableControllerProps>) {
   const { pathname } = useLocation();
 
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    setScreenWidth(window.innerWidth);
+  }, [window.innerWidth]);
+
   return (
     <>
+      <MobileTabContainer>
+        <TabContainer className="mobile">
+          {tabs.map((tab, index) => (
+            <Link
+              key={index}
+              to={tab.route}
+              className={pathname === tab.route ? 'active' : ''}
+            >
+              {tab.name}
+            </Link>
+          ))}
+        </TabContainer>
+        <div>Lock ID {lock}</div>
+      </MobileTabContainer>
       <Status>
         <StatusInfo>
           <div>
@@ -92,7 +115,7 @@ export function VoteController({
           </SearchInputContainer>
           {button && (
             <ButtonController onClick={() => button.handle()}>
-              Generate Voting Tool
+              {screenWidth <= 891 ? 'Voting Tool' : 'Generate Voting Tool'}
             </ButtonController>
           )}
         </SearchContainer>

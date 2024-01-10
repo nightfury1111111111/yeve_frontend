@@ -40,5 +40,9 @@ export const Title = styled.div`
       line-height: 20px;
       color: ${({ theme }) => theme.colors.purple['50']};
     }
+
+    @media (max-width: 768px) {
+      display: none;
+    }
   }
 `;

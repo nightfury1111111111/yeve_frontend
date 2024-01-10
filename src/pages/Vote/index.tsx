@@ -66,6 +66,7 @@ export default function VotePage() {
             text: 'Add/Remove Pool',
             handle: handleControlPool,
           }}
+          lock={112843}
         >
           <TableControlSelect options={POOL_VERSIONS} />
           <TableControlSelect options={LIQUIDITY_TYPES} />

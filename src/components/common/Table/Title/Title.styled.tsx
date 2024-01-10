@@ -11,6 +11,11 @@ export const Title = styled.div`
     font-weight: 600;
     line-height: 40px;
     color: ${({ theme }) => theme.colors.gray['0']};
+
+    @media (max-width: 768px) {
+      font-size: 24px;
+      line-height: 32px;
+    }
   }
 
   > div {
@@ -120,9 +125,14 @@ export const Title = styled.div`
         flex: 1;
       }
     }
+
+    > button {
+      width: 100%;
+      padding: 10px;
+    }
   }
 
-  @media (max-width: 650px) {
+  @media (max-width: 740px) {
     > div {
       > div {
         flex-direction: column;
