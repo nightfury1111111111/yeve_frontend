@@ -53,7 +53,7 @@ export function TableController({
             to={tab.route}
             className={pathname === tab.route ? 'active' : ''}
           >
-            {tab.name}
+            <span>{tab.name}</span>
           </Link>
         ))}
       </TabContainer>

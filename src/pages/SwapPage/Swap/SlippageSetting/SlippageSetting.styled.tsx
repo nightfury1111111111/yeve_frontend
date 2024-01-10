@@ -70,7 +70,7 @@ export const SlippageTolerance = styled.div`
 
 export const Heading = styled.div`
   display: flex;
-  align-items: center;
+  align-items: stretch;
   justify-content: space-between;
 
   > div {
@@ -84,14 +84,7 @@ export const Heading = styled.div`
     cursor: pointer;
 
     > svg > path {
-      stroke: ${({ theme }) => theme.colors.gray['500']} !important;
-    }
-
-    > span {
-      color: ${({ theme }) => theme.colors.gray['0']};
-      font-size: 14px;
-      font-weight: 600;
-      line-height: 20px;
+      stroke: ${({ theme }) => theme.colors.gray['200']} !important;
     }
   }
 

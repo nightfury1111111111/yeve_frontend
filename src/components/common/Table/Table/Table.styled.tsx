@@ -184,7 +184,7 @@ export const TableContainer = styled.table`
   border-spacing: unset;
   overflow: auto;
   @media (max-width: 1200px) {
-    width: 900px;
+    /* width: 900px; */
     display: table;
   }
   thead {
@@ -193,6 +193,10 @@ export const TableContainer = styled.table`
         text-align: left;
         padding: 10px 0;
         cursor: pointer;
+
+        @media (max-width: 1100px) {
+          padding-right: 40px;
+        }
 
         &:first-child {
           padding-left: 16px;
@@ -217,6 +221,10 @@ export const TableContainer = styled.table`
       border-bottom: 8px solid ${({ theme }) => theme.colors.gray['950']};
 
       td {
+        @media (max-width: 1100px) {
+          padding-right: 40px;
+        }
+
         &:first-child {
           border-top-left-radius: 4px;
           border-bottom-left-radius: 4px;

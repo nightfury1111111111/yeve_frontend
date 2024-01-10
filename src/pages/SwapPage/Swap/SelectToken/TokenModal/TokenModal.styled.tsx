@@ -3,11 +3,40 @@ import { styled } from 'styled-components';
 export const TokenBalance = styled.div`
   color: ${({ theme }) => theme.colors.gray['0']};
   opacity: 0.48;
-  margin-right: 12px;
-  margin-left: 12px;
+  margin-right: 4px;
   font-size: 14px;
   font-weight: 600;
   line-height: 20px;
+`;
+
+export const TokenAddress = styled.a`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  > div {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 8px;
+    border-radius: 4px;
+    border: 1px solid ${({ theme }) => theme.colors.purple['500']};
+    > span {
+      font-size: 12px;
+      font-weight: 600;
+      line-height: 16px;
+      color: ${({ theme }) => theme.colors.purple['50']} !important;
+    }
+
+    > svg {
+      width: 16px !important;
+      height: 16px !important;
+
+      > path {
+        stroke: ${({ theme }) => theme.colors.purple['50']} !important;
+      }
+    }
+  }
 `;
 
 export const TokenInfo = styled.div`
@@ -30,15 +59,26 @@ export const TokenInfo = styled.div`
 `;
 
 export const TokenItem = styled.div`
-  display: flex;
-  align-items: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
   padding: 8px 0;
   cursor: pointer;
+  margin-right: 8px;
 
-  > img {
-    width: 32px;
-    height: 32px;
-    border-radius: 999px;
+  > div {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+    > img {
+      width: 32px;
+      height: 32px;
+      border-radius: 999px;
+    }
+
+    &:last-child {
+      justify-content: flex-end;
+    }
   }
 
   svg {
@@ -170,6 +210,14 @@ export const TokenModalForm = styled.div`
   display: flex;
   flex-direction: column;
   gap: 16px;
+
+  @media screen and (max-width: 960px) {
+    width: 60%;
+  }
+
+  @media screen and (max-width: 600px) {
+    width: 90%;
+  }
 `;
 
 export const TokenModalContainer = styled.div`

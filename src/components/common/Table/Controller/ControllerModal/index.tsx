@@ -1,4 +1,4 @@
-import { PropsWithChildren, useRef } from 'react';
+import { PropsWithChildren, useEffect, useRef } from 'react';
 import { useOnClickOutside } from 'usehooks-ts';
 import {
   ControllerModalButton,
@@ -24,6 +24,14 @@ export default function ControllerModal({
   useOnClickOutside(ref, () => {
     handleClose();
   });
+
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';
+
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, []);
 
   if (!children) return <></>;
 

@@ -584,6 +584,12 @@ export const Heading = styled.div`
     font-size: 36px;
     font-weight: 600;
     line-height: 40px;
+
+    @media (max-width: 768px) {
+      font-size: 24px;
+      line-height: 32px;
+    }
+
   }
 
   > button {

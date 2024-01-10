@@ -30,17 +30,24 @@ export const ButtonController = styled.button`
   cursor: pointer;
   outline: none;
   border: none;
-  padding: 12px 48px;
+  padding: 10px 48px;
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
   line-height: 24px;
+  text-wrap: nowrap;
 
   border: 2px solid ${({ theme }) => theme.colors.purple['500']};
 
   &:hover {
     background: ${({ theme }) => theme.colors.purple['600']};
     border-color: ${({ theme }) => theme.colors.purple['300']};
+  }
+
+  @media (max-width: 768px) {
+    text-wrap: unset;
+    flex: 1;
+    padding: unset;
   }
 `;
 
@@ -100,17 +107,23 @@ export const SearchContainer = styled.div`
 
 export const TabContainer = styled.div`
   display: flex;
-  align-items: center;
+  align-items: stretch;
 
   > a {
     background: ${({ theme }) => theme.colors.gray['900']};
-    color: ${({ theme }) => theme.colors.gray['50']};
-    display: block;
-    font-size: 14px;
-    font-weight: 600;
-    line-height: 20px;
-    padding: 14px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
     border-radius: 4px;
+
+    > span {
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 20px;
+      color: ${({ theme }) => theme.colors.gray['50']};
+      text-wrap: nowrap;
+    }
 
     &.active {
       background: ${({ theme }) => theme.colors.purple['500']};
