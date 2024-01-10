@@ -211,11 +211,15 @@ export const TokenModalForm = styled.div`
   flex-direction: column;
   gap: 16px;
 
+  @media screen and (max-width: 1376px) {
+    width: 50%;
+  }
+
   @media screen and (max-width: 960px) {
     width: 60%;
   }
 
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 680px) {
     width: 90%;
   }
 `;

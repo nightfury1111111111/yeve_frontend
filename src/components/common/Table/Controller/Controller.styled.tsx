@@ -202,5 +202,6 @@ export const Controller = styled.div`
 
   @media (max-width: 768px) {
     flex-wrap: nowrap;
+    margin-top: 12px;
   }
 `;
