@@ -6,7 +6,7 @@ import { ThemeProvider } from 'styled-components';
 import Notification from './Notification';
 import WalletContextProvider from './WalletContextProvider';
 import { userRoutes } from './routes';
-import store from './redux/store';
+import { store } from './redux/store';
 import { Provider } from 'react-redux';
 export type SolanaNetworkType = 'mainnet-beta' | 'devnet';
 

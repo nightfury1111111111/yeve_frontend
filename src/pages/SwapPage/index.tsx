@@ -26,17 +26,13 @@ import {
   PDA_FEE_TIER_SEED,
   PDA_YEVEPOOL_SEED,
   TICK_ARRAY_SIZE,
+  configAccount,
   tokenMintAKey,
   tokenMintBKey,
   rewardMint,
   PDA_TICK_ARRAY_SEED,
 } from '@src/constants/other';
-import { useSelector, useDispatch } from 'react-redux';
-import { decrement, increment } from '../../redux/slices/counter1Slice';
 const programID = new PublicKey(idl.metadata.address);
-const configAccount = new PublicKey(
-  '9T96hWoRdKyLgKxXKgwmTqVm1Mb9Pi3iReZJhRG9deY8'
-);
 
 export default function SwapPage() {
   const { connection } = useConnection();
@@ -372,8 +368,6 @@ export default function SwapPage() {
     // initializeReward();
     // setRewardEmissions();
   }, [publicKey]);
-  const count = useSelector((state: any) => state.counter1.value);
-  const dispatch = useDispatch();
   return (
     <SwapPageContainer>
       <Swap />

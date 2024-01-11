@@ -11,7 +11,8 @@ import {
   Commitment,
   SYSVAR_RENT_PUBKEY,
 } from '@solana/web3.js';
-import { TokenListProvider, TokenInfo } from '@solana/spl-token-registry';
+import { useDispatch } from 'react-redux';
+import { setTokenA, setTokenB, swapToken } from '@src/redux/slices/tokenPair';
 import yeveImage from '@src/assets/images/png/token-1.png';
 import tetherImage from '@src/assets/images/png/token-2.png';
 import DownIcon from '@src/assets/images/svg/menu/DownIcon';
@@ -20,28 +21,29 @@ import { useEffect, useState } from 'react';
 import { SelectPair, SelectPairItem } from '../CreateLiquidityPool';
 import TokenModal from './TokenModal';
 
-interface OwnedTokenInfo {
+export interface OwnedTokenInfo {
   address: string;
   amount: number;
 }
 
 export default function SelectPairElements() {
+  const dispatch = useDispatch();
   const { connection } = useConnection();
   const { publicKey } = useWallet();
 
   const [ownedToken, setOwnedToken] = useState<Array<OwnedTokenInfo>>([]);
 
   const [fromToken, setFromToken] = useState<Record<string, any>>({
-    address: '1',
-    symbol: 'USDT',
-    name: 'USDT Coin',
+    address: 'CU1f67B7n3XzwbHkFvciuH6Yqe8kiaEFfSZHzLNRvtYi',
+    symbol: 'LUNA',
+    name: 'LUNA Coin',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/2n4pLBdDtciUsEyR2WoS2cTgDiyTHysVQF4caHttV44v/logo.png',
+      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/5j2dS5kLdJowd6NpQ1pVykyyKDvRPZrHZGHgtyVG4PbD/logo.png',
     balance: 10.2,
   });
 
   const [toToken, setToToken] = useState<Record<string, any>>({
-    address: '1',
+    address: '7vEpiNkomzeF2uDw8uuDFqEcQfaWbpPgmFf41G5Y7W4o',
     symbol: 'USDC',
     name: 'USD Coin',
     logoURI:
@@ -51,69 +53,88 @@ export default function SelectPairElements() {
 
   const [tokenModalMode, setTokenModalMode] = useState<string>('');
 
+  // useEffect(() => {
+  //   // get token balance
+  //   if (!publicKey) return;
+  //   const rpcEndpoint =
+  //     'https://virulent-wandering-reel.solana-devnet.quiknode.pro/c29fc55807faf8297c2fed73d3cd98150fd970ad/';
+  //   const solanaConnection = new Connection(rpcEndpoint);
+
+  //   const walletToQuery = publicKey.toString(); //example: vines1vzrYbzLMRdu58ou5XTby4qAqVRLmqo36NKPTg
+
+  //   async function getTokenAccounts(
+  //     wallet: string,
+  //     solanaConnection: Connection
+  //   ) {
+  //     const filters: GetProgramAccountsFilter[] = [
+  //       {
+  //         dataSize: 165, //size of account (bytes)
+  //       },
+  //       {
+  //         memcmp: {
+  //           offset: 32, //location of our query in the account (bytes)
+  //           bytes: wallet, //our search criteria, a base58 encoded string
+  //         },
+  //       },
+  //     ];
+  //     const accounts = await solanaConnection.getParsedProgramAccounts(
+  //       TOKEN_PROGRAM_ID, //new PublicKey("TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA")
+  //       { filters: filters }
+  //     );
+  //     console.log(
+  //       `Found ${accounts.length} token account(s) for wallet ${wallet}.`
+  //     );
+  //     const tmpTokenOwnedInfo: OwnedTokenInfo[] = [];
+  //     accounts.forEach((account) => {
+  //       //Parse the account data
+  //       const parsedAccountInfo: any = account.account.data;
+  //       if (
+  //         parsedAccountInfo['parsed']['info']['tokenAmount']['uiAmount'] != 1 &&
+  //         parsedAccountInfo['parsed']['info']['tokenAmount']['decimals'] != 0
+  //       ) {
+  //         const tokenOwnedByWallet: OwnedTokenInfo = {
+  //           address: parsedAccountInfo['parsed']['info']['mint'],
+  //           amount:
+  //             Math.floor(
+  //               parsedAccountInfo['parsed']['info']['tokenAmount']['uiAmount'] *
+  //                 1000
+  //             ) / 1000,
+  //         };
+  //         tmpTokenOwnedInfo.push(tokenOwnedByWallet);
+  //       }
+  //     });
+  //     setOwnedToken(tmpTokenOwnedInfo);
+  //   }
+  //   getTokenAccounts(walletToQuery, solanaConnection);
+  // }, [publicKey]);
+
   useEffect(() => {
-    // get token balance
-    if (!publicKey) return;
-    const rpcEndpoint =
-      'https://virulent-wandering-reel.solana-devnet.quiknode.pro/c29fc55807faf8297c2fed73d3cd98150fd970ad/';
-    const solanaConnection = new Connection(rpcEndpoint);
-
-    const walletToQuery = publicKey.toString(); //example: vines1vzrYbzLMRdu58ou5XTby4qAqVRLmqo36NKPTg
-
-    async function getTokenAccounts(
-      wallet: string,
-      solanaConnection: Connection
-    ) {
-      const filters: GetProgramAccountsFilter[] = [
-        {
-          dataSize: 165, //size of account (bytes)
-        },
-        {
-          memcmp: {
-            offset: 32, //location of our query in the account (bytes)
-            bytes: wallet, //our search criteria, a base58 encoded string
-          },
-        },
-      ];
-      const accounts = await solanaConnection.getParsedProgramAccounts(
-        TOKEN_PROGRAM_ID, //new PublicKey("TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA")
-        { filters: filters }
-      );
-      console.log(
-        `Found ${accounts.length} token account(s) for wallet ${wallet}.`
-      );
-      const tmpTokenOwnedInfo: OwnedTokenInfo[] = [];
-      accounts.forEach((account) => {
-        //Parse the account data
-        const parsedAccountInfo: any = account.account.data;
-        if (
-          parsedAccountInfo['parsed']['info']['tokenAmount']['uiAmount'] != 1 &&
-          parsedAccountInfo['parsed']['info']['tokenAmount']['decimals'] != 0
-        ) {
-          const tokenOwnedByWallet: OwnedTokenInfo = {
-            address: parsedAccountInfo['parsed']['info']['mint'],
-            amount:
-              Math.floor(
-                parsedAccountInfo['parsed']['info']['tokenAmount']['uiAmount'] *
-                  1000
-              ) / 1000,
-          };
-          tmpTokenOwnedInfo.push(tokenOwnedByWallet);
-        }
-      });
-      setOwnedToken(tmpTokenOwnedInfo);
-    }
-    getTokenAccounts(walletToQuery, solanaConnection);
-  }, [publicKey]);
+    dispatch(
+      setTokenA({
+        name: fromToken.name,
+        logoURI: fromToken.logoURI,
+        address: fromToken.address,
+        depositAmount: 0,
+      })
+    );
+  }, [fromToken]);
 
   useEffect(() => {
-    console.log(ownedToken);
-  }, [ownedToken]);
+    dispatch(
+      setTokenB({
+        name: toToken.name,
+        logoURI: toToken.logoURI,
+        address: toToken.address,
+        depositAmount: 0,
+      })
+    );
+  }, [toToken]);
 
   const handleSwitchToken = () => {
     const from = JSON.parse(JSON.stringify(fromToken));
     setFromToken(toToken);
     setToToken(from);
+    dispatch(swapToken());
   };
 
   const handleTokenChange = (data: Record<string, any>) => {
