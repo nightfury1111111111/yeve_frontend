@@ -376,11 +376,6 @@ export default function SwapPage() {
   const dispatch = useDispatch();
   return (
     <SwapPageContainer>
-      <div>
-        <h1>Counter: {count}</h1>
-        <button onClick={() => dispatch(increment())}>Increment</button>
-        <button onClick={() => dispatch(decrement())}>Decrement</button>
-      </div>
       <Swap />
       <Chart />
     </SwapPageContainer>
