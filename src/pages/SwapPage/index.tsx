@@ -31,7 +31,8 @@ import {
   rewardMint,
   PDA_TICK_ARRAY_SEED,
 } from '@src/constants/other';
-
+import { useSelector, useDispatch } from 'react-redux';
+import { decrement, increment } from '../../redux/slices/counter1Slice';
 const programID = new PublicKey(idl.metadata.address);
 const configAccount = new PublicKey(
   '9T96hWoRdKyLgKxXKgwmTqVm1Mb9Pi3iReZJhRG9deY8'
@@ -337,7 +338,7 @@ export default function SwapPage() {
       programID
     );
 
-    let fetchData = await program.account.yevepool.fetch(yevepoolPda[0]);
+    const fetchData = await program.account.yevepool.fetch(yevepoolPda[0]);
     console.log(fetchData.rewardInfos[0].vault.toString());
 
     const transaction = new Transaction();
@@ -371,9 +372,15 @@ export default function SwapPage() {
     // initializeReward();
     // setRewardEmissions();
   }, [publicKey]);
-
+  const count = useSelector((state: any) => state.counter1.value);
+  const dispatch = useDispatch();
   return (
     <SwapPageContainer>
+      <div>
+        <h1>Counter: {count}</h1>
+        <button onClick={() => dispatch(increment())}>Increment</button>
+        <button onClick={() => dispatch(decrement())}>Decrement</button>
+      </div>
       <Swap />
       <Chart />
     </SwapPageContainer>
