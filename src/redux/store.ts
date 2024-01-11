@@ -1,10 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
-import counter1Reducer from './slices/counter1Slice';
-import counter2Reducer from './slices/counter2Slice';
+import tokenPairReducer from './slices/tokenPair';
 
-export default configureStore({
-    reducer: {
-        counter1: counter1Reducer,
-        counter2: counter2Reducer,
-    },
+export const store = configureStore({
+  reducer: {
+    tokenPair: tokenPairReducer,
+  },
 });
+
+export type RootState = ReturnType<typeof store.getState>;
+
+export type AppDispatch = typeof store.dispatch;

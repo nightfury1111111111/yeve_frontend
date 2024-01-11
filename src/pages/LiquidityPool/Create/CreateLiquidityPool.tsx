@@ -312,6 +312,17 @@ export const DepositAmountToken = styled.div`
   }
 `;
 
+export const DepositAmountInput = styled.input`
+  display: flex;
+  align-items: center;
+  color: ${({ theme }) => theme.colors.gray['0']};
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 28px;
+  background: none;
+  border: none;
+`;
+
 export const DepositAmountItem = styled.div`
   background-color: ${({ theme }) => theme.colors.gray['900']};
   border-radius: 4px;
@@ -589,7 +600,6 @@ export const Heading = styled.div`
       font-size: 24px;
       line-height: 32px;
     }
-
   }
 
   > button {

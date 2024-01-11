@@ -1,5 +1,22 @@
 import ArrowLeftIcon from '@src/assets/images/svg/arrow-left';
 import SettingIcon from '@src/assets/images/svg/swap/SettingIcon';
+import { useConnection, useWallet } from '@solana/wallet-adapter-react';
+import { AnchorProvider, Program } from '@project-serum/anchor';
+import {
+  Keypair,
+  PublicKey,
+  SystemProgram,
+  Transaction,
+  Connection,
+  Commitment,
+  SYSVAR_RENT_PUBKEY,
+} from '@solana/web3.js';
+import { TOKEN_PROGRAM_ID } from '@solana/spl-token';
+import Decimal from 'decimal.js';
+import { BN } from '@project-serum/anchor';
+import { MathUtil } from '@orca-so/common-sdk';
+import idl from '../../../idl.json';
+import { Idl } from '@project-serum/anchor/dist/cjs/idl';
 import { useNavigate } from 'react-router-dom';
 import {
   CreatePositionButton,
@@ -20,7 +37,9 @@ import {
 import SelectPairElements from './SelectPair';
 import CurrentPoolStats from './PoolStats';
 import { CREATE_POOL_TYPE } from '@src/constants/enum';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import type { RootState } from '@src/redux/store';
+import { useSelector } from 'react-redux';
 import ALMProviderComponent from './ALMProvider';
 import DepositAmountsComponent from './DepositAmounts';
 import {
@@ -32,12 +51,136 @@ import SubtractIcon from '@src/assets/images/svg/pools/subtract-icon';
 import PlusIcon from '@src/assets/images/svg/pools/plus-icon';
 import ReturnIcon from '@src/assets/images/svg/return-svg';
 
+import { TickSpacing } from '@src/constants/enum';
+import {
+  PDA_FEE_TIER_SEED,
+  PDA_YEVEPOOL_SEED,
+  TICK_ARRAY_SIZE,
+  configAccount,
+  rewardMint,
+  PDA_TICK_ARRAY_SEED,
+} from '@src/constants/other';
+import { errorToast, infoToast } from '@src/Notification';
+
+const programID = new PublicKey(idl.metadata.address);
+
 export default function CreateLiquidityPoolPage() {
+  const tokenPair = useSelector((state: RootState) => state.tokenPair);
+
   const navigate = useNavigate();
 
   const [type, setType] = useState(CREATE_POOL_TYPE.AUTOMATIC);
   const [freeTierType, setFreeTierType] = useState('0.3');
   const [priceRange, setPriceRange] = useState('Full Range');
+
+  const { connection } = useConnection();
+  const { publicKey, wallet, signTransaction, signAllTransactions } =
+    useWallet();
+
+  const getProvider = () => {
+    if (!wallet || !publicKey || !signTransaction || !signAllTransactions) {
+      return;
+    }
+    const signerWallet = {
+      publicKey: publicKey,
+      signTransaction: signTransaction,
+      signAllTransactions: signAllTransactions,
+    };
+
+    const provider = new AnchorProvider(connection, signerWallet, {
+      preflightCommitment: 'recent',
+    });
+
+    return provider;
+  };
+
+  const initalizePool = async () => {
+    const provider = getProvider();
+    if (!provider || !publicKey || !signTransaction) return;
+    const program = new Program(idl as Idl, programID, provider);
+
+    let tokenMintAKey: PublicKey = PublicKey.default;
+    let tokenMintBKey: PublicKey = PublicKey.default;
+    if (tokenPair.tokenA.address < tokenPair.tokenB.address) {
+      tokenMintAKey = new PublicKey(tokenPair.tokenA.address);
+      tokenMintBKey = new PublicKey(tokenPair.tokenB.address);
+    } else {
+      tokenMintAKey = new PublicKey(tokenPair.tokenB.address);
+      tokenMintBKey = new PublicKey(tokenPair.tokenA.address);
+    }
+
+    console.log(tokenMintAKey.toString(), tokenMintBKey.toString());
+    const price = MathUtil.toX64(new Decimal(5));
+    const yevepoolPda = PublicKey.findProgramAddressSync(
+      [
+        Buffer.from(PDA_YEVEPOOL_SEED),
+        configAccount.toBuffer(),
+        tokenMintAKey.toBuffer(),
+        tokenMintBKey.toBuffer(),
+        new BN(TickSpacing.Stable).toArrayLike(Buffer, 'le', 2),
+      ],
+      programID
+    );
+
+    const feeTierPda = PublicKey.findProgramAddressSync(
+      [
+        Buffer.from(PDA_FEE_TIER_SEED),
+        configAccount.toBuffer(),
+        new BN(TickSpacing.Stable).toArrayLike(Buffer, 'le', 2),
+      ],
+      programID
+    );
+
+    const yevepoolBump = {
+      yevepoolBump: yevepoolPda[1],
+    };
+
+    const tokenVaultAKeypair = Keypair.generate();
+    const tokenVaultBKeypair = Keypair.generate();
+
+    const transaction = new Transaction();
+
+    const tx = await program.methods
+      .initializePool(yevepoolBump, TickSpacing.Stable, price)
+      .accounts({
+        yevepoolsConfig: configAccount,
+        tokenMintA: tokenMintAKey,
+        tokenMintB: tokenMintBKey,
+        funder: publicKey,
+        yevepool: yevepoolPda[0],
+        tokenVaultA: tokenVaultAKeypair.publicKey,
+        tokenVaultB: tokenVaultBKeypair.publicKey,
+        feeTier: feeTierPda[0],
+        tokenProgram: TOKEN_PROGRAM_ID,
+        systemProgram: SystemProgram.programId,
+        rent: SYSVAR_RENT_PUBKEY,
+      })
+      .transaction();
+
+    transaction.add(tx);
+
+    transaction.feePayer = provider.wallet.publicKey;
+    transaction.recentBlockhash = (
+      await connection.getLatestBlockhash()
+    ).blockhash;
+    transaction.partialSign(tokenVaultAKeypair);
+    transaction.partialSign(tokenVaultBKeypair);
+    const signedTx = await provider.wallet.signTransaction(transaction);
+    const txId = await connection.sendRawTransaction(signedTx.serialize());
+    await connection.confirmTransaction(txId, 'confirmed');
+    console.log(txId);
+  };
+
+  const createNewPool = async () => {
+    if (
+      tokenPair.tokenA.depositAmount == 0 ||
+      tokenPair.tokenB.depositAmount == 0
+    ) {
+      errorToast('Insufficient balance');
+      return;
+    }
+    initalizePool();
+  };
 
   return (
     <PageContainer>
@@ -100,7 +243,9 @@ export default function CreateLiquidityPoolPage() {
               </SectionLabel>
               <DepositAmountsComponent />
             </SectionItem>
-            <CreatePositionButton>Create Position</CreatePositionButton>
+            <CreatePositionButton onClick={createNewPool}>
+              Create Position
+            </CreatePositionButton>
           </>
         ) : (
           <SectionItem>
@@ -213,7 +358,9 @@ export default function CreateLiquidityPoolPage() {
             </SectionLabel>
             <DepositAmountsComponent />
           </SectionItem>
-          <CreatePositionButton>Create Position</CreatePositionButton>
+          <CreatePositionButton onClick={createNewPool}>
+            Create Position
+          </CreatePositionButton>
         </Section>
       )}
     </PageContainer>

@@ -4,7 +4,7 @@ export default function Notification() {
   return <Toaster position="top-center" reverseOrder={true} />;
 }
 
-const duration = 5000;
+const duration = 3000;
 
 const successToast = (message: string) => {
   toast.remove();
