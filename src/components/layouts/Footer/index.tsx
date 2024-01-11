@@ -7,7 +7,7 @@ type FooterProps = {
 export default function Footer({ style = {} }: FooterProps) {
   return (
     <FooterContainer style={style}>
-      <ReservedText>© 2023 YEVE. All rights reserved.</ReservedText>
+      <ReservedText>© 2024 YEVE. All rights reserved.</ReservedText>
       <FooterMenu>
         <li>Documentation </li>
         <li>Privacy Policy</li>
