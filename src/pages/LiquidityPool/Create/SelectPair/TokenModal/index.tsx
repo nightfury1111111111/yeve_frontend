@@ -89,12 +89,12 @@ export default function TokenModal({ onClose, handleSelect }: TokenModalProps) {
         <TokenList>
           {Object.values(TOKEN_LIST).map((item, index) => (
             <TokenItem key={index} onClick={() => handleSelectToken(item)}>
-              <img src={item.image} />
+              <img src={item.logoURI} />
               <TokenInfo>
                 <div>{item.name}</div>
                 <span>{item.symbol}</span>
               </TokenInfo>
-              <TokenBalance>{item.balance}</TokenBalance>
+              {/* <TokenBalance>{item.balance}</TokenBalance> */}
               <div onClick={() => handleBookMark(item)}>
                 {bookmark[item.address] ? <BookmarkFull /> : <BookmarkEmpty />}
               </div>
