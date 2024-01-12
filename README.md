@@ -22,9 +22,29 @@ export default {
     project: ['./tsconfig.json', './tsconfig.node.json'],
     tsconfigRootDir: __dirname,
   },
-}
+};
 ```
 
 - Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
 - Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
 - Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+
+##Note
+
+### tslint
+
+`    "noUnusedLocals": false,   -- tsconfig file udpated to build in development mode`
+
+### Open position with metadata feature need to be implemented
+
+### How to run
+
+Swap Page - initConfig()
+
+get config account from console and change the configaccount using this address
+
+Then run initFeeTier()
+
+Go to liquidity page and create new pool.
+
+When create new pool, don't add reward. After pool is created, then add reward and set emission rate.

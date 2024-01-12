@@ -11,12 +11,20 @@ import {
   Commitment,
   SYSVAR_RENT_PUBKEY,
 } from '@solana/web3.js';
-import { TOKEN_PROGRAM_ID } from '@solana/spl-token';
+import {
+  ASSOCIATED_TOKEN_PROGRAM_ID,
+  TOKEN_PROGRAM_ID,
+  createTransferCheckedInstruction,
+} from '@solana/spl-token';
 import Decimal from 'decimal.js';
 import { BN } from '@project-serum/anchor';
 import { MathUtil } from '@orca-so/common-sdk';
 import idl from '../../../idl.json';
 import { Idl } from '@project-serum/anchor/dist/cjs/idl';
+import { getOrCreateAssociatedTokenAccount } from '../../../utils/transferSpl/getOrCreateAssociatedTokenAccount';
+import { getAssociatedTokenAddress } from '../../../utils/transferSpl/getAssociatedTokerAddress';
+import { getAccountInfo } from '../../../utils/transferSpl/getAccountInfo';
+import { createAssociatedTokenAccountInstruction } from '../../../utils/transferSpl/createAssociatedTokenAccountInstruction';
 import { useNavigate } from 'react-router-dom';
 import {
   CreatePositionButton,
@@ -55,7 +63,11 @@ import { TickSpacing } from '@src/constants/enum';
 import {
   PDA_FEE_TIER_SEED,
   PDA_YEVEPOOL_SEED,
+  PDA_POSITION_SEED,
+  PDA_METADATA_SEED,
+  METADATA_PROGRAM_ADDRESS,
   TICK_ARRAY_SIZE,
+  WHIRLPOOL_NFT_UPDATE_AUTH,
   configAccount,
   rewardMint,
   PDA_TICK_ARRAY_SEED,
@@ -94,7 +106,14 @@ export default function CreateLiquidityPoolPage() {
     return provider;
   };
 
-  const initalizePool = async () => {
+  const createNewPool = async () => {
+    if (
+      tokenPair.tokenA.depositAmount == 0 ||
+      tokenPair.tokenB.depositAmount == 0
+    ) {
+      errorToast('Insufficient balance');
+      return;
+    }
     const provider = getProvider();
     if (!provider || !publicKey || !signTransaction) return;
     const program = new Program(idl as Idl, programID, provider);
@@ -140,7 +159,7 @@ export default function CreateLiquidityPoolPage() {
 
     const transaction = new Transaction();
 
-    const tx = await program.methods
+    const init_pool_tx = await program.methods
       .initializePool(yevepoolBump, TickSpacing.Stable, price)
       .accounts({
         yevepoolsConfig: configAccount,
@@ -157,7 +176,160 @@ export default function CreateLiquidityPoolPage() {
       })
       .transaction();
 
-    transaction.add(tx);
+    transaction.add(init_pool_tx);
+
+    const tickSpacing = TickSpacing.Standard;
+    const startTick = TICK_ARRAY_SIZE * tickSpacing * 2;
+
+    const tickArrayPda = PublicKey.findProgramAddressSync(
+      [
+        Buffer.from(PDA_TICK_ARRAY_SEED),
+        yevepoolPda[0].toBuffer(),
+        Buffer.from(startTick.toString()),
+      ],
+      programID
+    );
+
+    const init_tick_array_tx = await program.methods
+      .initializeTickArray(startTick)
+      .accounts({
+        yevepool: yevepoolPda[0],
+        tickArray: tickArrayPda[0],
+        funder: publicKey,
+        systemProgram: SystemProgram.programId,
+      })
+      .transaction();
+
+    transaction.add(init_tick_array_tx);
+
+    // const rewardVaultKeypair = Keypair.generate();
+
+    // let initializerAssiciatedToken = await getAssociatedTokenAddress(
+    //   rewardMint,
+    //   publicKey,
+    //   false,
+    //   TOKEN_PROGRAM_ID,
+    //   ASSOCIATED_TOKEN_PROGRAM_ID
+    // );
+
+    // let rewardVaultAssiciatedToken = await getAssociatedTokenAddress(
+    //   rewardMint,
+    //   rewardVaultKeypair.publicKey,
+    //   false,
+    //   TOKEN_PROGRAM_ID,
+    //   ASSOCIATED_TOKEN_PROGRAM_ID
+    // );
+
+    // let account;
+    // try {
+    //   account = await getAccountInfo(
+    //     connection,
+    //     rewardVaultAssiciatedToken,
+    //     undefined,
+    //     TOKEN_PROGRAM_ID
+    //   );
+    // } catch (error: any) {
+    //   if (
+    //     error.message === 'TokenAccountNotFoundError' ||
+    //     error.message === 'TokenInvalidAccountOwnerError'
+    //   ) {
+    //     transaction.add(
+    //       createAssociatedTokenAccountInstruction(
+    //         publicKey,
+    //         rewardVaultAssiciatedToken,
+    //         rewardVaultKeypair.publicKey,
+    //         rewardMint,
+    //         TOKEN_PROGRAM_ID,
+    //         ASSOCIATED_TOKEN_PROGRAM_ID
+    //       )
+    //     );
+    //   }
+    // }
+
+    // transaction.add(
+    //   createTransferCheckedInstruction(
+    //     initializerAssiciatedToken, // from
+    //     rewardMint, // mint
+    //     rewardVaultKeypair.publicKey, // to
+    //     publicKey, // from's owner
+    //     100 * 1e9, // amount
+    //     9 // decimals
+    //   )
+    // );
+
+    // const tx = await program.methods
+    //   .initializeReward(0)
+    //   .accounts({
+    //     rewardAuthority: publicKey,
+    //     yevepool: yevepoolPda[0],
+    //     funder: publicKey,
+    //     rewardMint,
+    //     rewardVault: rewardVaultKeypair.publicKey,
+    //     tokenProgram: TOKEN_PROGRAM_ID,
+    //     systemProgram: SystemProgram.programId,
+    //     rent: SYSVAR_RENT_PUBKEY,
+    //   })
+    //   .transaction();
+
+    // transaction.add(tx);
+
+    const tickLowerIndex = 0;
+    const tickUpperIndex = 128;
+
+    const positionMintKeypair = Keypair.generate();
+    const positionPda = PublicKey.findProgramAddressSync(
+      [
+        Buffer.from(PDA_POSITION_SEED),
+        positionMintKeypair.publicKey.toBuffer(),
+      ],
+      programID
+    );
+
+    const metadataPda = PublicKey.findProgramAddressSync(
+      [
+        Buffer.from(PDA_METADATA_SEED),
+        METADATA_PROGRAM_ADDRESS.toBuffer(),
+        positionMintKeypair.publicKey.toBuffer(),
+      ],
+      METADATA_PROGRAM_ADDRESS
+    );
+
+    const [positionTokenAccountAddress] = PublicKey.findProgramAddressSync(
+      [
+        publicKey.toBuffer(),
+        TOKEN_PROGRAM_ID.toBuffer(),
+        positionMintKeypair.publicKey.toBuffer(),
+      ],
+      ASSOCIATED_TOKEN_PROGRAM_ID
+    );
+
+    const bumps = {
+      positionBump: positionPda[1],
+      // metadataBump: metadataPda[1],
+    };
+
+    transaction.add(
+      await program.methods
+        .openPosition(bumps, tickLowerIndex, tickUpperIndex)
+        .accounts({
+          funder: publicKey,
+          owner: publicKey,
+          position: positionPda[0],
+          positionMint: positionMintKeypair.publicKey,
+          positionTokenAccount: positionTokenAccountAddress,
+          yevepool: yevepoolPda[0],
+          // positionMetadataAccount: metadataPda[0], // open position with metadata
+          // metadataProgram: METADATA_PROGRAM_ADDRESS, // open position with metadata
+          // metadataUpdateAuth: WHIRLPOOL_NFT_UPDATE_AUTH, // open position with metadata
+          tokenProgram: TOKEN_PROGRAM_ID,
+          systemProgram: SystemProgram.programId,
+          rent: SYSVAR_RENT_PUBKEY,
+          associatedTokenProgram: ASSOCIATED_TOKEN_PROGRAM_ID,
+        })
+        .transaction()
+    );
+
+    const currTick = 0;
 
     transaction.feePayer = provider.wallet.publicKey;
     transaction.recentBlockhash = (
@@ -165,21 +337,12 @@ export default function CreateLiquidityPoolPage() {
     ).blockhash;
     transaction.partialSign(tokenVaultAKeypair);
     transaction.partialSign(tokenVaultBKeypair);
+    transaction.partialSign(positionMintKeypair);
+    // transaction.partialSign(rewardVaultKeypair);
     const signedTx = await provider.wallet.signTransaction(transaction);
     const txId = await connection.sendRawTransaction(signedTx.serialize());
     await connection.confirmTransaction(txId, 'confirmed');
     console.log(txId);
-  };
-
-  const createNewPool = async () => {
-    if (
-      tokenPair.tokenA.depositAmount == 0 ||
-      tokenPair.tokenB.depositAmount == 0
-    ) {
-      errorToast('Insufficient balance');
-      return;
-    }
-    initalizePool();
   };
 
   return (
