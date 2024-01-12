@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import wadeBg from '@src/assets/images/png/wade-bg.png';
+import wadeBg from '@src/assets/images/png/main-bg.png';
 import { Button } from '@src/components/layouts/LandingPageHeader/Header.styled';
 
 export const LandingContainer = styled.div`

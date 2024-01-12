@@ -19,10 +19,10 @@ export const HeaderContainer = styled.div`
 
 export const Button = styled.button<{ padding?: string }>`
   border-radius: 4px;
-  background-color: #151515;
+  background-color: ${({ theme }) => theme.colors.gray['900']};
+  border: 2px solid ${({ theme }) => theme.colors.gray['900']};
   padding: ${(props) => props.padding || '12px'};
-  border: none;
-  color: white;
+  color: ${({ theme }) => theme.colors.gray['100']};
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
@@ -30,6 +30,13 @@ export const Button = styled.button<{ padding?: string }>`
   gap: 8px;
   align-items: center;
   cursor: pointer;
+
+  &.dark {
+    &:hover {
+      background-color: ${({ theme }) => theme.colors.gray['850']};
+      border-color: ${({ theme }) => theme.colors.gray['700']};
+    }
+  }
 `;
 
 export const FlexContainer = styled.div`

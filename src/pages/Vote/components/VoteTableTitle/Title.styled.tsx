@@ -45,4 +45,8 @@ export const Title = styled.div`
       display: none;
     }
   }
+
+  @media (max-width: 768px) {
+    margin-bottom: 8px;
+  }
 `;
