@@ -14,9 +14,8 @@ import {
 import {
   ASSOCIATED_TOKEN_PROGRAM_ID,
   TOKEN_PROGRAM_ID,
-  createTransferCheckedInstruction,
 } from '@solana/spl-token';
-import Decimal from 'decimal.js';
+import Decimal from 'decimal.js/decimal.js';
 import { BN } from '@project-serum/anchor';
 import { MathUtil } from '@orca-so/common-sdk';
 import idl from '../../../idl.json';

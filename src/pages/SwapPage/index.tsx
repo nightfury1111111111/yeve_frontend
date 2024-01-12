@@ -11,7 +11,7 @@ import {
   SYSVAR_RENT_PUBKEY,
 } from '@solana/web3.js';
 import { TOKEN_PROGRAM_ID } from '@solana/spl-token';
-import Decimal from 'decimal.js';
+import Decimal from 'decimal.js/decimal.js';
 import { useEffect } from 'react';
 import idl from '../../idl.json';
 import Chart from './Chart';
