@@ -157,7 +157,7 @@ export default function LandingPage() {
           </LandingBottomRight>
         </LandingBottom>
       </LandingInsideContainer>
-      <Footer className="landing-page-footer" />
+      <Footer />
     </LandingContainer>
   );
 }
