@@ -65,7 +65,7 @@ export const LIQUIDITY_POOLS_DATA = [
 export const MY_POOLS_DATA = [
   {
     pair: {
-      name: 'ZERO/USDT',
+      name: 'YEVE/USDT',
       type: 'Stable',
       value: 0.3,
       tokens: [
@@ -79,7 +79,7 @@ export const MY_POOLS_DATA = [
         },
       ],
     },
-    type: 'GAMMA',
+    type: 'KAMINO',
     range: 'In Range',
     poolSize: {
       usd: '18220',
@@ -218,7 +218,7 @@ export const LOCKS_DATA = [
 export const REWARDS_DATA = [
   {
     pair: {
-      name: 'ZERO/USDT',
+      name: 'YEVE/USDT',
       type: 'Stable',
       value: 0.3,
       tokens: [
@@ -253,7 +253,7 @@ export const REWARDS_DATA = [
 export const VOTING_REWARDS_DATA = [
   {
     pair: {
-      name: 'ZERO/USDT',
+      name: 'YEVE/USDT',
       type: 'Stable',
       value: 0.3,
       tokens: [

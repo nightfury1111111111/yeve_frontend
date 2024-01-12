@@ -147,17 +147,17 @@ export default function LandingPage() {
 
           <LandingBottomRight>
             <StarRoundIcon />
-            <Button>SWAP</Button>
-            <Button>EARN</Button>
+            <Button className="dark">SWAP</Button>
+            <Button className="dark">EARN</Button>
             <ArrowPointHorizontalIcon />
-            <Button>BRIBE</Button>
-            <Button>VOTE</Button>
-            <Button>REWARD</Button>
+            <Button className="dark">BRIBE</Button>
+            <Button className="dark">VOTE</Button>
+            <Button className="dark">REWARD</Button>
             <StarIcon />
           </LandingBottomRight>
         </LandingBottom>
       </LandingInsideContainer>
-      <Footer />
+      <Footer className="landing-page-footer" />
     </LandingContainer>
   );
 }

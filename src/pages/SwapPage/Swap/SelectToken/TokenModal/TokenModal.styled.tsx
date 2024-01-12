@@ -205,7 +205,7 @@ export const TokenModalForm = styled.div`
   padding: 24px;
   background: ${({ theme }) => theme.colors.gray['950']};
   border-radius: 8px;
-  width: 30%;
+  width: 40%;
   max-height: 60%;
   display: flex;
   flex-direction: column;
@@ -216,10 +216,6 @@ export const TokenModalForm = styled.div`
   }
 
   @media screen and (max-width: 960px) {
-    width: 60%;
-  }
-
-  @media screen and (max-width: 680px) {
     width: 90%;
   }
 `;
@@ -236,4 +232,12 @@ export const TokenModalContainer = styled.div`
   z-index: 999;
   background: ${({ theme }) => `${theme.colors.gray['1000']}80`};
   backdrop-filter: blur(4px);
+
+  @media screen and (max-width: 960px) {
+    align-items: unset;
+
+    > div {
+      margin-top: 112px;
+    }
+  }
 `;

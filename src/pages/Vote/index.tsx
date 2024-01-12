@@ -139,7 +139,10 @@ export default function VotePage() {
                   <EnterVote>
                     <input placeholder="0" />{' '}
                     <div>
-                      % <button>MAX</button>
+                      %{' '}
+                      <button>
+                        <span>MAX</span>
+                      </button>
                     </div>
                   </EnterVote>
                 </EnterVoteWrap>

@@ -218,9 +218,10 @@ export const TableContainer = styled.table`
   tbody {
     tr {
       background: ${({ theme }) => theme.colors.gray['900']};
-      border-bottom: 8px solid ${({ theme }) => theme.colors.gray['950']};
 
       td {
+        border-bottom: 8px solid ${({ theme }) => theme.colors.gray['950']};
+
         @media (max-width: 1100px) {
           padding-right: 40px;
         }

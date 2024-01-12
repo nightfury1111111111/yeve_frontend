@@ -170,6 +170,14 @@ export const TokenModalForm = styled.div`
   display: flex;
   flex-direction: column;
   gap: 16px;
+
+  @media screen and (max-width: 1376px) {
+    width: 50%;
+  }
+
+  @media screen and (max-width: 960px) {
+    width: 90%;
+  }
 `;
 
 export const TokenModalContainer = styled.div`
@@ -184,4 +192,12 @@ export const TokenModalContainer = styled.div`
   z-index: 999;
   background: ${({ theme }) => `${theme.colors.gray['1000']}80`};
   backdrop-filter: blur(4px);
+
+  @media screen and (max-width: 960px) {
+    align-items: unset;
+
+    > div {
+      margin-top: 112px;
+    }
+  }
 `;
