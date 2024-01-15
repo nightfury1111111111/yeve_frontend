@@ -11,6 +11,11 @@ export const LandingContainer = styled.div`
   /* background-position: center; */
   overflow: hidden;
   position: relative;
+
+  @media (max-width: 700px) {
+    height: fit-content;
+    overflow-y: scroll;
+  }
 `;
 
 export const VideoBg = styled.div`

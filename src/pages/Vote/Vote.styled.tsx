@@ -27,7 +27,7 @@ export const EnterVote = styled.div`
   align-items: center;
   justify-content: space-between;
   width: 150px;
-  padding: 12px;
+  padding: 10px 12px 10px 16px;
   border-radius: 4px;
   input {
     background: transparent;

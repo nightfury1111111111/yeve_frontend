@@ -45,6 +45,7 @@ export const ChildMenu = styled.div`
   padding: 12px;
   background: ${({ theme }) => theme.colors.gray['950']};
   transition: all ease-in 1s;
+  z-index: 99;
 
   &::before {
     content: '';

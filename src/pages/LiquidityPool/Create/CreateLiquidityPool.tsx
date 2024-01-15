@@ -53,6 +53,10 @@ export const SelectRangeManual = styled.div`
   grid-template-columns: 1fr 1fr;
   grid-template-rows: auto;
   grid-gap: 8px;
+
+  @media (max-width: 530px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 export const PriceRangeRating = styled.div`
@@ -222,6 +226,10 @@ export const FreeTierList = styled.div`
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: auto;
   grid-gap: 8px;
+
+  @media (max-width: 530px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
 `;
 
 export const CreatePositionButton = styled.button`
@@ -308,6 +316,7 @@ export const DepositAmountToken = styled.div`
       font-weight: 600;
       line-height: 28px;
       color: ${({ theme }) => theme.colors.gray['0']};
+      text-wrap: nowrap;
     }
   }
 `;
@@ -321,6 +330,7 @@ export const DepositAmountInput = styled.input`
   line-height: 28px;
   background: none;
   border: none;
+  width: 100%;
 `;
 
 export const DepositAmountItem = styled.div`

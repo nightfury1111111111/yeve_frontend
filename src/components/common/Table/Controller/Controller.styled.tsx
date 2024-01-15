@@ -108,9 +108,9 @@ export const SearchContainer = styled.div`
 export const TabContainer = styled.div`
   display: flex;
   align-items: stretch;
+  background: ${({ theme }) => theme.colors.gray['900']};
 
   > a {
-    background: ${({ theme }) => theme.colors.gray['900']};
     display: flex;
     align-items: center;
     justify-content: center;

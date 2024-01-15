@@ -32,7 +32,7 @@ export default function SelectTokenItem({
         <span>FROM</span>
         <TokenSelect onClick={() => setOpenTokenModal(true)}>
           <div>
-            <TokenIcon src={token.image} />
+            <TokenIcon src={token.image || token.logoURI} />
             <span>{token.symbol}</span>
           </div>
           <DownIcon />
