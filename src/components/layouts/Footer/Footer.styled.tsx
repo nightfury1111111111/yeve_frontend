@@ -8,7 +8,7 @@ export const FooterContainer = styled.div`
     padding: 20px 0 20px;
   }
   @media screen and (max-width: 960px) {
-    margin-bottom: 105px;
+    /* margin-bottom: 105px; */
   }
   @media (min-height: 755px) {
     position: absolute;
@@ -27,7 +27,7 @@ export const FooterContainer = styled.div`
   @media (max-width: 900px) {
     display: block;
     text-align: center;
-    padding: 20px 0;
+    padding: 16px 0;
   }
 `;
 
@@ -49,6 +49,10 @@ export const ReservedText = styled.div`
   }
   @media (max-width: 900px) {
     padding-left: 0;
+  }
+
+  @media (max-width: 700px) {
+    margin-bottom: 12px;
   }
 `;
 export const FooterMenu = styled.div`
