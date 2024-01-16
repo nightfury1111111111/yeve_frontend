@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import wadeBg from '@src/assets/images/png/wade-bg.png';
+import wadeBg from '@src/assets/images/png/main-bg.png';
 import { Button } from '@src/components/layouts/LandingPageHeader/Header.styled';
 
 export const LandingContainer = styled.div`
@@ -11,6 +11,11 @@ export const LandingContainer = styled.div`
   /* background-position: center; */
   overflow: hidden;
   position: relative;
+
+  @media (max-width: 700px) {
+    height: fit-content;
+    overflow-y: scroll;
+  }
 `;
 
 export const VideoBg = styled.div`

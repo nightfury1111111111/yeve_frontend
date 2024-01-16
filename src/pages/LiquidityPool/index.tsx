@@ -53,7 +53,6 @@ export default function LiquidityPoolPage() {
             handle: handleControlPool,
           }}
         >
-          <TableControlSelect options={POOL_VERSIONS} />
           <TableControlSelect options={LIQUIDITY_TYPES} />
         </TableController>
         <Table columnNames={LIQUIDITY_POOL_COLUMN_NAMES}>

@@ -20,6 +20,7 @@ import { useEffect, useRef, useState } from 'react';
 import CloseIcon from '@src/assets/images/svg/close-icon';
 import { useOnClickOutside } from 'usehooks-ts';
 import ArrowUpRightIcon from '@src/assets/images/svg/pools/arrow-up-right-icon';
+import { sliceAddress } from '@src/utils/misc';
 
 type TokenModalProps = {
   onClose: () => void;
@@ -53,6 +54,7 @@ export default function TokenModal({ onClose, handleSelect }: TokenModalProps) {
   };
 
   const handleSelectToken = (item: Record<string, any>) => {
+    console.log(item)
     handleSelect(item);
     handleClose();
   };
@@ -106,7 +108,7 @@ export default function TokenModal({ onClose, handleSelect }: TokenModalProps) {
               </div>
               <TokenAddress>
                 <div>
-                  <span>{item.address}</span>
+                  <span>{sliceAddress(item.address)}</span>
                   <ArrowUpRightIcon />
                 </div>
               </TokenAddress>

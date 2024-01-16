@@ -46,6 +46,7 @@ export const SearchInputContainer = styled.div`
     color: ${({ theme }) => theme.colors.gray['50']} !important;
     font-size: 14px;
     flex: 1;
+    width: 100%;
 
     &::-webkit-input-placeholder {
       font-size: 14px;

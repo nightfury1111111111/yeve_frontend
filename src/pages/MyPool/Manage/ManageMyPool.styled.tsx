@@ -525,6 +525,7 @@ export const PageContainer = styled.div`
   align-items: flex-start;
   gap: 32px;
   padding: 0 16px;
+  
 
   @media (max-width: 1024px) {
     flex-direction: column;
@@ -532,5 +533,9 @@ export const PageContainer = styled.div`
     ${Section} {
       width: 100%;
     }
+  }
+
+  @media (max-width: 768px) {
+    margin-top: 24px;
   }
 `;

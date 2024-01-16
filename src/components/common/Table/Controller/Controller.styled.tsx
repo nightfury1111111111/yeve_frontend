@@ -108,14 +108,15 @@ export const SearchContainer = styled.div`
 export const TabContainer = styled.div`
   display: flex;
   align-items: stretch;
+  background: ${({ theme }) => theme.colors.gray['900']};
 
   > a {
-    background: ${({ theme }) => theme.colors.gray['900']};
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 16px;
+    padding: 0 16px;
     border-radius: 4px;
+    height: 48px;
 
     > span {
       font-size: 14px;
@@ -169,6 +170,7 @@ export const ControllerModalForm = styled.div`
   border-radius: 8px;
   width: 30%;
   max-height: 60%;
+  height: fit-content;
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -176,6 +178,11 @@ export const ControllerModalForm = styled.div`
 
   > div {
     display: block;
+  }
+
+  @media screen and (max-width: 530px) {
+    width: 100%;
+    margin: 0 16px;
   }
 `;
 
@@ -191,6 +198,14 @@ export const ControllerModalContainer = styled.div`
   z-index: 999;
   background: ${({ theme }) => `${theme.colors.gray['1000']}80`};
   backdrop-filter: blur(4px);
+
+  @media screen and (max-width: 960px) {
+    align-items: unset;
+
+    > div {
+      margin-top: 112px;
+    }
+  }
 `;
 
 export const Controller = styled.div`

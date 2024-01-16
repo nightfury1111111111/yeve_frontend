@@ -1,5 +1,18 @@
 import { styled } from 'styled-components';
 
+export const ConnectButtonWrap = styled.div`
+  button {
+    background-color: ${({ theme }) => theme.colors.gray['950']};
+    border: 2px solid ${({ theme }) => theme.colors.gray['950']};
+    text-wrap: nowrap;
+
+    &:hover {
+      background-color: ${({ theme }) => theme.colors.gray['900']};
+      border-color: ${({ theme }) => theme.colors.gray['750']};
+    }
+  }
+`;
+
 export const ConnectButton = styled.button`
   width: 200px;
   height: 48px;

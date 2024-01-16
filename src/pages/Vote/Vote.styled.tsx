@@ -4,6 +4,12 @@ import { styled } from 'styled-components';
 export const PageContainer = styled.div`
   margin-top: 80px;
   padding: 0 16px;
+
+  @media (max-width: 768px) {
+    margin-top: 24px;
+    background-color: ${({ theme }) => theme.colors.gray['950']};
+    padding-bottom: 12px;
+  }
 `;
 export const SmallText = styled.div`
   font-size: 12px;
@@ -21,7 +27,8 @@ export const EnterVote = styled.div`
   align-items: center;
   justify-content: space-between;
   width: 150px;
-  padding: 0 12px;
+  padding: 10px 12px 10px 16px;
+  border-radius: 4px;
   input {
     background: transparent;
     border: none;
@@ -39,8 +46,17 @@ export const EnterVote = styled.div`
     border-radius: 4px;
     background-color: ${({ theme }) => theme.colors.purple['500']};
     border: none;
-    height: 30px;
-    color: white;
+    padding: 4px 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    > span {
+      color: ${({ theme }) => theme.colors.gray['50']};
+      font-size: 12px;
+      font-weight: 600;
+      line-height: 16px;
+    }
   }
 `;
 
