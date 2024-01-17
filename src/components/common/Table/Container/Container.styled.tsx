@@ -17,5 +17,6 @@ export const TableContainer = styled.div`
     border: none;
     margin: unset;
     width: 100%;
+    background: unset;
   }
 `;

@@ -95,7 +95,7 @@ export const SwapContainer = styled.div`
   padding: 24px;
   width: 55%;
   @media screen and (max-width: 768px) {
-    width: 92vw;
+    width: 100%;
     padding: 12px;
   }
 `;

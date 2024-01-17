@@ -5,6 +5,11 @@ export const TableWrapper = styled.div`
     overflow-x: auto;
     white-space: nowrap;
   }
+
+  @media (max-width: 768px) {
+    /* background: ${({ theme }) => theme.colors.gray['950']}; */
+    margin: 0 -12px;
+  }
 `;
 export const Status = styled.div`
   align-items: center;
@@ -181,8 +186,11 @@ export const PairElement = styled.div`
 export const TableContainer = styled.table`
   width: 100%;
   margin-top: 30px;
+  padding: 0 12px;
   border-spacing: unset;
   overflow: auto;
+  background: ${({ theme }) => theme.colors.gray['950']};
+
   @media (max-width: 1200px) {
     /* width: 900px; */
     display: table;
