@@ -79,6 +79,7 @@ export const SwapTab = styled.div`
   justify-content: space-between;
   margin-top: 10px;
   background: ${({ theme }) => theme.colors.gray['900']};
+  border-radius: 4px;
 `;
 
 export const BalanceContainer = styled.div`

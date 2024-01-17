@@ -109,6 +109,7 @@ export const TabContainer = styled.div`
   display: flex;
   align-items: stretch;
   background: ${({ theme }) => theme.colors.gray['900']};
+  border-radius: 4px;
 
   > a {
     display: flex;
