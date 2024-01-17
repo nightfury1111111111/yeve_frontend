@@ -24,7 +24,7 @@ export const BribeBox = styled.div`
   width: 55%;
   margin: auto;
   @media screen and (max-width: 768px) {
-    width: 92vw;
+    width: 100%;
   }
   input {
     background: ${({ theme }) => theme.colors.gray['900']};
@@ -51,7 +51,7 @@ export const Title = styled.div`
   margin-bottom: 25px;
 `;
 export const Label = styled.div`
-  color: ${({ theme }) => theme.colors.gray['250']};
+  color: ${({ theme }) => theme.colors.gray['0']};
   margin: 20px 0 10px;
 `;
 
@@ -79,6 +79,7 @@ export const SwapTab = styled.div`
   justify-content: space-between;
   margin-top: 10px;
   background: ${({ theme }) => theme.colors.gray['900']};
+  border-radius: 4px;
 `;
 
 export const BalanceContainer = styled.div`
@@ -97,7 +98,7 @@ export const BalanceRow = styled.div`
     color: ${({ theme }) => theme.colors.gray['150']};
   }
   div:last-child {
-    color: white;
+    color: ${({ theme }) => theme.colors.gray['0']};
   }
   margin: 10px 0;
 `;
@@ -147,5 +148,11 @@ export const Flex = styled.div`
   input {
     width: 50px;
     min-width: 0;
+    text-align: right;
+    color: ${({ theme }) => theme.colors.gray['200']};
+
+    &::-webkit-input-placeholder {
+      color: ${({ theme }) => theme.colors.gray['200']};
+    }
   }
 `;

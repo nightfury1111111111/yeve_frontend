@@ -108,14 +108,19 @@ export const TokenButtonContainer = styled.div`
     background: ${({ theme }) => theme.colors.purple['500']};
     padding: 4px 8px;
     border-radius: 4px;
-    color: ${({ theme }) => theme.colors.gray['50']};
-    font-weight: 500;
-    font-size: 12px;
-    line-height: 16px;
-    letter-spacing: 0.24px;
     border: none;
     outline: none;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    > span {
+      color: ${({ theme }) => theme.colors.gray['50']};
+      font-weight: 500;
+      font-size: 12px;
+      letter-spacing: 0.24px;
+    }
   }
 `;
 

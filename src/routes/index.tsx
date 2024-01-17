@@ -88,11 +88,11 @@ export const userRoutes: Record<string, unknown>[] = [
           },
           {
             path: '/veyeve',
-            element: <VeYEVE />,
+            element: <OYeve />,
           },
           {
             path: '/xYEVE',
-            element: <OYeve />,
+            element: <VeYEVE />,
           },
           {
             path: '/presale',

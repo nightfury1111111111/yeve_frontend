@@ -1,6 +1,9 @@
 import yeveImage from '@src/assets/images/png/token-1.png';
 import { useNavigate } from 'react-router-dom';
-import { TokenIcon } from '../SwapPage/Swap/SelectToken/SelectToken.styled';
+import {
+  TokenIcon,
+  TokenSelect,
+} from '../SwapPage/Swap/SelectToken/SelectToken.styled';
 import { SwapButton } from '../SwapPage/Swap/Swap.styled';
 import {
   BalanceContainer,
@@ -13,6 +16,9 @@ import {
   SwapTabItem,
   Title,
 } from './VEYeve.styled';
+import DownIcon from '@src/assets/images/svg/menu/DownIcon';
+import { Flex } from '../OYeve/OYeve.styled';
+import SolIcon from '@src/assets/images/svg/sol-icon';
 
 export default function VeYEVE() {
   const navigate = useNavigate();
@@ -21,37 +27,46 @@ export default function VeYEVE() {
     <BribeContainer>
       <BribeBox>
         <Title>Options</Title>
-        <div>Redeem into</div>
+        <h3>Convert xYEVE to YEVE. Conversion is one-way and non-refund</h3>
         <SwapTab>
-          <SwapTabItem onClick={() => navigate('/xYEVE')}>xYEVE</SwapTabItem>
-          <SwapTabItem className={'active'}>veYEVE</SwapTabItem>
+          <SwapTabItem className={'active'}>YEVE</SwapTabItem>
+          <SwapTabItem onClick={() => navigate('/veYEVE')}>veYEVE</SwapTabItem>
         </SwapTab>
 
         <BalanceContainer>
           <BalanceRow>
-            <div>oYEVE Balance:</div>
-            <div>70.0 oYEVE</div>
+            <div>xYEVE Balance:</div>
+            <div>70.0 xYEVE</div>
           </BalanceRow>
           <BalanceRow>
-            <div>CASH Balance:</div>
-            <div>239 CASH</div>
+            <div>SOL Balance:</div>
+            <div>239 SOL</div>
           </BalanceRow>
           <BalanceRow>
-            <div>Discount:</div>
+            <div>% Fee:</div>
             <div>20%</div>
           </BalanceRow>
         </BalanceContainer>
-        <Label>Your redeem YEVE</Label>
+        <Label>Amount of xYEVE to Convert</Label>
         <InputContainer>
-          <TokenIcon src={yeveImage} />
-
-          <button>MAX</button>
+          <TokenSelect>
+            <div>
+              <TokenIcon src={yeveImage} />
+              <span>xYEVE</span>
+            </div>
+            <DownIcon />
+          </TokenSelect>
+          <Flex>
+            <input placeholder="0.00" />
+            <button>MAX</button>
+          </Flex>
         </InputContainer>
-        <Label>You pay CASH</Label>
+        <Label>SOL required</Label>
         <InputContainer>
-          <TokenIcon src={yeveImage} />
-
-          <button>MAX</button>
+          <div className="sol-icon">
+            <SolIcon />
+            <input placeholder='0.00' />
+          </div>
         </InputContainer>
         <BalanceContainer>
           <BalanceRow>

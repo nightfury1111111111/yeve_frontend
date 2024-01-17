@@ -1,9 +1,11 @@
 import ClockIcon from '@src/assets/images/svg/clock-icon';
 import { Title } from './Title.styled';
 import { ButtonController } from '../Controller/Controller.styled';
+import LockIcon from '@src/assets/images/svg/lock-icon';
 type Button = {
   text: string;
   handle: () => void;
+  icon?: string;
 };
 
 type TableTitleProps = {
@@ -55,7 +57,8 @@ export function TableTitle({
       )}
       {button && (
         <ButtonController onClick={() => button.handle()}>
-          {button.text}
+          {button.icon && button.icon === 'lock' && <LockIcon />}
+          {button.icon ? <span>{button.text}</span> : button.text}
         </ButtonController>
       )}
     </Title>

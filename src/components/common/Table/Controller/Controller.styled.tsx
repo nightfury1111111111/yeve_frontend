@@ -32,10 +32,21 @@ export const ButtonController = styled.button`
   border: none;
   padding: 10px 48px;
   font-size: 16px;
-  font-style: normal;
   font-weight: 600;
   line-height: 24px;
   text-wrap: nowrap;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  > span {
+    color: ${({ theme }) => theme.colors.gray['50']};
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 24px;
+    text-wrap: nowrap;
+  }
 
   border: 2px solid ${({ theme }) => theme.colors.purple['500']};
 
@@ -109,6 +120,7 @@ export const TabContainer = styled.div`
   display: flex;
   align-items: stretch;
   background: ${({ theme }) => theme.colors.gray['900']};
+  border-radius: 4px;
 
   > a {
     display: flex;

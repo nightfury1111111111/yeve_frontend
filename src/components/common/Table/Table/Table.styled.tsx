@@ -1,9 +1,32 @@
 import { styled } from 'styled-components';
+export const NormalText = styled.div`
+  color: ${({ theme }) => theme.colors.gray['50']};
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  margin-bottom: 4px;
+
+  > span {
+    color: ${({ theme }) => theme.colors.gray['200']};
+  }
+`;
+
+export const SmallText = styled.div`
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+  color: ${({ theme }) => theme.colors.gray['200']};
+`;
 export const TableWrapper = styled.div`
   @media (max-width: 1200px) {
     display: block;
     overflow-x: auto;
     white-space: nowrap;
+  }
+
+  @media (max-width: 768px) {
+    /* background: ${({ theme }) => theme.colors.gray['950']}; */
+    margin: 0 -12px;
   }
 `;
 export const Status = styled.div`
@@ -139,6 +162,7 @@ export const PairInfoLabel = styled.div<{ mt?: string }>`
   line-height: 16px;
   text-align: center;
   margin-top: ${(p) => p.mt};
+  width: fit-content;
 `;
 
 export const PairInfo = styled.div`
@@ -147,6 +171,21 @@ export const PairInfo = styled.div`
     font-size: 14px;
     font-weight: 600;
     line-height: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 4px;
+
+    > span {
+      color: ${({ theme }) => theme.colors.gray['0']};
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 20px;
+    }
+
+    > svg > path {
+      stroke: ${({ theme }) => theme.colors.gray['50']} !important;
+    }
   }
 
   > span {
@@ -181,8 +220,11 @@ export const PairElement = styled.div`
 export const TableContainer = styled.table`
   width: 100%;
   margin-top: 30px;
+  padding: 0 12px;
   border-spacing: unset;
   overflow: auto;
+  background: ${({ theme }) => theme.colors.gray['950']};
+
   @media (max-width: 1200px) {
     /* width: 900px; */
     display: table;

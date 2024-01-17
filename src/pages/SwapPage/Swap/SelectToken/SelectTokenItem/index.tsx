@@ -50,7 +50,11 @@ export default function SelectTokenItem({
         <label>Balance</label>
         <TokenButtonContainer>
           <label>18.7685</label>
-          {buttonMax && <button>MAX</button>}
+          {buttonMax && (
+            <button>
+              <span>MAX</span>
+            </button>
+          )}
         </TokenButtonContainer>
       </TokenItem>
     </TokenContainer>
