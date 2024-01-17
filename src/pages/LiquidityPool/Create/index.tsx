@@ -1,7 +1,7 @@
 import ArrowLeftIcon from '@src/assets/images/svg/arrow-left';
 import SettingIcon from '@src/assets/images/svg/swap/SettingIcon';
 import { useConnection, useWallet } from '@solana/wallet-adapter-react';
-import { AnchorProvider, Program } from '@project-serum/anchor';
+import { AnchorProvider, Program } from '@coral-xyz/anchor';
 import {
   Keypair,
   PublicKey,
@@ -16,10 +16,11 @@ import {
   TOKEN_PROGRAM_ID,
 } from '@solana/spl-token';
 import Decimal from 'decimal.js/decimal.js';
-import { BN } from '@project-serum/anchor';
-import { MathUtil } from '@orca-so/common-sdk';
+import { BN } from '@coral-xyz/anchor';
+import { MathUtil, AddressUtil } from '@orca-so/common-sdk';
+import { PoolUtil } from '@orca-so/whirlpools-sdk';
 import idl from '../../../idl.json';
-import { Idl } from '@project-serum/anchor/dist/cjs/idl';
+import { Idl } from '@coral-xyz/anchor/dist/cjs/idl';
 import { getOrCreateAssociatedTokenAccount } from '../../../utils/transferSpl/getOrCreateAssociatedTokenAccount';
 import { getAssociatedTokenAddress } from '../../../utils/transferSpl/getAssociatedTokerAddress';
 import { getAccountInfo } from '../../../utils/transferSpl/getAccountInfo';
@@ -117,15 +118,14 @@ export default function CreateLiquidityPoolPage() {
     if (!provider || !publicKey || !signTransaction) return;
     const program = new Program(idl as Idl, programID, provider);
 
-    let tokenMintAKey: PublicKey = PublicKey.default;
-    let tokenMintBKey: PublicKey = PublicKey.default;
-    if (tokenPair.tokenA.address < tokenPair.tokenB.address) {
-      tokenMintAKey = new PublicKey(tokenPair.tokenA.address);
-      tokenMintBKey = new PublicKey(tokenPair.tokenB.address);
-    } else {
-      tokenMintAKey = new PublicKey(tokenPair.tokenB.address);
-      tokenMintBKey = new PublicKey(tokenPair.tokenA.address);
-    }
+    let mintA, mintB;
+    [mintA, mintB] = PoolUtil.orderMints(
+      new PublicKey(tokenPair.tokenA.address),
+      new PublicKey(tokenPair.tokenB.address)
+    );
+
+    let tokenMintAKey = AddressUtil.toPubKey(mintA);
+    let tokenMintBKey = AddressUtil.toPubKey(mintB);
 
     console.log(tokenMintAKey.toString(), tokenMintBKey.toString());
     const price = MathUtil.toX64(new Decimal(5));

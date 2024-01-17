@@ -1,5 +1,5 @@
 import { TOKEN_PROGRAM_ID } from '@solana/spl-token';
-import { AnchorProvider, Program } from '@project-serum/anchor';
+import { AnchorProvider, Program } from '@coral-xyz/anchor';
 import { useConnection, useWallet } from '@solana/wallet-adapter-react';
 import {
   Keypair,
@@ -34,20 +34,20 @@ export default function SelectPairElements() {
   const [ownedToken, setOwnedToken] = useState<Array<OwnedTokenInfo>>([]);
 
   const [fromToken, setFromToken] = useState<Record<string, any>>({
-    address: 'CU1f67B7n3XzwbHkFvciuH6Yqe8kiaEFfSZHzLNRvtYi',
-    symbol: 'LUNA',
-    name: 'LUNA Coin',
+    address: 'BRjpCHtyQLNCo8gqRUr8jtdAj5AjPYQaoqbvcZiHok1k',
+    symbol: 'devUSDC',
+    name: 'devUSDC',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/5j2dS5kLdJowd6NpQ1pVykyyKDvRPZrHZGHgtyVG4PbD/logo.png',
+      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v/logo.png',
     balance: 10.2,
   });
 
   const [toToken, setToToken] = useState<Record<string, any>>({
-    address: '7vEpiNkomzeF2uDw8uuDFqEcQfaWbpPgmFf41G5Y7W4o',
-    symbol: 'USDC',
-    name: 'USD Coin',
+    address: 'Jd4M8bfJG3sAkd82RsGWyEXoaBXQP7njFzBwEaCTuDa',
+    symbol: 'devSAMO',
+    name: 'devSAMO',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v/logo.png',
+      'https://api.phantom.app/image-proxy/?image=https%3A%2F%2Feverlastingsong.github.io%2Fnebula%2Fdevtoken_metadata%2FdevSAMO%2Fimage.png',
     balance: 10.2,
   });
 
