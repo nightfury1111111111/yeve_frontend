@@ -3,9 +3,9 @@ import yeveImage from '@src/assets/images/png/token-1.png';
 export const TOKEN_LIST = [
   {
     chainId: 103,
-    address: '7vEpiNkomzeF2uDw8uuDFqEcQfaWbpPgmFf41G5Y7W4o', // devnet token - tokenMintAKey
-    symbol: 'USDC',
-    name: 'USD Coin',
+    address: 'BRjpCHtyQLNCo8gqRUr8jtdAj5AjPYQaoqbvcZiHok1k', // devnet token - tokenMintAKey
+    symbol: 'devUSDC',
+    name: 'devUSDC',
     decimals: 6,
     logoURI:
       'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v/logo.png',
@@ -27,12 +27,12 @@ export const TOKEN_LIST = [
   },
   {
     chainId: 103,
-    address: 'CU1f67B7n3XzwbHkFvciuH6Yqe8kiaEFfSZHzLNRvtYi', // devnet token - tokenMintBKey
-    symbol: 'LUNA',
-    name: 'LUNA Coin',
-    decimals: 9,
+    address: 'H8UekPGwePSmQ3ttuYGPU1szyFfjZR4N53rymSFwpLPm', // devnet token - tokenMintBKey
+    symbol: 'devUSDT',
+    name: 'devUSDT',
+    decimals: 6,
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/5j2dS5kLdJowd6NpQ1pVykyyKDvRPZrHZGHgtyVG4PbD/logo.png',
+      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB/logo.svg',
     tags: ['social-token'],
     extensions: {
       website: 'https://www.terra.money',
@@ -40,12 +40,12 @@ export const TOKEN_LIST = [
   },
   {
     chainId: 103,
-    address: '2rg5syU3DSwwWs778FQ6yczDKhS14NM3vP4hqnkJ2jsM',
-    symbol: 'pSOL',
-    name: 'SOL stake pool',
+    address: 'Jd4M8bfJG3sAkd82RsGWyEXoaBXQP7njFzBwEaCTuDa',
+    symbol: 'devSAMO',
+    name: 'devSAMO',
     decimals: 9,
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/2rg5syU3DSwwWs778FQ6yczDKhS14NM3vP4hqnkJ2jsM/logo.png',
+      'https://api.phantom.app/image-proxy/?image=https%3A%2F%2Feverlastingsong.github.io%2Fnebula%2Fdevtoken_metadata%2FdevSAMO%2Fimage.png',
     tags: [],
     extensions: {
       website: 'https://solana.com/',
@@ -55,12 +55,12 @@ export const TOKEN_LIST = [
   },
   {
     chainId: 103,
-    address: 'StepAscQoEioFxxWGnh2sLBDFp9d8rvKz2Yp39iDpyT',
-    symbol: 'STEP',
-    name: 'Step',
-    decimals: 9,
+    address: 'Afn8YB1p4NsoZeS5XJBZ18LTfEy5NFPwN46wapZcBQr6',
+    symbol: 'devTMAC',
+    name: 'devTMAC',
+    decimals: 6,
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/StepAscQoEioFxxWGnh2sLBDFp9d8rvKz2Yp39iDpyT/logo.png',
+      'https://api.phantom.app/image-proxy/?image=https%3A%2F%2Feverlastingsong.github.io%2Fnebula%2Fdevtoken_metadata%2FdevTMAC%2Fimage.png',
     tags: ['utility-token'],
     extensions: {
       website: 'https://step.finance/',
@@ -68,35 +68,5 @@ export const TOKEN_LIST = [
       coingeckoId: 'step-finance',
       waterfallbot: 'https://bit.ly/STEPwaterfall',
     },
-  },
-  {
-    chainId: 103,
-    address: '7STJWT74tAZzhbNNPRH8WuGDy9GZg27968EwALWuezrH',
-    symbol: 'wSUSHI',
-    name: 'SushiSwap (Wormhole)',
-    decimals: 9,
-    logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/7STJWT74tAZzhbNNPRH8WuGDy9GZg27968EwALWuezrH/logo.png',
-    tags: ['wrapped', 'wormhole'],
-    extensions: {
-      website: 'https://sushi.com',
-      background: 'https://sushi.com/static/media/Background-sm.fd449814.jpg/',
-      address: '0x6B3595068778DD592e39A122f4f5a5cF09C90fE2',
-      bridgeContract:
-        'https://etherscan.io/address/0xf92cD566Ea4864356C5491c177A430C222d7e678',
-      assetContract:
-        'https://etherscan.io/address/0x6B3595068778DD592e39A122f4f5a5cF09C90fE2',
-      coingeckoId: 'sushi',
-    },
-  },
-  {
-    chainId: 103,
-    address: '3aMbgP7aGsP1sVcFKc6j65zu7UiziP57SMFzf6ptiCSX',
-    symbol: 'sHOG',
-    name: 'Devnet StableHog',
-    decimals: 6,
-    logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/3aMbgP7aGsP1sVcFKc6j65zu7UiziP57SMFzf6ptiCSX/logo.png',
-    tags: ['stablecoin'],
   },
 ];

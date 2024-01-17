@@ -1,5 +1,5 @@
-import { AnchorProvider, Program } from '@project-serum/anchor';
-import { Idl } from '@project-serum/anchor/dist/cjs/idl';
+import { AnchorProvider, Program } from '@coral-xyz/anchor';
+import { Idl } from '@coral-xyz/anchor/dist/cjs/idl';
 import { useConnection, useWallet } from '@solana/wallet-adapter-react';
 import {
   Keypair,
@@ -17,7 +17,7 @@ import idl from '../../idl.json';
 import Chart from './Chart';
 import Swap from './Swap';
 import { SwapPageContainer } from './SwapPage.styled';
-import { BN } from '@project-serum/anchor';
+import { BN } from '@coral-xyz/anchor';
 import { MathUtil } from '@orca-so/common-sdk';
 import * as buffer from 'buffer';
 window.Buffer = buffer.Buffer;
