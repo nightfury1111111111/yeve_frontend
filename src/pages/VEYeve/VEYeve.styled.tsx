@@ -21,14 +21,20 @@ export const BribeBox = styled.div`
   border-color: ${({ theme }) => theme.colors.gray['800']};
   background: ${({ theme }) => theme.colors.gray['950']};
   padding: 24px;
-  width: 55%;
+  width: 60%;
   margin: auto;
   @media screen and (max-width: 768px) {
     width: 100%;
   }
+  h3 {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 24px;
+    color: ${({ theme }) => theme.colors.gray['0']};
+  }
   input {
     background: ${({ theme }) => theme.colors.gray['900']};
-    color: ${({ theme }) => theme.colors.gray['500']};
+    color: ${({ theme }) => theme.colors.gray['200']};
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -42,6 +48,7 @@ export const BribeBox = styled.div`
     border: none;
     width: 100%;
     margin-left: 8px;
+    text-align: right;
   }
 `;
 
@@ -51,7 +58,7 @@ export const Title = styled.div`
   margin-bottom: 25px;
 `;
 export const Label = styled.div`
-  color: ${({ theme }) => theme.colors.gray['250']};
+  color: ${({ theme }) => theme.colors.gray['0']};
   margin: 20px 0 10px;
 `;
 
@@ -95,10 +102,10 @@ export const BalanceRow = styled.div`
   width: 100%;
   font-size: 14px;
   div:first-child {
-    color: ${({ theme }) => theme.colors.gray['150']};
+    color: ${({ theme }) => theme.colors.gray['200']};
   }
   div:last-child {
-    color: white;
+    color: ${({ theme }) => theme.colors.gray['0']};;
   }
   margin: 10px 0;
 `;
@@ -125,5 +132,38 @@ export const InputContainer = styled.div`
     border: none;
     height: 30px;
     color: white;
+  }
+  > div {
+    width: 120px;
+    flex: 0;
+    gap: 10px;
+    align-items: center;
+    background: transparent;
+    padding: 0;
+    svg {
+      margin-top: 5px;
+    }
+
+    &.sol-icon {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 8px;
+      flex: 1;
+
+      > svg {
+        margin-top: unset;
+      }
+
+      > input {
+        color: ${({ theme }) => theme.colors.gray['400']};
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 20px;
+        cursor: pointer;
+        width: 100%;
+        text-align: left;
+      }
+    }
   }
 `;

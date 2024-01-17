@@ -70,10 +70,6 @@ export const LOCKS_COLUMNS_NAME = [
     sort: true,
   },
   {
-    value: 'Lock Expire',
-    sort: true,
-  },
-  {
     value: 'Votes Used',
     sort: true,
   },
