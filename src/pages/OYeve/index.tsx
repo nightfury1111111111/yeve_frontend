@@ -27,14 +27,14 @@ export default function OYeve() {
         <Title>Convert</Title>
         <div>Redeem into</div>
         <SwapTab>
-          <SwapTabItem className={'active'}>xYEVE</SwapTabItem>
-          <SwapTabItem onClick={() => navigate('/veYEVE')}>veYEVE</SwapTabItem>
+          <SwapTabItem onClick={() => navigate('/xYeve')}>YEVE</SwapTabItem>
+          <SwapTabItem className={'active'}>veYEVE</SwapTabItem>
         </SwapTab>
 
         <BalanceContainer>
           <BalanceRow>
-            <div>oYEVE Balance:</div>
-            <div>70.0 oYEVE</div>
+            <div>xYEVE Balance:</div>
+            <div>70.0 xYEVE</div>
           </BalanceRow>
         </BalanceContainer>
         <Label>Your redeem</Label>
@@ -42,7 +42,7 @@ export default function OYeve() {
           <TokenSelect>
             <div>
               <TokenIcon src={yeveImage} />
-              <span>YEVE</span>
+              <span>xYEVE</span>
             </div>
             <DownIcon />
           </TokenSelect>
@@ -54,12 +54,12 @@ export default function OYeve() {
         <BalanceContainer>
           <BalanceRow>
             <div>Voting power:</div>
-            <div>70.0 oYEVE</div>
+            <div>70.0 veYEVE</div>
           </BalanceRow>
-          <BalanceRow>
+          {/* <BalanceRow>
             <div>Unlocking at:</div>
             <div>07.09.2025</div>
-          </BalanceRow>
+          </BalanceRow> */}
         </BalanceContainer>
         <SwapButton>Redeem in to YEVE</SwapButton>
       </BribeBox>
