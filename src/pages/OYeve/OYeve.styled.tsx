@@ -24,7 +24,7 @@ export const BribeBox = styled.div`
   width: 55%;
   margin: auto;
   @media screen and (max-width: 768px) {
-    width: 92vw;
+    width: 100%;
   }
   input {
     background: ${({ theme }) => theme.colors.gray['900']};

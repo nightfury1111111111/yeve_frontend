@@ -9,7 +9,7 @@ export const LockInfoContainer = styled.div`
   position: relative;
   width: 400px;
   @media screen and (max-width: 768px) {
-    width: 92vw;
+    width: 100%;
     margin-top: 20px;
   }
 `;
