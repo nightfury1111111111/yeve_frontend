@@ -85,6 +85,7 @@ export const VotingInfo = styled.div`
   }
   button {
     font-size: 14px;
+    width: 50%;
   }
 
   @media screen and (max-width: 960px) {
