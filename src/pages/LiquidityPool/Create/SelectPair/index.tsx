@@ -40,6 +40,7 @@ export default function SelectPairElements() {
     logoURI:
       'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v/logo.png',
     balance: 10.2,
+    decimals: 6,
   });
 
   const [toToken, setToToken] = useState<Record<string, any>>({
@@ -49,6 +50,7 @@ export default function SelectPairElements() {
     logoURI:
       'https://api.phantom.app/image-proxy/?image=https%3A%2F%2Feverlastingsong.github.io%2Fnebula%2Fdevtoken_metadata%2FdevSAMO%2Fimage.png',
     balance: 10.2,
+    decimals: 9,
   });
 
   const [tokenModalMode, setTokenModalMode] = useState<string>('');
@@ -115,6 +117,7 @@ export default function SelectPairElements() {
         logoURI: fromToken.logoURI,
         address: fromToken.address,
         depositAmount: 0,
+        decimals: fromToken.decimals,
       })
     );
   }, [fromToken]);
@@ -126,6 +129,7 @@ export default function SelectPairElements() {
         logoURI: toToken.logoURI,
         address: toToken.address,
         depositAmount: 0,
+        decimals: toToken.decimals,
       })
     );
   }, [toToken]);

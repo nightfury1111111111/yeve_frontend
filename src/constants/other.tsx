@@ -12,7 +12,7 @@ export const PDA_BUNDLED_POSITION_SEED = 'bundled_position';
 export const TICK_ARRAY_SIZE = 88;
 
 export const configAccount = new PublicKey(
-  '8wEZPr3ep6e6KR6Pyr5vaQVSMAMaeGCtkrH2Ax9WbeiT'
+  '7MM5NCEmwPfbXj4pPkopQitdrqxiSMRJmD4Wjw5d5R7S'
 );
 
 export const METADATA_PROGRAM_ADDRESS = new PublicKey(

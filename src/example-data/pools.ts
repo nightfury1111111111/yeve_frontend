@@ -311,21 +311,25 @@ export const VOTING_REWARDS_DATA = [
 
 export const CREATE_POOL_FREE_TIER_LIST = [
   {
+    tickSpacing: 1,
     apr: '0.01',
     desc: 'Best for very stable pairs.',
     selectPercent: '4',
   },
   {
+    tickSpacing: 8,
     apr: '0.05',
     desc: 'Best for very stable pairs.',
     selectPercent: '12',
   },
   {
+    tickSpacing: 32,
     apr: '0.3',
     desc: 'Best for most pairs.',
     selectPercent: '64',
   },
   {
+    tickSpacing: 64,
     apr: '1',
     desc: 'Best for very stable pairs.',
     selectPercent: '8',

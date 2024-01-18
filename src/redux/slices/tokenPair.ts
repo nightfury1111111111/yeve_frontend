@@ -6,6 +6,7 @@ export interface TokenInfo {
   logoURI: string;
   address: string;
   depositAmount: number;
+  decimals: number;
 }
 
 // export interface TokenPairState {
@@ -14,8 +15,8 @@ export interface TokenInfo {
 // }
 
 const initialState = {
-  tokenA: { name: '', logoURI: '', address: '', depositAmount: 0 },
-  tokenB: { name: '', logoURI: '', address: '', depositAmount: 0 },
+  tokenA: { name: '', logoURI: '', address: '', depositAmount: 0, decimals: 0 },
+  tokenB: { name: '', logoURI: '', address: '', depositAmount: 0, decimals: 0 },
 };
 
 const tokenPairSlice = createSlice({

@@ -1,7 +1,7 @@
 import ArrowLeftIcon from '@src/assets/images/svg/arrow-left';
 import SettingIcon from '@src/assets/images/svg/swap/SettingIcon';
 import { useConnection, useWallet } from '@solana/wallet-adapter-react';
-import { AnchorProvider, Program } from '@coral-xyz/anchor';
+import { AnchorProvider, Program, BN } from '@coral-xyz/anchor';
 import {
   Keypair,
   PublicKey,
@@ -16,15 +16,21 @@ import {
   TOKEN_PROGRAM_ID,
 } from '@solana/spl-token';
 import Decimal from 'decimal.js/decimal.js';
-import { BN } from '@coral-xyz/anchor';
 import { MathUtil, AddressUtil } from '@orca-so/common-sdk';
-import { PoolUtil } from '@orca-so/whirlpools-sdk';
-import idl from '../../../idl.json';
-import { Idl } from '@coral-xyz/anchor/dist/cjs/idl';
-import { getOrCreateAssociatedTokenAccount } from '../../../utils/transferSpl/getOrCreateAssociatedTokenAccount';
-import { getAssociatedTokenAddress } from '../../../utils/transferSpl/getAssociatedTokerAddress';
-import { getAccountInfo } from '../../../utils/transferSpl/getAccountInfo';
-import { createAssociatedTokenAccountInstruction } from '../../../utils/transferSpl/createAssociatedTokenAccountInstruction';
+import {
+  WhirlpoolContext,
+  buildWhirlpoolClient,
+  WhirlpoolIx,
+  toTx,
+  ORCA_WHIRLPOOL_PROGRAM_ID,
+  WhirlpoolsConfigData,
+  FeeTierData,
+  WhirlpoolData,
+  PoolUtil,
+  PDAUtil,
+  PriceMath,
+  IGNORE_CACHE,
+} from '@orca-so/whirlpools-sdk';
 import { useNavigate } from 'react-router-dom';
 import {
   CreatePositionButton,
@@ -60,21 +66,9 @@ import PlusIcon from '@src/assets/images/svg/pools/plus-icon';
 import ReturnIcon from '@src/assets/images/svg/return-svg';
 
 import { TickSpacing } from '@src/constants/enum';
-import {
-  PDA_FEE_TIER_SEED,
-  PDA_YEVEPOOL_SEED,
-  PDA_POSITION_SEED,
-  PDA_METADATA_SEED,
-  METADATA_PROGRAM_ADDRESS,
-  TICK_ARRAY_SIZE,
-  WHIRLPOOL_NFT_UPDATE_AUTH,
-  configAccount,
-  rewardMint,
-  PDA_TICK_ARRAY_SEED,
-} from '@src/constants/other';
+import { configAccount } from '@src/constants/other';
+import { wait } from '@src/utils/misc';
 import { errorToast, infoToast } from '@src/Notification';
-
-const programID = new PublicKey(idl.metadata.address);
 
 export default function CreateLiquidityPoolPage() {
   const tokenPair = useSelector((state: RootState) => state.tokenPair);
@@ -82,7 +76,7 @@ export default function CreateLiquidityPoolPage() {
   const navigate = useNavigate();
 
   const [type, setType] = useState(CREATE_POOL_TYPE.AUTOMATIC);
-  const [freeTierType, setFreeTierType] = useState('0.3');
+  const [freeTierType, setFreeTierType] = useState(32);
   const [priceRange, setPriceRange] = useState('Full Range');
 
   const { connection } = useConnection();
@@ -116,7 +110,15 @@ export default function CreateLiquidityPoolPage() {
     }
     const provider = getProvider();
     if (!provider || !publicKey || !signTransaction) return;
-    const program = new Program(idl as Idl, programID, provider);
+
+    const ctx = WhirlpoolContext.from(
+      connection,
+      provider.wallet,
+      ORCA_WHIRLPOOL_PROGRAM_ID
+    );
+
+    const client = buildWhirlpoolClient(ctx);
+    const fetcher = ctx.fetcher;
 
     let mintA, mintB;
     [mintA, mintB] = PoolUtil.orderMints(
@@ -126,222 +128,92 @@ export default function CreateLiquidityPoolPage() {
 
     let tokenMintAKey = AddressUtil.toPubKey(mintA);
     let tokenMintBKey = AddressUtil.toPubKey(mintB);
+    const aToB = tokenPair.tokenA.address == tokenMintAKey.toString();
 
-    console.log(tokenMintAKey.toString(), tokenMintBKey.toString());
-    const price = MathUtil.toX64(new Decimal(5));
-    const yevepoolPda = PublicKey.findProgramAddressSync(
-      [
-        Buffer.from(PDA_YEVEPOOL_SEED),
-        configAccount.toBuffer(),
-        tokenMintAKey.toBuffer(),
-        tokenMintBKey.toBuffer(),
-        new BN(TickSpacing.Stable).toArrayLike(Buffer, 'le', 2),
-      ],
-      programID
+    const initSqrtPrice = PriceMath.priceToSqrtPriceX64(
+      new Decimal(1).div(new Decimal(10)),
+      aToB ? tokenPair.tokenA.decimals : tokenPair.tokenB.decimals,
+      aToB ? tokenPair.tokenB.decimals : tokenPair.tokenA.decimals
     );
 
-    const feeTierPda = PublicKey.findProgramAddressSync(
-      [
-        Buffer.from(PDA_FEE_TIER_SEED),
-        configAccount.toBuffer(),
-        new BN(TickSpacing.Stable).toArrayLike(Buffer, 'le', 2),
-      ],
-      programID
+    const whirlpoolPda = PDAUtil.getWhirlpool(
+      ctx.program.programId,
+      configAccount,
+      tokenMintAKey,
+      tokenMintBKey,
+      freeTierType // tickSpacing
     );
 
-    const yevepoolBump = {
-      yevepoolBump: yevepoolPda[1],
-    };
+    let whirlpool_data = (await fetcher.getPool(
+      whirlpoolPda.publicKey
+    )) as WhirlpoolData;
+
+    console.log(whirlpool_data);
 
     const tokenVaultAKeypair = Keypair.generate();
     const tokenVaultBKeypair = Keypair.generate();
 
-    const transaction = new Transaction();
-
-    const init_pool_tx = await program.methods
-      .initializePool(yevepoolBump, TickSpacing.Stable, price)
-      .accounts({
-        yevepoolsConfig: configAccount,
-        tokenMintA: tokenMintAKey,
-        tokenMintB: tokenMintBKey,
-        funder: publicKey,
-        yevepool: yevepoolPda[0],
-        tokenVaultA: tokenVaultAKeypair.publicKey,
-        tokenVaultB: tokenVaultBKeypair.publicKey,
-        feeTier: feeTierPda[0],
-        tokenProgram: TOKEN_PROGRAM_ID,
-        systemProgram: SystemProgram.programId,
-        rent: SYSVAR_RENT_PUBKEY,
-      })
-      .transaction();
-
-    transaction.add(init_pool_tx);
-
-    const tickSpacing = TickSpacing.Standard;
-    const startTick = TICK_ARRAY_SIZE * tickSpacing * 2;
-
-    const tickArrayPda = PublicKey.findProgramAddressSync(
-      [
-        Buffer.from(PDA_TICK_ARRAY_SEED),
-        yevepoolPda[0].toBuffer(),
-        Buffer.from(startTick.toString()),
-      ],
-      programID
+    let feeTierPda = PDAUtil.getFeeTier(
+      ctx.program.programId,
+      configAccount,
+      freeTierType // tickSpacing
     );
 
-    const init_tick_array_tx = await program.methods
-      .initializeTickArray(startTick)
-      .accounts({
-        yevepool: yevepoolPda[0],
-        tickArray: tickArrayPda[0],
-        funder: publicKey,
-        systemProgram: SystemProgram.programId,
-      })
-      .transaction();
+    let latest_blockhash, signature;
 
-    transaction.add(init_tick_array_tx);
-
-    // const rewardVaultKeypair = Keypair.generate();
-
-    // let initializerAssiciatedToken = await getAssociatedTokenAddress(
-    //   rewardMint,
-    //   publicKey,
-    //   false,
-    //   TOKEN_PROGRAM_ID,
-    //   ASSOCIATED_TOKEN_PROGRAM_ID
-    // );
-
-    // let rewardVaultAssiciatedToken = await getAssociatedTokenAddress(
-    //   rewardMint,
-    //   rewardVaultKeypair.publicKey,
-    //   false,
-    //   TOKEN_PROGRAM_ID,
-    //   ASSOCIATED_TOKEN_PROGRAM_ID
-    // );
-
-    // let account;
-    // try {
-    //   account = await getAccountInfo(
-    //     connection,
-    //     rewardVaultAssiciatedToken,
-    //     undefined,
-    //     TOKEN_PROGRAM_ID
-    //   );
-    // } catch (error: any) {
-    //   if (
-    //     error.message === 'TokenAccountNotFoundError' ||
-    //     error.message === 'TokenInvalidAccountOwnerError'
-    //   ) {
-    //     transaction.add(
-    //       createAssociatedTokenAccountInstruction(
-    //         publicKey,
-    //         rewardVaultAssiciatedToken,
-    //         rewardVaultKeypair.publicKey,
-    //         rewardMint,
-    //         TOKEN_PROGRAM_ID,
-    //         ASSOCIATED_TOKEN_PROGRAM_ID
-    //       )
-    //     );
-    //   }
-    // }
-
-    // transaction.add(
-    //   createTransferCheckedInstruction(
-    //     initializerAssiciatedToken, // from
-    //     rewardMint, // mint
-    //     rewardVaultKeypair.publicKey, // to
-    //     publicKey, // from's owner
-    //     100 * 1e9, // amount
-    //     9 // decimals
-    //   )
-    // );
-
-    // const tx = await program.methods
-    //   .initializeReward(0)
-    //   .accounts({
-    //     rewardAuthority: publicKey,
-    //     yevepool: yevepoolPda[0],
-    //     funder: publicKey,
-    //     rewardMint,
-    //     rewardVault: rewardVaultKeypair.publicKey,
-    //     tokenProgram: TOKEN_PROGRAM_ID,
-    //     systemProgram: SystemProgram.programId,
-    //     rent: SYSVAR_RENT_PUBKEY,
-    //   })
-    //   .transaction();
-
-    // transaction.add(tx);
-
-    const tickLowerIndex = 0;
-    const tickUpperIndex = 128;
-
-    const positionMintKeypair = Keypair.generate();
-    const positionPda = PublicKey.findProgramAddressSync(
-      [
-        Buffer.from(PDA_POSITION_SEED),
-        positionMintKeypair.publicKey.toBuffer(),
-      ],
-      programID
-    );
-
-    const metadataPda = PublicKey.findProgramAddressSync(
-      [
-        Buffer.from(PDA_METADATA_SEED),
-        METADATA_PROGRAM_ADDRESS.toBuffer(),
-        positionMintKeypair.publicKey.toBuffer(),
-      ],
-      METADATA_PROGRAM_ADDRESS
-    );
-
-    const [positionTokenAccountAddress] = PublicKey.findProgramAddressSync(
-      [
-        publicKey.toBuffer(),
-        TOKEN_PROGRAM_ID.toBuffer(),
-        positionMintKeypair.publicKey.toBuffer(),
-      ],
-      ASSOCIATED_TOKEN_PROGRAM_ID
-    );
-
-    const bumps = {
-      positionBump: positionPda[1],
-      // metadataBump: metadataPda[1],
-    };
-
-    transaction.add(
-      await program.methods
-        .openPosition(bumps, tickLowerIndex, tickUpperIndex)
-        .accounts({
-          funder: publicKey,
-          owner: publicKey,
-          position: positionPda[0],
-          positionMint: positionMintKeypair.publicKey,
-          positionTokenAccount: positionTokenAccountAddress,
-          yevepool: yevepoolPda[0],
-          // positionMetadataAccount: metadataPda[0], // open position with metadata
-          // metadataProgram: METADATA_PROGRAM_ADDRESS, // open position with metadata
-          // metadataUpdateAuth: WHIRLPOOL_NFT_UPDATE_AUTH, // open position with metadata
-          tokenProgram: TOKEN_PROGRAM_ID,
-          systemProgram: SystemProgram.programId,
-          rent: SYSVAR_RENT_PUBKEY,
-          associatedTokenProgram: ASSOCIATED_TOKEN_PROGRAM_ID,
+    if (!whirlpool_data) {
+      signature = await toTx(
+        ctx,
+        WhirlpoolIx.initializePoolIx(ctx.program, {
+          initSqrtPrice,
+          tickSpacing: freeTierType, // tickSpacing
+          tokenMintA: tokenMintAKey,
+          tokenMintB: tokenMintBKey,
+          tokenVaultAKeypair,
+          tokenVaultBKeypair,
+          whirlpoolPda,
+          whirlpoolsConfig: configAccount,
+          feeTierKey: feeTierPda.publicKey,
+          funder: ctx.wallet.publicKey,
         })
-        .transaction()
+      ).buildAndExecute();
+
+      // Wait for the transaction to complete
+      latest_blockhash = await ctx.connection.getLatestBlockhash();
+      await ctx.connection.confirmTransaction(
+        { signature, ...latest_blockhash },
+        'confirmed'
+      );
+    }
+
+    const whirlpool = await client.getPool(
+      whirlpoolPda.publicKey,
+      IGNORE_CACHE
+    );
+    const price = PriceMath.sqrtPriceX64ToPrice(
+      whirlpool.getData().sqrtPrice,
+      aToB ? tokenPair.tokenA.decimals : tokenPair.tokenB.decimals,
+      aToB ? tokenPair.tokenB.decimals : tokenPair.tokenA.decimals
+    );
+    console.log(
+      'price:',
+      price.toFixed(
+        aToB ? tokenPair.tokenB.decimals : tokenPair.tokenA.decimals
+      )
     );
 
-    const currTick = 0;
-
-    transaction.feePayer = provider.wallet.publicKey;
-    transaction.recentBlockhash = (
-      await connection.getLatestBlockhash()
-    ).blockhash;
-    transaction.partialSign(tokenVaultAKeypair);
-    transaction.partialSign(tokenVaultBKeypair);
-    transaction.partialSign(positionMintKeypair);
-    // transaction.partialSign(rewardVaultKeypair);
-    const signedTx = await provider.wallet.signTransaction(transaction);
-    const txId = await connection.sendRawTransaction(signedTx.serialize());
-    await connection.confirmTransaction(txId, 'confirmed');
-    console.log(txId);
+    // transaction.feePayer = provider.wallet.publicKey;
+    // transaction.recentBlockhash = (
+    //   await connection.getLatestBlockhash()
+    // ).blockhash;
+    // transaction.partialSign(tokenVaultAKeypair);
+    // transaction.partialSign(tokenVaultBKeypair);
+    // transaction.partialSign(positionMintKeypair);
+    // // transaction.partialSign(rewardVaultKeypair);
+    // const signedTx = await provider.wallet.signTransaction(transaction);
+    // const txId = await connection.sendRawTransaction(signedTx.serialize());
+    // await connection.confirmTransaction(txId, 'confirmed');
+    // console.log(txId);
   };
 
   return (
@@ -418,8 +290,10 @@ export default function CreateLiquidityPoolPage() {
               {CREATE_POOL_FREE_TIER_LIST.map((item, index) => (
                 <FreeTierElement
                   key={index}
-                  className={`${freeTierType === item.apr ? 'active' : ''}`}
-                  onClick={() => setFreeTierType(item.apr)}
+                  className={`${
+                    freeTierType === item.tickSpacing ? 'active' : ''
+                  }`}
+                  onClick={() => setFreeTierType(item.tickSpacing)}
                 >
                   <label>{item.apr}%</label>
                   <span>{item.desc}</span>
