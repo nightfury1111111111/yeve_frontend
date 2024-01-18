@@ -12,7 +12,12 @@ import {
   SYSVAR_RENT_PUBKEY,
 } from '@solana/web3.js';
 import { useDispatch } from 'react-redux';
-import { setTokenA, setTokenB, swapToken } from '@src/redux/slices/tokenPair';
+import {
+  setTokenA,
+  setTokenB,
+  swapToken,
+  resetTokenDepositAmount,
+} from '@src/redux/slices/tokenPair';
 import yeveImage from '@src/assets/images/png/token-1.png';
 import tetherImage from '@src/assets/images/png/token-2.png';
 import DownIcon from '@src/assets/images/svg/menu/DownIcon';
@@ -141,6 +146,7 @@ export default function SelectPairElements() {
     setFromToken(toToken);
     setToToken(from);
     dispatch(swapToken());
+    dispatch(resetTokenDepositAmount());
   };
 
   const handleTokenChange = (data: Record<string, any>) => {

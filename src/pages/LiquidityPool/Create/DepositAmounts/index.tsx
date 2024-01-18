@@ -31,8 +31,8 @@ export default function DepositAmountsComponent() {
   const dispatch = useDispatch();
   const tokenPair = useSelector((state: RootState) => state.tokenPair);
   const [ownedToken, setOwnedToken] = useState<Array<OwnedTokenInfo>>([]);
-  const [tokenADepositAmount, setTokenADepositAmount] = useState<string>('0');
-  const [tokenBDepositAmount, setTokenBDepositAmount] = useState<string>('0');
+  const [tokenADepositAmount, setTokenADepositAmount] = useState(0);
+  const [tokenBDepositAmount, setTokenBDepositAmount] = useState(0);
   const { publicKey } = useWallet();
 
   useEffect(() => {
@@ -88,6 +88,14 @@ export default function DepositAmountsComponent() {
     getTokenAccounts(walletToQuery, solanaConnection);
   }, [publicKey]);
 
+  useEffect(() => {
+    setTokenADepositAmount(tokenPair.tokenA.depositAmount);
+  }, [tokenPair.tokenA.depositAmount]);
+
+  useEffect(() => {
+    setTokenBDepositAmount(tokenPair.tokenB.depositAmount);
+  }, [tokenPair.tokenB.depositAmount]);
+
   const calculateBalance = (address: string) => {
     let balance: number = 0;
     for (let i = 0; i < ownedToken.length; i++) {
@@ -122,7 +130,7 @@ export default function DepositAmountsComponent() {
                 errorToast('Insufficient balance');
                 return;
               }
-              setTokenADepositAmount(Number(e.target.value).toString());
+              setTokenADepositAmount(Number(e.target.value));
             }}
           />
           <div>
@@ -137,7 +145,7 @@ export default function DepositAmountsComponent() {
             <button
               onClick={() => {
                 setTokenADepositAmount(
-                  Number(calculateBalance(tokenPair.tokenA.address)).toString()
+                  Number(calculateBalance(tokenPair.tokenA.address))
                 );
               }}
             >
@@ -159,7 +167,7 @@ export default function DepositAmountsComponent() {
                 errorToast('Insufficient Balance');
                 return;
               }
-              setTokenBDepositAmount(Number(e.target.value).toString());
+              setTokenBDepositAmount(Number(e.target.value));
             }}
           />
           <div>
@@ -174,7 +182,7 @@ export default function DepositAmountsComponent() {
             <button
               onClick={() => {
                 setTokenBDepositAmount(
-                  Number(calculateBalance(tokenPair.tokenB.address)).toString()
+                  Number(calculateBalance(tokenPair.tokenB.address))
                 );
               }}
             >

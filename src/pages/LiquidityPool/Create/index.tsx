@@ -39,6 +39,11 @@ import {
 } from '@orca-so/whirlpools-sdk';
 import { useNavigate } from 'react-router-dom';
 import {
+  resetTokenDepositAmount,
+  updateJustTokenADepositAmount,
+  updateJustTokenBDepositAmount,
+} from '@src/redux/slices/tokenPair';
+import {
   CreatePositionButton,
   PriceAmountInput,
   FreeTierElement,
@@ -60,7 +65,7 @@ import CurrentPoolStats from './PoolStats';
 import { CREATE_POOL_TYPE } from '@src/constants/enum';
 import { useEffect, useState, useRef } from 'react';
 import type { RootState } from '@src/redux/store';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import ALMProviderComponent from './ALMProvider';
 import DepositAmountsComponent from './DepositAmounts';
 import {
@@ -79,6 +84,7 @@ import { errorToast, infoToast } from '@src/Notification';
 
 export default function CreateLiquidityPoolPage() {
   const tokenPair = useSelector((state: RootState) => state.tokenPair);
+  const dispatch = useDispatch();
 
   const navigate = useNavigate();
   const timer = useRef(null);
@@ -87,8 +93,8 @@ export default function CreateLiquidityPoolPage() {
   const [freeTierType, setFreeTierType] = useState(32);
   const [priceRange, setPriceRange] = useState('Full Range');
   const [currentPrice, setCurrentPrice] = useState(0);
-  const [lowerPrice, setLowerPrice] = useState('0');
-  const [upperPrice, setUpperPrice] = useState('0');
+  const [lowerPrice, setLowerPrice] = useState(0);
+  const [upperPrice, setUpperPrice] = useState(0);
   const [whirlpoolData, setWhirlpoolData] = useState<WhirlpoolData>(
     {} as WhirlpoolData
   );
@@ -116,8 +122,8 @@ export default function CreateLiquidityPoolPage() {
         lower_price = 0;
         upper_price = 0;
     }
-    setLowerPrice((Math.floor(lower_price * 10000) / 10000).toString());
-    setUpperPrice((Math.floor(upper_price * 10000) / 10000).toString());
+    setLowerPrice(Math.floor(lower_price * 10000) / 10000);
+    setUpperPrice(Math.floor(upper_price * 10000) / 10000);
   }, [priceRange, currentPrice]);
 
   useEffect(() => {
@@ -131,7 +137,7 @@ export default function CreateLiquidityPoolPage() {
   }, [tokenPair.tokenA.depositAmount]);
 
   useEffect(() => {
-    temp();
+    getPoolInfo();
   }, [
     tokenPair.tokenA.name,
     tokenPair.tokenB.name,
@@ -141,7 +147,7 @@ export default function CreateLiquidityPoolPage() {
     signTransaction,
   ]);
 
-  const temp = async () => {
+  const getPoolInfo = async () => {
     const provider = getProvider();
     if (!provider || !publicKey || !signTransaction) return;
 
@@ -204,7 +210,7 @@ export default function CreateLiquidityPoolPage() {
   };
 
   const handleGetQuote = (tokenType: string) => {
-    if (lowerPrice == '0' || upperPrice == '0') {
+    if (lowerPrice == 0 || upperPrice == 0) {
       errorToast('Price range value must be bigger than 0');
       return;
     }
@@ -216,13 +222,6 @@ export default function CreateLiquidityPoolPage() {
     timer.current = setTimeout(() => {
       let inputTokenMint = PublicKey.default;
       let inputTokenAmount = new BN('0');
-      if (tokenType == 'tokenB') {
-        inputTokenMint = new PublicKey(tokenPair.tokenB.address);
-        inputTokenAmount = DecimalUtil.toBN(
-          new Decimal(tokenPair.tokenB.depositAmount.toString()),
-          tokenPair.tokenB.decimals
-        );
-      }
 
       if (tokenType == 'tokenA') {
         inputTokenMint = new PublicKey(tokenPair.tokenA.address);
@@ -232,6 +231,13 @@ export default function CreateLiquidityPoolPage() {
         );
       }
 
+      if (tokenType == 'tokenB') {
+        inputTokenMint = new PublicKey(tokenPair.tokenB.address);
+        inputTokenAmount = DecimalUtil.toBN(
+          new Decimal(tokenPair.tokenB.depositAmount.toString()),
+          tokenPair.tokenB.decimals
+        );
+      }
       // inputTokenMint = whirlpoolData.tokenMintB;
       // inputTokenAmount = DecimalUtil.toBN(new Decimal('10'), 6);
       // console.log(whirlpoolData);
@@ -244,7 +250,6 @@ export default function CreateLiquidityPoolPage() {
         aToB ? tokenPair.tokenA.decimals : tokenPair.tokenB.decimals,
         aToB ? tokenPair.tokenB.decimals : tokenPair.tokenA.decimals
       );
-      console.log(originalprice.toFixed(5));
       const lower_tick_index = PriceMath.priceToInitializableTickIndex(
         aToB
           ? new Decimal(lowerPrice)
@@ -261,7 +266,6 @@ export default function CreateLiquidityPoolPage() {
         aToB ? tokenPair.tokenB.decimals : tokenPair.tokenA.decimals,
         whirlpoolData.tickSpacing
       );
-      console.log(lower_tick_index, upper_tick_index);
 
       const quote = increaseLiquidityQuoteByInputTokenWithParams({
         // Pass the pool definition and state
@@ -279,14 +283,47 @@ export default function CreateLiquidityPoolPage() {
         slippageTolerance: slippage,
       });
 
-      console.log(
-        'devSAMO max input:',
-        DecimalUtil.fromBN(quote.tokenMaxA, 9).toFixed(6)
-      );
-      console.log(
-        'devUSDC max input:',
-        DecimalUtil.fromBN(quote.tokenMaxB, 6).toFixed(6)
-      );
+      if (tokenType == 'tokenA') {
+        dispatch(
+          updateJustTokenBDepositAmount(
+            aToB
+              ? DecimalUtil.fromBN(
+                  quote.tokenMaxB,
+                  tokenPair.tokenB.decimals
+                ).toNumber()
+              : DecimalUtil.fromBN(
+                  quote.tokenMaxA,
+                  tokenPair.tokenB.decimals
+                ).toNumber()
+          )
+        );
+      }
+
+      if (tokenType == 'tokenB') {
+        dispatch(
+          updateJustTokenADepositAmount(
+            aToB
+              ? DecimalUtil.fromBN(
+                  quote.tokenMaxA,
+                  tokenPair.tokenA.decimals
+                ).toNumber()
+              : DecimalUtil.fromBN(
+                  quote.tokenMaxB,
+                  tokenPair.tokenA.decimals
+                ).toNumber()
+          )
+        );
+      }
+
+      // console.log(
+      //   'devSAMO max input:',
+      //   DecimalUtil.fromBN(quote.tokenMaxA, 9).toNumber(),
+      //   DecimalUtil.fromBN(quote.tokenMaxA, 9).toFixed(9)
+      // );
+      // console.log(
+      //   'devUSDC max input:',
+      //   DecimalUtil.fromBN(quote.tokenMaxB, 6).toFixed(6)
+      // );
     }, 500);
   };
 
@@ -540,7 +577,10 @@ export default function CreateLiquidityPoolPage() {
                   className={`${
                     freeTierType === item.tickSpacing ? 'active' : ''
                   }`}
-                  onClick={() => setFreeTierType(item.tickSpacing)}
+                  onClick={() => {
+                    setFreeTierType(item.tickSpacing);
+                    dispatch(resetTokenDepositAmount());
+                  }}
                 >
                   <label>{item.apr}%</label>
                   <span>{item.desc}</span>
@@ -567,6 +607,7 @@ export default function CreateLiquidityPoolPage() {
                   className={`${priceRange === item.label ? 'active' : ''}`}
                   onClick={() => {
                     setPriceRange(item.label);
+                    dispatch(resetTokenDepositAmount());
                   }}
                 >
                   <label>
@@ -615,9 +656,7 @@ export default function CreateLiquidityPoolPage() {
                 <button
                   onClick={() => {
                     setLowerPrice((lowerPrice) =>
-                      Number(lowerPrice) - 1 < 0
-                        ? '0'
-                        : (Number(lowerPrice) - 1).toString()
+                      Number(lowerPrice) - 1 < 0 ? 0 : Number(lowerPrice) - 1
                     );
                   }}
                 >
@@ -629,7 +668,7 @@ export default function CreateLiquidityPoolPage() {
                     type="number"
                     value={lowerPrice}
                     onChange={(e) => {
-                      setLowerPrice(Number(e.target.value).toString());
+                      setLowerPrice(Number(e.target.value));
                     }}
                   />
                   <label>
@@ -638,9 +677,7 @@ export default function CreateLiquidityPoolPage() {
                 </div>
                 <button
                   onClick={() => {
-                    setLowerPrice((lowerPrice) =>
-                      (Number(lowerPrice) + 1).toString()
-                    );
+                    setLowerPrice((lowerPrice) => Number(lowerPrice) + 1);
                   }}
                 >
                   <PlusIcon />
@@ -650,9 +687,7 @@ export default function CreateLiquidityPoolPage() {
                 <button
                   onClick={() => {
                     setUpperPrice((upperPrice) =>
-                      Number(upperPrice) - 1 < 0
-                        ? '0'
-                        : (Number(upperPrice) - 1).toString()
+                      Number(upperPrice) - 1 < 0 ? 0 : Number(upperPrice) - 1
                     );
                   }}
                 >
@@ -664,7 +699,7 @@ export default function CreateLiquidityPoolPage() {
                     type="number"
                     value={upperPrice}
                     onChange={(e) => {
-                      setUpperPrice(Number(e.target.value).toString());
+                      setUpperPrice(Number(e.target.value));
                     }}
                   />
                   <label>
@@ -673,9 +708,7 @@ export default function CreateLiquidityPoolPage() {
                 </div>
                 <button
                   onClick={() => {
-                    setUpperPrice((upperPrice) =>
-                      (Number(upperPrice) + 1).toString()
-                    );
+                    setUpperPrice((upperPrice) => Number(upperPrice) + 1);
                   }}
                 >
                   <PlusIcon />

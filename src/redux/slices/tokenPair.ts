@@ -62,6 +62,22 @@ const tokenPairSlice = createSlice({
       state.tokenA.fetchInfo = false;
       state.tokenB.fetchInfo = true;
     },
+    updateJustTokenADepositAmount: (state, action: PayloadAction<number>) => {
+      state.tokenA.depositAmount = action.payload;
+      state.tokenA.fetchInfo = false;
+      state.tokenB.fetchInfo = false;
+    },
+    updateJustTokenBDepositAmount: (state, action: PayloadAction<number>) => {
+      state.tokenB.depositAmount = action.payload;
+      state.tokenA.fetchInfo = false;
+      state.tokenB.fetchInfo = false;
+    },
+    resetTokenDepositAmount: (state) => {
+      state.tokenA.depositAmount = 0;
+      state.tokenA.fetchInfo = false;
+      state.tokenB.depositAmount = 0;
+      state.tokenB.fetchInfo = false;
+    },
   },
 });
 
@@ -71,5 +87,8 @@ export const {
   swapToken,
   updateTokenADepositAmount,
   updateTokenBDepositAmount,
+  updateJustTokenADepositAmount,
+  updateJustTokenBDepositAmount,
+  resetTokenDepositAmount,
 } = tokenPairSlice.actions;
 export default tokenPairSlice.reducer;
