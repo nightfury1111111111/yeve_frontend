@@ -7,6 +7,7 @@ export interface TokenInfo {
   address: string;
   depositAmount: number;
   decimals: number;
+  fetchInfo: boolean;
 }
 
 // export interface TokenPairState {
@@ -15,8 +16,22 @@ export interface TokenInfo {
 // }
 
 const initialState = {
-  tokenA: { name: '', logoURI: '', address: '', depositAmount: 0, decimals: 0 },
-  tokenB: { name: '', logoURI: '', address: '', depositAmount: 0, decimals: 0 },
+  tokenA: {
+    name: '',
+    logoURI: '',
+    address: '',
+    depositAmount: 0,
+    decimals: 0,
+    fetchInfo: false,
+  },
+  tokenB: {
+    name: '',
+    logoURI: '',
+    address: '',
+    depositAmount: 0,
+    decimals: 0,
+    fetchInfo: false,
+  },
 };
 
 const tokenPairSlice = createSlice({
@@ -34,12 +49,18 @@ const tokenPairSlice = createSlice({
       const tmpTokenB = state.tokenB;
       state.tokenA = tmpTokenB;
       state.tokenB = tmpTokenA;
+      state.tokenA.fetchInfo = false;
+      state.tokenB.fetchInfo = false;
     },
     updateTokenADepositAmount: (state, action: PayloadAction<number>) => {
       state.tokenA.depositAmount = action.payload;
+      state.tokenA.fetchInfo = true;
+      state.tokenB.fetchInfo = false;
     },
     updateTokenBDepositAmount: (state, action: PayloadAction<number>) => {
       state.tokenB.depositAmount = action.payload;
+      state.tokenA.fetchInfo = false;
+      state.tokenB.fetchInfo = true;
     },
   },
 });

@@ -118,6 +118,7 @@ export default function SelectPairElements() {
         address: fromToken.address,
         depositAmount: 0,
         decimals: fromToken.decimals,
+        fetchInfo: false,
       })
     );
   }, [fromToken]);
@@ -130,6 +131,7 @@ export default function SelectPairElements() {
         address: toToken.address,
         depositAmount: 0,
         decimals: toToken.decimals,
+        fetchInfo: false,
       })
     );
   }, [toToken]);

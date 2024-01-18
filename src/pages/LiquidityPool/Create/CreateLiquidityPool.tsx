@@ -321,6 +321,19 @@ export const DepositAmountToken = styled.div`
   }
 `;
 
+export const PriceAmountInput = styled.input`
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: ${({ theme }) => theme.colors.gray['0']};
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 24px;
+  background: none;
+  border: none;
+  width: 100%;
+`;
+
 export const DepositAmountInput = styled.input`
   display: flex;
   align-items: center;
