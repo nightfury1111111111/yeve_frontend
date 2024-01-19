@@ -16,15 +16,15 @@ export const TOKEN_LIST = [
       website: 'https://www.centre.io/',
     },
   },
-  {
-    chainId: 103,
-    address: 'JC7EAyPpZKjt5bAQj7a3zpMRwsac5AxMoY5DHnPMffJr',
-    name: 'YEVE',
-    symbol: 'YEVE',
-    decimals: 9,
-    logoURI: yeveImage,
-    tags: ['community-token'],
-  },
+  // {
+  //   chainId: 103,
+  //   address: 'JC7EAyPpZKjt5bAQj7a3zpMRwsac5AxMoY5DHnPMffJr',
+  //   name: 'YEVE',
+  //   symbol: 'YEVE',
+  //   decimals: 9,
+  //   logoURI: yeveImage,
+  //   tags: ['community-token'],
+  // },
   {
     chainId: 103,
     address: 'H8UekPGwePSmQ3ttuYGPU1szyFfjZR4N53rymSFwpLPm', // devnet token - tokenMintBKey
