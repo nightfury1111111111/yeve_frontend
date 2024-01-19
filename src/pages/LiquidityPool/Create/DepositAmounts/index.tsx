@@ -89,10 +89,30 @@ export default function DepositAmountsComponent() {
   }, [publicKey]);
 
   useEffect(() => {
+    if (
+      calculateBalance(tokenPair.tokenA.address) <
+      tokenPair.tokenA.depositAmount
+    ) {
+      errorToast(`Insufficient ${tokenPair.tokenA.name} balance.`);
+      setTokenADepositAmount(0);
+      setTokenBDepositAmount(0);
+
+      return;
+    }
     setTokenADepositAmount(tokenPair.tokenA.depositAmount);
   }, [tokenPair.tokenA.depositAmount]);
 
   useEffect(() => {
+    if (
+      calculateBalance(tokenPair.tokenB.address) <
+      tokenPair.tokenA.depositAmount
+    ) {
+      errorToast(`Insufficient ${tokenPair.tokenB.name} balance.`);
+      setTokenADepositAmount(0);
+      setTokenBDepositAmount(0);
+
+      return;
+    }
     setTokenBDepositAmount(tokenPair.tokenB.depositAmount);
   }, [tokenPair.tokenB.depositAmount]);
 

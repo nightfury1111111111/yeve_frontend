@@ -34,6 +34,7 @@ import {
   PoolUtil,
   PDAUtil,
   PriceMath,
+  IncreaseLiquidityQuote,
   IGNORE_CACHE,
   increaseLiquidityQuoteByInputTokenWithParams,
 } from '@orca-so/whirlpools-sdk';
@@ -48,6 +49,8 @@ import {
   PriceAmountInput,
   FreeTierElement,
   FreeTierList,
+  DepositAmountItem,
+  DepositAmountInput,
   Heading,
   PageContainer,
   PriceRangeElement,
@@ -80,7 +83,7 @@ import ReturnIcon from '@src/assets/images/svg/return-svg';
 import { TickSpacing } from '@src/constants/enum';
 import { configAccount } from '@src/constants/other';
 import { wait } from '@src/utils/misc';
-import { errorToast, infoToast } from '@src/Notification';
+import { errorToast, infoToast, successToast } from '@src/Notification';
 
 export default function CreateLiquidityPoolPage() {
   const tokenPair = useSelector((state: RootState) => state.tokenPair);
@@ -89,14 +92,18 @@ export default function CreateLiquidityPoolPage() {
   const navigate = useNavigate();
   const timer = useRef(null);
 
-  const [type, setType] = useState(CREATE_POOL_TYPE.AUTOMATIC);
+  const [type, setType] = useState(CREATE_POOL_TYPE.MANUAL);
   const [freeTierType, setFreeTierType] = useState(32);
-  const [priceRange, setPriceRange] = useState('Full Range');
+  const [priceRange, setPriceRange] = useState('Safe');
+  const [desiredAmount, setDesiredAmount] = useState(0);
   const [currentPrice, setCurrentPrice] = useState(0);
   const [lowerPrice, setLowerPrice] = useState(0);
   const [upperPrice, setUpperPrice] = useState(0);
   const [whirlpoolData, setWhirlpoolData] = useState<WhirlpoolData>(
     {} as WhirlpoolData
+  );
+  const [quoteData, setQuoteData] = useState<IncreaseLiquidityQuote>(
+    {} as IncreaseLiquidityQuote
   );
 
   const { connection } = useConnection();
@@ -137,7 +144,12 @@ export default function CreateLiquidityPoolPage() {
   }, [tokenPair.tokenA.depositAmount]);
 
   useEffect(() => {
+    dispatch(resetTokenDepositAmount());
+  }, [lowerPrice, upperPrice, desiredAmount]);
+
+  useEffect(() => {
     getPoolInfo();
+    setDesiredAmount(0);
   }, [
     tokenPair.tokenA.name,
     tokenPair.tokenB.name,
@@ -181,7 +193,8 @@ export default function CreateLiquidityPoolPage() {
     );
 
     let whirlpool_data = (await fetcher.getPool(
-      whirlpoolPda.publicKey
+      whirlpoolPda.publicKey,
+      IGNORE_CACHE
     )) as WhirlpoolData;
 
     if (!whirlpool_data) {
@@ -211,6 +224,7 @@ export default function CreateLiquidityPoolPage() {
 
   const handleGetQuote = (tokenType: string) => {
     if (lowerPrice == 0 || upperPrice == 0) {
+      setQuoteData({} as IncreaseLiquidityQuote);
       errorToast('Price range value must be bigger than 0');
       return;
     }
@@ -315,6 +329,8 @@ export default function CreateLiquidityPoolPage() {
         );
       }
 
+      setQuoteData(quote);
+
       // console.log(
       //   'devSAMO max input:',
       //   DecimalUtil.fromBN(quote.tokenMaxA, 9).toNumber(),
@@ -345,6 +361,94 @@ export default function CreateLiquidityPoolPage() {
   };
 
   const createNewPool = async () => {
+    if (desiredAmount <= 0) {
+      errorToast('Invalid desired price input.');
+    }
+    const provider = getProvider();
+    if (!provider || !publicKey || !signTransaction) return;
+
+    const ctx = WhirlpoolContext.from(
+      connection,
+      provider.wallet,
+      ORCA_WHIRLPOOL_PROGRAM_ID
+    );
+
+    const client = buildWhirlpoolClient(ctx);
+    const fetcher = ctx.fetcher;
+
+    let mintA, mintB;
+    [mintA, mintB] = PoolUtil.orderMints(
+      new PublicKey(tokenPair.tokenA.address),
+      new PublicKey(tokenPair.tokenB.address)
+    );
+
+    let tokenMintAKey = AddressUtil.toPubKey(mintA);
+    let tokenMintBKey = AddressUtil.toPubKey(mintB);
+    const aToB =
+      tokenPair.tokenA.address.toLowerCase() ==
+      tokenMintAKey.toString().toLowerCase();
+
+    const initSqrtPrice = PriceMath.priceToSqrtPriceX64(
+      new Decimal(1).div(new Decimal(desiredAmount)),
+      aToB ? tokenPair.tokenA.decimals : tokenPair.tokenB.decimals,
+      aToB ? tokenPair.tokenB.decimals : tokenPair.tokenA.decimals
+    );
+
+    const whirlpoolPda = PDAUtil.getWhirlpool(
+      ctx.program.programId,
+      configAccount,
+      tokenMintAKey,
+      tokenMintBKey,
+      freeTierType // tickSpacing
+    );
+
+    let whirlpool_data = (await fetcher.getPool(
+      whirlpoolPda.publicKey
+    )) as WhirlpoolData;
+
+    const tokenVaultAKeypair = Keypair.generate();
+    const tokenVaultBKeypair = Keypair.generate();
+
+    let feeTierPda = PDAUtil.getFeeTier(
+      ctx.program.programId,
+      configAccount,
+      freeTierType // tickSpacing
+    );
+
+    if (!whirlpool_data) {
+      const signature = await toTx(
+        ctx,
+        WhirlpoolIx.initializePoolIx(ctx.program, {
+          initSqrtPrice,
+          tickSpacing: freeTierType, // tickSpacing
+          tokenMintA: tokenMintAKey,
+          tokenMintB: tokenMintBKey,
+          tokenVaultAKeypair,
+          tokenVaultBKeypair,
+          whirlpoolPda,
+          whirlpoolsConfig: configAccount,
+          feeTierKey: feeTierPda.publicKey,
+          funder: ctx.wallet.publicKey,
+        })
+      ).buildAndExecute();
+
+      // Wait for the transaction to complete
+      const latest_blockhash = await ctx.connection.getLatestBlockhash();
+      await ctx.connection.confirmTransaction(
+        { signature, ...latest_blockhash },
+        'confirmed'
+      );
+
+      await getPoolInfo();
+
+      successToast('Pool created successfully.');
+      return;
+    } else {
+      errorToast('Pool exists');
+    }
+  };
+
+  const createNewPosition = async () => {
     if (
       tokenPair.tokenA.depositAmount == 0 ||
       tokenPair.tokenB.depositAmount == 0
@@ -376,12 +480,6 @@ export default function CreateLiquidityPoolPage() {
       tokenPair.tokenA.address.toLowerCase() ==
       tokenMintAKey.toString().toLowerCase();
 
-    const initSqrtPrice = PriceMath.priceToSqrtPriceX64(
-      new Decimal(1).div(new Decimal(10)),
-      aToB ? tokenPair.tokenA.decimals : tokenPair.tokenB.decimals,
-      aToB ? tokenPair.tokenB.decimals : tokenPair.tokenA.decimals
-    );
-
     const whirlpoolPda = PDAUtil.getWhirlpool(
       ctx.program.programId,
       configAccount,
@@ -394,9 +492,6 @@ export default function CreateLiquidityPoolPage() {
       whirlpoolPda.publicKey
     )) as WhirlpoolData;
 
-    const tokenVaultAKeypair = Keypair.generate();
-    const tokenVaultBKeypair = Keypair.generate();
-
     let feeTierPda = PDAUtil.getFeeTier(
       ctx.program.programId,
       configAccount,
@@ -405,31 +500,6 @@ export default function CreateLiquidityPoolPage() {
 
     let latest_blockhash, signature;
 
-    if (!whirlpool_data) {
-      signature = await toTx(
-        ctx,
-        WhirlpoolIx.initializePoolIx(ctx.program, {
-          initSqrtPrice,
-          tickSpacing: freeTierType, // tickSpacing
-          tokenMintA: tokenMintAKey,
-          tokenMintB: tokenMintBKey,
-          tokenVaultAKeypair,
-          tokenVaultBKeypair,
-          whirlpoolPda,
-          whirlpoolsConfig: configAccount,
-          feeTierKey: feeTierPda.publicKey,
-          funder: ctx.wallet.publicKey,
-        })
-      ).buildAndExecute();
-
-      // Wait for the transaction to complete
-      latest_blockhash = await ctx.connection.getLatestBlockhash();
-      await ctx.connection.confirmTransaction(
-        { signature, ...latest_blockhash },
-        'confirmed'
-      );
-    }
-
     const whirlpool = await client.getPool(
       whirlpoolPda.publicKey,
       IGNORE_CACHE
@@ -437,67 +507,123 @@ export default function CreateLiquidityPoolPage() {
     whirlpool_data = whirlpool.getData();
     const token_a = whirlpool.getTokenAInfo();
     const token_b = whirlpool.getTokenBInfo();
-    const price = PriceMath.sqrtPriceX64ToPrice(
+
+    const originalprice = PriceMath.sqrtPriceX64ToPrice(
       whirlpool_data.sqrtPrice,
       token_a.decimals,
       token_b.decimals
     );
 
-    let lower_price, lower_tick_index;
-    let upper_price, upper_tick_index;
+    const current_tick_index = PriceMath.sqrtPriceX64ToTickIndex(
+      whirlpool_data.sqrtPrice
+    );
 
-    // Set price range, amount of tokens to deposit, and acceptable slippage
-    switch (priceRange) {
-      case 'Safe':
-        lower_price = price.div(new Decimal('2'));
-        upper_price = new Decimal('2').mul(price);
-        break;
-      case 'Common':
-        lower_price = price.div(new Decimal('1.3'));
-        upper_price = new Decimal('1.3').mul(price);
-        break;
-      case 'Expert':
-        lower_price = price.div(new Decimal('1.1'));
-        upper_price = new Decimal('1.1').mul(price);
-        break;
-      default:
-        lower_price = price.div(new Decimal('1.1'));
-        upper_price = new Decimal('1.1').mul(price);
+    const lower_tick_index = PriceMath.priceToInitializableTickIndex(
+      aToB
+        ? new Decimal(lowerPrice)
+        : new Decimal(lowerPrice).mul(originalprice).mul(originalprice),
+      token_a.decimals,
+      token_b.decimals,
+      whirlpool_data.tickSpacing
+    );
+    const upper_tick_index = PriceMath.priceToInitializableTickIndex(
+      aToB
+        ? new Decimal(upperPrice)
+        : new Decimal(upperPrice).mul(originalprice).mul(originalprice),
+      token_a.decimals,
+      token_b.decimals,
+      whirlpool_data.tickSpacing
+    );
+    console.log(current_tick_index, lower_tick_index, upper_tick_index);
+
+    const init_tick_arrays_tx = await whirlpool.initTickArrayForTicks([
+      current_tick_index,
+      lower_tick_index,
+      upper_tick_index,
+    ]);
+
+    if (init_tick_arrays_tx == null) {
+      console.log('Tick array was already initialized.');
+
+      // Create a transaction
+      const open_position_tx = await whirlpool.openPosition(
+        lower_tick_index,
+        upper_tick_index,
+        quoteData
+      );
+
+      // Send the transaction
+      const signature = await open_position_tx.tx.buildAndExecute();
+      console.log(
+        'signature for open position and increase liquidity:',
+        signature
+      );
+      console.log('position NFT:', open_position_tx.positionMint.toBase58());
+
+      // Wait for the transaction to complete
+      const latest_blockhash = await ctx.connection.getLatestBlockhash();
+      await ctx.connection.confirmTransaction(
+        { signature, ...latest_blockhash },
+        'confirmed'
+      );
+      successToast('Successfully created new position.');
+      const positionPda = PDAUtil.getPosition(
+        ctx.program.programId,
+        open_position_tx.positionMint
+      );
+
+      console.log(positionPda.publicKey.toString());
+      navigate('/liquidity-pool');
+
+      return;
     }
 
-    console.log('lower_price:', lower_price.toFixed(token_b.decimals));
-    console.log('upper_price:', upper_price.toFixed(token_b.decimals));
-
-    lower_tick_index = PriceMath.priceToInitializableTickIndex(
-      lower_price,
-      token_a.decimals,
-      token_b.decimals,
-      whirlpool_data.tickSpacing
-    );
-    upper_tick_index = PriceMath.priceToInitializableTickIndex(
-      upper_price,
-      token_a.decimals,
-      token_b.decimals,
-      whirlpool_data.tickSpacing
+    infoToast('Need to initialize price range first.');
+    signature = await init_tick_arrays_tx.buildAndExecute();
+    console.log('signature for init tick array:', signature);
+    // Wait for the transaction to complete
+    latest_blockhash = await ctx.connection.getLatestBlockhash();
+    await ctx.connection.confirmTransaction(
+      { signature, ...latest_blockhash },
+      'confirmed'
     );
 
-    const dev_usdc_amount = DecimalUtil.toBN(
-      new Decimal('1' /* devUSDC */),
-      token_b.decimals
+    successToast(
+      'Price range was set successfullu. Wait until open position is performed.'
     );
-    const slippage = Percentage.fromFraction(10, 1000); // 1%
 
-    // transaction.feePayer = provider.wallet.publicKey;
-    // transaction.recentBlockhash = (
-    //   await connection.getLatestBlockhash()
-    // ).blockhash;
-    // transaction.partialSign(tokenVaultAKeypair);
-    // transaction.partialSign(tokenVaultBKeypair);
-    // transaction.partialSign(positionMintKeypair);
-    // // transaction.partialSign(rewardVaultKeypair);
-    // const signedTx = await provider.wallet.signTransaction(transaction);
-    // const txId = await connection.sendRawTransaction(signedTx.serialize());
-    // await connection.confirmTransaction(txId, 'confirmed');
+    // Create a transaction
+    const open_position_tx = await whirlpool.openPosition(
+      lower_tick_index,
+      upper_tick_index,
+      quoteData
+    );
+
+    // Send the transaction
+    signature = await open_position_tx.tx.buildAndExecute();
+    console.log(
+      'signature for open position and increase liquidity:',
+      signature
+    );
+    console.log('position NFT:', open_position_tx.positionMint.toBase58());
+
+    // Wait for the transaction to complete
+    latest_blockhash = await ctx.connection.getLatestBlockhash();
+    await ctx.connection.confirmTransaction(
+      { signature, ...latest_blockhash },
+      'confirmed'
+    );
+
+    successToast('Successfully created new position.');
+
+    const positionPda = PDAUtil.getPosition(
+      ctx.program.programId,
+      open_position_tx.positionMint
+    );
+
+    console.log(positionPda.publicKey.toString());
+
+    navigate('/liquidity-pool');
   };
 
   return (
@@ -532,6 +658,12 @@ export default function CreateLiquidityPoolPage() {
           </SectionLabel>
           <SwitchType>
             <button
+              onClick={() => setType(CREATE_POOL_TYPE.MANUAL)}
+              className={`${type === CREATE_POOL_TYPE.MANUAL ? 'active' : ''}`}
+            >
+              Manual
+            </button>
+            <button
               onClick={() => setType(CREATE_POOL_TYPE.AUTOMATIC)}
               className={`${
                 type === CREATE_POOL_TYPE.AUTOMATIC ? 'active' : ''
@@ -539,17 +671,11 @@ export default function CreateLiquidityPoolPage() {
             >
               Automatic
             </button>
-            <button
-              onClick={() => setType(CREATE_POOL_TYPE.MANUAL)}
-              className={`${type === CREATE_POOL_TYPE.MANUAL ? 'active' : ''}`}
-            >
-              Manual
-            </button>
           </SwitchType>
         </SectionItem>
         {type === CREATE_POOL_TYPE.AUTOMATIC ? (
           <>
-            <SectionItem>
+            {/* <SectionItem>
               <SectionLabel>
                 <span>Select ALM Provider</span>
               </SectionLabel>
@@ -563,7 +689,12 @@ export default function CreateLiquidityPoolPage() {
             </SectionItem>
             <CreatePositionButton onClick={createNewPool}>
               Create Position
-            </CreatePositionButton>
+            </CreatePositionButton> */}
+            <SectionItem>
+              <SectionLabel>
+                <span>We can't use this method now.</span>
+              </SectionLabel>
+            </SectionItem>
           </>
         ) : (
           <SectionItem>
@@ -593,137 +724,161 @@ export default function CreateLiquidityPoolPage() {
       </Section>
       {type === CREATE_POOL_TYPE.MANUAL && (
         <Section>
-          <SectionItem>
-            <SectionLabel>
-              <span className="font-16">Select Price Range</span>
-              <button>
-                <span>Reset</span>
-              </button>
-            </SectionLabel>
-            <PriceRangeList>
-              {CREATE_POOL_PRICE_RANGE.map((item, index) => (
-                <PriceRangeElement
-                  key={index}
-                  className={`${priceRange === item.label ? 'active' : ''}`}
-                  onClick={() => {
-                    setPriceRange(item.label);
-                    dispatch(resetTokenDepositAmount());
-                  }}
-                >
-                  <label>
+          {currentPrice > 0 && (
+            <SectionItem>
+              <SectionLabel>
+                <span className="font-16">Select Price Range</span>
+                <button>
+                  <span>Reset</span>
+                </button>
+              </SectionLabel>
+              <PriceRangeList>
+                {CREATE_POOL_PRICE_RANGE.map((item, index) => (
+                  <PriceRangeElement
+                    key={index}
+                    className={`${priceRange === item.label ? 'active' : ''}`}
+                    onClick={() => {
+                      setPriceRange(item.label);
+                      dispatch(resetTokenDepositAmount());
+                    }}
+                  >
+                    <label>
+                      <div>
+                        <CheckIcon />
+                      </div>
+                      <span>{item.label}</span>
+                    </label>
                     <div>
-                      <CheckIcon />
+                      <PriceRangeRating>
+                        <span>Risk:</span>
+                        <div>
+                          {new Array(item.risk).fill(0).map((_, i) => (
+                            <div key={i} className="risk"></div>
+                          ))}
+                          {new Array(5 - item.risk).fill(0).map((_, i) => (
+                            <div key={i}></div>
+                          ))}
+                        </div>
+                      </PriceRangeRating>
+                      <PriceRangeRating>
+                        <span>Profit:</span>
+                        <div>
+                          {new Array(item.profit).fill(0).map((_, i) => (
+                            <div key={i} className="profit"></div>
+                          ))}
+                          {new Array(5 - item.profit).fill(0).map((_, i) => (
+                            <div key={i}></div>
+                          ))}
+                        </div>
+                      </PriceRangeRating>
                     </div>
-                    <span>{item.label}</span>
-                  </label>
+                  </PriceRangeElement>
+                ))}
+              </PriceRangeList>
+            </SectionItem>
+          )}
+          {currentPrice > 0 && (
+            <SectionItem>
+              <SectionLabel>
+                <span className="font-16">Current price:</span>
+                <span className="font-16 gray-200">
+                  {`${currentPrice} ${tokenPair.tokenB.name} per ${tokenPair.tokenA.name}`}
+                </span>
+              </SectionLabel>
+              <SelectRangeManual>
+                <SelectRangeManualItem>
+                  <button
+                    onClick={() => {
+                      setLowerPrice((lowerPrice) =>
+                        Number(lowerPrice) - 1 < 0 ? 0 : Number(lowerPrice) - 1
+                      );
+                    }}
+                  >
+                    <SubtractIcon />
+                  </button>
                   <div>
-                    <PriceRangeRating>
-                      <span>Risk:</span>
-                      <div>
-                        {new Array(item.risk).fill(0).map((_, i) => (
-                          <div key={i} className="risk"></div>
-                        ))}
-                        {new Array(5 - item.risk).fill(0).map((_, i) => (
-                          <div key={i}></div>
-                        ))}
-                      </div>
-                    </PriceRangeRating>
-                    <PriceRangeRating>
-                      <span>Profit:</span>
-                      <div>
-                        {new Array(item.profit).fill(0).map((_, i) => (
-                          <div key={i} className="profit"></div>
-                        ))}
-                        {new Array(5 - item.profit).fill(0).map((_, i) => (
-                          <div key={i}></div>
-                        ))}
-                      </div>
-                    </PriceRangeRating>
+                    <label>Min</label>
+                    <PriceAmountInput
+                      type="number"
+                      value={lowerPrice}
+                      onChange={(e) => {
+                        setLowerPrice(Number(e.target.value));
+                      }}
+                    />
+                    <label>
+                      {tokenPair.tokenB.name} per {tokenPair.tokenA.name}
+                    </label>
                   </div>
-                </PriceRangeElement>
-              ))}
-            </PriceRangeList>
-          </SectionItem>
-          <SectionItem>
-            <SectionLabel>
-              <span className="font-16">Current price:</span>
-              <span className="font-16 gray-200">
-                {`${currentPrice} ${tokenPair.tokenB.name} per ${tokenPair.tokenA.name}`}
-              </span>
-            </SectionLabel>
-            <SelectRangeManual>
-              <SelectRangeManualItem>
-                <button
-                  onClick={() => {
-                    setLowerPrice((lowerPrice) =>
-                      Number(lowerPrice) - 1 < 0 ? 0 : Number(lowerPrice) - 1
-                    );
-                  }}
-                >
-                  <SubtractIcon />
-                </button>
-                <div>
-                  <label>Min</label>
-                  <PriceAmountInput
-                    type="number"
-                    value={lowerPrice}
-                    onChange={(e) => {
-                      setLowerPrice(Number(e.target.value));
+                  <button
+                    onClick={() => {
+                      setLowerPrice((lowerPrice) => Number(lowerPrice) + 1);
                     }}
-                  />
-                  <label>
-                    {tokenPair.tokenB.name} per {tokenPair.tokenA.name}
-                  </label>
-                </div>
-                <button
-                  onClick={() => {
-                    setLowerPrice((lowerPrice) => Number(lowerPrice) + 1);
-                  }}
-                >
-                  <PlusIcon />
-                </button>
-              </SelectRangeManualItem>
-              <SelectRangeManualItem>
-                <button
-                  onClick={() => {
-                    setUpperPrice((upperPrice) =>
-                      Number(upperPrice) - 1 < 0 ? 0 : Number(upperPrice) - 1
-                    );
-                  }}
-                >
-                  <SubtractIcon />
-                </button>
-                <div>
-                  <label>Max</label>
-                  <PriceAmountInput
-                    type="number"
-                    value={upperPrice}
-                    onChange={(e) => {
-                      setUpperPrice(Number(e.target.value));
+                  >
+                    <PlusIcon />
+                  </button>
+                </SelectRangeManualItem>
+                <SelectRangeManualItem>
+                  <button
+                    onClick={() => {
+                      setUpperPrice((upperPrice) =>
+                        Number(upperPrice) - 1 < 0 ? 0 : Number(upperPrice) - 1
+                      );
                     }}
-                  />
-                  <label>
-                    {tokenPair.tokenB.name} per {tokenPair.tokenA.name}
-                  </label>
-                </div>
-                <button
-                  onClick={() => {
-                    setUpperPrice((upperPrice) => Number(upperPrice) + 1);
+                  >
+                    <SubtractIcon />
+                  </button>
+                  <div>
+                    <label>Max</label>
+                    <PriceAmountInput
+                      type="number"
+                      value={upperPrice}
+                      onChange={(e) => {
+                        setUpperPrice(Number(e.target.value));
+                      }}
+                    />
+                    <label>
+                      {tokenPair.tokenB.name} per {tokenPair.tokenA.name}
+                    </label>
+                  </div>
+                  <button
+                    onClick={() => {
+                      setUpperPrice((upperPrice) => Number(upperPrice) + 1);
+                    }}
+                  >
+                    <PlusIcon />
+                  </button>
+                </SelectRangeManualItem>
+              </SelectRangeManual>
+            </SectionItem>
+          )}
+          {currentPrice == 0 && (
+            <SectionItem>
+              <SectionLabel>
+                <span>Desired Start Price</span>
+              </SectionLabel>
+              <DepositAmountItem>
+                <DepositAmountInput
+                  type="number"
+                  value={desiredAmount}
+                  onChange={(e) => {
+                    setDesiredAmount(Number(e.target.value));
                   }}
-                >
-                  <PlusIcon />
-                </button>
-              </SelectRangeManualItem>
-            </SelectRangeManual>
-          </SectionItem>
-          <SectionItem>
-            <SectionLabel>
-              <span>Deposit Amounts</span>
-            </SectionLabel>
-            <DepositAmountsComponent />
-          </SectionItem>
-          <CreatePositionButton onClick={createNewPool}>
-            Create Position
+                />
+              </DepositAmountItem>
+            </SectionItem>
+          )}
+          {currentPrice > 0 && (
+            <SectionItem>
+              <SectionLabel>
+                <span>Deposit Amounts</span>
+              </SectionLabel>
+              <DepositAmountsComponent />
+            </SectionItem>
+          )}
+          <CreatePositionButton
+            onClick={currentPrice > 0 ? createNewPosition : createNewPool}
+          >
+            Create {currentPrice > 0 ? 'Position' : 'Pool'}
           </CreatePositionButton>
         </Section>
       )}
